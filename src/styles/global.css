@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap");
+
+@font-face {
+  font-family: "Microgramma D Extended Bold";
+  src: url("/fonts/Microgramma D Extended Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  /* Paleta fvantracita */
+  --color-fvantracita-50: #F6F6F6;
+  --color-fvantracita-100: #E7E7E7;
+  --color-fvantracita-200: #D1D1D1;
+  --color-fvantracita-300: #B0B0B0;
+  --color-fvantracita-400: #888888;
+  --color-fvantracita-500: #6D6D6D;
+  --color-fvantracita-600: #5D5D5D;
+  --color-fvantracita-700: #4F4F4F;
+  --color-fvantracita-800: #454545;
+  --color-fvantracita-900: #3D3D3D;
+  --color-fvantracita-950: #1A1A1A;
+
+  /* Paleta fvazul */
+  --color-fvazul-50: #EDF7FF;
+  --color-fvazul-100: #D6ECFF;
+  --color-fvazul-200: #B5DFFF;
+  --color-fvazul-300: #83CDFF;
+  --color-fvazul-400: #48B0FF;
+  --color-fvazul-500: #1E8BFF;
+  --color-fvazul-600: #066AFF;
+  --color-fvazul-700: #0055FF;
+  --color-fvazul-800: #0841C5;
+  --color-fvazul-900: #0D3C9B;
+  --color-fvazul-950: #0E265D;
+
+  /* Paleta fvplata */
+  --color-fvplata-50: #F4F7F9;
+  --color-fvplata-100: #ECF0F3;
+  --color-fvplata-200: #DCE4E9;
+  --color-fvplata-300: #C6D2DB;
+  --color-fvplata-400: #AEBCCB;
+  --color-fvplata-500: #94A3B8;
+  --color-fvplata-600: #828FA9;
+  --color-fvplata-700: #6F7A93;
+  --color-fvplata-800: #5C6677;
+  --color-fvplata-900: #4D5462;
+  --color-fvplata-950: #2D3139;
+
+  /* Color primario fijo */
+  --color-primary: #1A1A1A;
+  /* Azul Eléctrico */
+  --color-accent: #0055FF;
+  
+  /* Fuentes */
+  --font-display: "Microgramma D Extended Bold", sans-serif;
+  --font-sans: "Overpass", sans-serif;
+}

@@ -1,17 +1,26 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Header from '../sections/Header.astro';
+import Hero from '../sections/Hero.astro';
+import Inventory from '../sections/Inventory.astro';
+import About from '../sections/About.astro';
+import Contact from '../sections/Contact.astro';
+import Footer from '../sections/Footer.astro';
 
+import '../styles/global.css';
+
+const title = 'FV Automotores - Venta de autos usados en Zona Sur';
+const description = 'Concesionaria líder con 25 años de trayectoria. Encontrá tu próximo seleccionado con la mejor financiación.';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title={title} description={description}>
+	<Header />
+	<Hero />
+	<Inventory />
+	<About />
+	<Contact />
+	<Footer />
+</Layout>
+
+
+
