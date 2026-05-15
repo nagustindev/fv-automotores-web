@@ -48,12 +48,12 @@ const shouldReloadNavItem = (href: string) => currentPath === "/" && href === "/
                                 href={item.href}
                                 data-astro-reload={shouldReloadNavItem(item.href) ? true : undefined}
                                 data-nav-link
-                                class="group relative inline-flex items-center px-3 py-2 font-display text-[0.65rem] font-bold tracking-[0.25em] text-white/85 transition duration-300 outline-none hover:text-fvplata-50 focus-visible:text-fvplata-50 sm:px-4 sm:text-xs"
+                                class="group relative inline-flex items-center px-3 py-2 font-primary text-[0.65rem] font-bold tracking-[0.25em] text-white/85 transition duration-300 outline-none hover:text-fvplata-50 focus-visible:text-fvplata-50 sm:px-4 sm:text-xs"
                             >
                                 <span
                                     aria-hidden="true"
                                     data-nav-underline
-                                    class="pointer-events-none absolute inset-x-3 -bottom-px h-px bg-fvazul-100 sm:inset-x-4"
+                                    class="pointer-events-none absolute inset-x-3 -bottom-px h-px bg-fvplata-300 sm:inset-x-4"
                                 />
                                 {item.label}
                             </a>
@@ -98,7 +98,7 @@ const shouldReloadNavItem = (href: string) => currentPath === "/" && href === "/
             aria-hidden="true"
             class="pointer-events-none absolute inset-x-0 top-0 h-64 bg-[radial-gradient(circle_at_50%_0%,rgba(30,139,255,0.18),transparent_62%)]"
         ></div>
-        <nav aria-label="Menú principal móvil" class="relative w-full max-w-sm">
+        <nav aria-label="Menú principal mobile" class="relative w-full max-w-sm">
             <ul class="flex flex-col items-center gap-6">
                 {
                     NAV_ITEMS.map((item) => (
@@ -108,12 +108,12 @@ const shouldReloadNavItem = (href: string) => currentPath === "/" && href === "/
                                 data-astro-reload={shouldReloadNavItem(item.href) ? true : undefined}
                                 data-mobile-menu-link
                                     data-nav-link
-                                class="group relative flex items-center justify-center rounded-2xl border border-fvazul-200/35 bg-fvazul-500/10 px-5 py-5 text-center font-display text-lg font-bold tracking-[0.28em] text-fvplata-50 outline-none transition duration-300 hover:border-fvazul-300 hover:bg-fvazul-500/20 focus-visible:ring-2 focus-visible:ring-fvazul-300 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent"
+                                class="group relative flex items-center justify-center rounded-2xl border border-fvazul-200/35 bg-fvazul-200/10 px-5 py-5 text-center font-display text-lg font-bold tracking-[0.28em] text-fvplata-50 outline-none transition duration-300 hover:border-fvazul-300 hover:bg-fvazul-400/20 focus-visible:ring-2 focus-visible:ring-fvazul-300 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent"
                             >
                                 <span
                                     aria-hidden="true"
                                         data-nav-underline
-                                        class="pointer-events-none absolute inset-x-6 bottom-3 h-px bg-fvazul-500"
+                                        class="pointer-events-none absolute inset-x-6 bottom-3 h-px bg-fvplata-300"
                                 />
                                 {item.label}
                             </a>

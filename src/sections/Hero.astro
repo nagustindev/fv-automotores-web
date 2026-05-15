@@ -1,0 +1,55 @@
+---
+---
+
+<section
+    class="relative w-full overflow-hidden bg-primary"
+    aria-label="Presentación de FV Automotores"
+>
+    <picture class="absolute inset-0 z-0" aria-hidden="true">
+        <source
+            type="image/webp"
+            srcset="/hero_background.webp 1x"
+        />
+        <img
+            src="/hero_background.webp"
+            alt=""
+            role="presentation"
+            class="h-full w-full object-cover object-center"
+            fetchpriority="high"
+            decoding="async"
+        />
+    </picture>
+
+    <div
+        class="absolute inset-0 z-1 bg-linear-to-b from-black/35 via-black/10 to-primary/85"
+        aria-hidden="true"
+    ></div>
+
+    <header class="relative z-10 flex min-h-screen w-full flex-col items-start justify-end px-4 pb-10 pt-16 text-left sm:px-6 lg:px-8 lg:pb-14">
+        <h1 class="text-balance font-primary text-3xl font-bold tracking-[0.18em] text-white sm:text-4xl lg:text-6xl">
+            FABIO VIOLA AUTOMOTORES
+        </h1>
+        <h2 class="mt-4 max-w-2xl text-balance font-overpass text-lg text-fvplata-300 sm:text-xl lg:text-2xl">
+            Te ayudamos a elegir tu próximo auto con atención personalizada en Zona Sur.
+        </h2>
+    </header>
+</section>
+
+<style>
+    picture {
+        -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+    }
+
+    img {
+        transform: scale(var(--hero-bg-scale, 1));
+        transform-origin: center center;
+        will-change: transform;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        img {
+            transform: none;
+        }
+    }
+</style>
