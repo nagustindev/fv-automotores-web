@@ -1,0 +1,42 @@
+---
+import VehicleCard from './VehicleCard.astro';
+
+// Datos de ejemplo (después consumir de BD)
+const vehicles = [
+  {
+    id: '1',
+    image: '/hilux-prueba.webp',
+    name: 'Toyota Hilux SRX',
+    price: '$75,000 USD'
+  },
+  {
+    id: '2',
+    image: '/hilux-prueba.webp',
+    name: 'Toyota Hilux SRX',
+    price: '$75,000 USD'
+  },
+  {
+    id: '3',
+    image: '/hilux-prueba.webp',
+    name: 'Toyota Hilux SRX',
+    price: '$75,000 USD'
+  },
+  {
+    id: '4',
+    image: '/hilux-prueba.webp',
+    name: 'Toyota Hilux SRX',
+    price: '$75,000 USD'
+  }
+];
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  {vehicles.map((vehicle) => (
+    <VehicleCard
+      id={vehicle.id}
+      image={vehicle.image}
+      name={vehicle.name}
+      price={vehicle.price}
+    />
+  ))}
+</div>

@@ -1,0 +1,138 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Datos de ejemplo - aquí consultarías la BD con el ID
+const vehicles = [
+  {
+    id: '1',
+    image: '/hilux-prueba.webp',
+    name: 'Toyota Hilux SRX',
+    price: '$75,000 USD',
+    year: 2023,
+    mileage: '15,000 km',
+    transmission: 'Automática',
+    fuel: 'Diésel',
+    color: 'Azul Metálizado',
+    description: 'Toyota Hilux SRX en excelente estado, con historial de mantenimiento completo y documentación al día.'
+  },
+  {
+    id: '2',
+    image: '/hilux-prueba.webp',
+    name: 'Toyota Hilux SRX',
+    price: '$75,000 USD',
+    year: 2023,
+    mileage: '15,000 km',
+    transmission: 'Automática',
+    fuel: 'Diésel',
+    color: 'Azul Metálizado',
+    description: 'Toyota Hilux SRX en excelente estado, con historial de mantenimiento completo y documentación al día.'
+  },
+  {
+    id: '3',
+    image: '/hilux-prueba.webp',
+    name: 'Toyota Hilux SRX',
+    price: '$75,000 USD',
+    year: 2023,
+    mileage: '15,000 km',
+    transmission: 'Automática',
+    fuel: 'Diésel',
+    color: 'Azul Metálizado',
+    description: 'Toyota Hilux SRX en excelente estado, con historial de mantenimiento completo y documentación al día.'
+  },
+  {
+    id: '4',
+    image: '/hilux-prueba.webp',
+    name: 'Toyota Hilux SRX',
+    price: '$75,000 USD',
+    year: 2023,
+    mileage: '15,000 km',
+    transmission: 'Automática',
+    fuel: 'Diésel',
+    color: 'Azul Metálizado',
+    description: 'Toyota Hilux SRX en excelente estado, con historial de mantenimiento completo y documentación al día.'
+  }
+];
+
+const { id } = Astro.params;
+const vehicle = vehicles.find(v => v.id === id);
+
+if (!vehicle) {
+  return Astro.redirect('/');
+}
+---
+
+<Layout title={vehicle.name}>
+  <main class="w-full min-h-screen bg-fvantracita-950 py-12">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <!-- Back Button -->
+      <a href="/" class="inline-flex items-center gap-2 text-fvplata-300 hover:text-fvplata-100 transition mb-8">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Volver al inventario
+      </a>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Image Section -->
+        <div class="lg:col-span-2">
+          <div class="relative overflow-hidden rounded-lg h-96 lg:h-full">
+            <img
+              src={vehicle.image}
+              alt={vehicle.name}
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
+        <!-- Details Section -->
+        <div class="flex flex-col justify-between">
+          <div>
+            <h1 class="text-4xl font-bold text-white font-primary tracking-wide mb-2">
+              {vehicle.name}
+            </h1>
+            <p class="text-4xl font-bold text-fvplata-300 mb-6">
+              {vehicle.price}
+            </p>
+
+            <div class="space-y-4 mb-8">
+              <div class="grid grid-cols-2 gap-4">
+                <div class="bg-fvantracita-900 p-4 rounded-lg">
+                  <p class="text-fvplata-300 text-sm font-overpass">Año</p>
+                  <p class="text-white text-lg font-bold">{vehicle.year}</p>
+                </div>
+                <div class="bg-fvantracita-900 p-4 rounded-lg">
+                  <p class="text-fvplata-300 text-sm font-overpass">Kilometraje</p>
+                  <p class="text-white text-lg font-bold">{vehicle.mileage}</p>
+                </div>
+                <div class="bg-fvantracita-900 p-4 rounded-lg">
+                  <p class="text-fvplata-300 text-sm font-overpass">Transmisión</p>
+                  <p class="text-white text-lg font-bold">{vehicle.transmission}</p>
+                </div>
+                <div class="bg-fvantracita-900 p-4 rounded-lg">
+                  <p class="text-fvplata-300 text-sm font-overpass">Combustible</p>
+                  <p class="text-white text-lg font-bold">{vehicle.fuel}</p>
+                </div>
+                <div class="bg-fvantracita-900 p-4 rounded-lg col-span-2">
+                  <p class="text-fvplata-300 text-sm font-overpass">Color</p>
+                  <p class="text-white text-lg font-bold">{vehicle.color}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-fvantracita-900 p-6 rounded-lg mb-8">
+              <h3 class="text-white font-bold mb-3 font-primary">Descripción</h3>
+              <p class="text-fvplata-300 leading-relaxed font-overpass">
+                {vehicle.description}
+              </p>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <button class="w-full bg-fvplata-300 hover:bg-fvplata-200 text-black font-bold py-3 px-6 rounded-lg transition duration-300 font-primary tracking-wide">
+            SOLICITAR INFORMACIÓN
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
