@@ -21,7 +21,7 @@ const shouldReloadNavItem = (href: string) => currentPath === "/" && href === "/
 <header
     data-header
     data-menu-open="false"
-    class="fixed inset-x-0 top-0 z-50 border-b border-transparent bg-transparent backdrop-blur-[0px] transition-[background-color,backdrop-filter,border-color] duration-500 ease-out data-[scrolled=true]:border-white/5 data-[scrolled=true]:bg-fvazul-950/40 data-[scrolled=true]:backdrop-blur-md"
+    class="fixed inset-x-0 top-0 z-50 border-b border-transparent bg-transparent backdrop-blur-[0px] transition-[background-color,backdrop-filter,border-color] duration-500 ease-out data-[scrolled=true]:border-fv-antracita-700/5 data-[scrolled=true]:bg-primary/40 data-[scrolled=true]:backdrop-blur-md"
 >
     <div class="relative z-50 mx-auto grid max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-4 py-3 sm:px-6 sm:py-4">
         <a
@@ -50,12 +50,14 @@ const shouldReloadNavItem = (href: string) => currentPath === "/" && href === "/
                                 data-nav-link
                                 class="group relative inline-flex items-center px-3 py-2 font-primary text-[0.65rem] font-bold tracking-[0.25em] text-white/85 transition duration-300 outline-none hover:text-fvplata-50 focus-visible:text-fvplata-50 sm:px-4 sm:text-xs"
                             >
-                                <span
-                                    aria-hidden="true"
-                                    data-nav-underline
-                                    class="pointer-events-none absolute inset-x-3 -bottom-px h-px bg-fvplata-300 sm:inset-x-4"
-                                />
-                                {item.label}
+                                <span class="relative inline-block">
+                                    <span
+                                        aria-hidden="true"
+                                        data-nav-underline
+                                        class="pointer-events-none absolute inset-x-0 -bottom-1 h-px bg-fvplata-300"
+                                    />
+                                    {item.label}
+                                </span>
                             </a>
                         </li>
                     ))

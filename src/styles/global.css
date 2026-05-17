@@ -44,9 +44,6 @@
 
   --color-primary: #1A1A1A;
   --color-accent: #0055FF;
-
-
-  
   
 }
 
@@ -89,9 +86,9 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: var(--color-fvazul-500);
+    background-color: var(--color-fvplata-300);
     border-radius: 5px;
-    border: 2px solid color-mix(in srgb, var(--color-fvazul-500) 40%, transparent);
+    border: 2px solid color-mix(in srgb, var(--color-fvplata-300) 40%, transparent);
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -100,7 +97,28 @@
 
   /* Firefox */
   * {
-    scrollbar-color: var(--color-fvazul-500) var(--color-fvantracita-950);
+    scrollbar-color: var(--color-fvplata-300) var(--color-fvantracita-950);
     scrollbar-width: thin;
+  }
+}
+
+@keyframes expandWidth {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@layer components {
+  .nav-underline {
+    @apply absolute -bottom-1 left-0 h-px bg-fvplata-300 pointer-events-none;
+    width: 0;
+    transition: width 0.3s ease;
+  }
+
+  .group:hover .nav-underline {
+    width: 100%;
   }
 }
