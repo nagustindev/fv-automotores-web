@@ -1,93 +1,187 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import Layout from "@/layouts/Layout.astro";
+import Footer from "@/sections/Footer.astro";
+import Header from "@/sections/Header.astro";
 
-// Datos de ejemplo - aquí consultarías la BD con el ID
-const vehicles = [
-  {
-    id: '1',
-    image: '/hilux-prueba.webp',
-    name: 'Toyota Hilux SRX',
-    price: '$75,000 USD',
-    year: 2023,
-    mileage: '15,000 km',
-    transmission: 'Automática',
-    fuel: 'Diésel',
-    color: 'Azul Metálizado',
-    description: 'Toyota Hilux SRX en excelente estado, con historial de mantenimiento completo y documentación al día.'
-  },
-  {
-    id: '2',
-    image: '/hilux-prueba.webp',
-    name: 'Toyota Hilux SRX',
-    price: '$75,000 USD',
-    year: 2023,
-    mileage: '15,000 km',
-    transmission: 'Automática',
-    fuel: 'Diésel',
-    color: 'Azul Metálizado',
-    description: 'Toyota Hilux SRX en excelente estado, con historial de mantenimiento completo y documentación al día.'
-  },
-  {
-    id: '3',
-    image: '/hilux-prueba.webp',
-    name: 'Toyota Hilux SRX',
-    price: '$75,000 USD',
-    year: 2023,
-    mileage: '15,000 km',
-    transmission: 'Automática',
-    fuel: 'Diésel',
-    color: 'Azul Metálizado',
-    description: 'Toyota Hilux SRX en excelente estado, con historial de mantenimiento completo y documentación al día.'
-  },
-  {
-    id: '4',
-    image: '/hilux-prueba.webp',
-    name: 'Toyota Hilux SRX',
-    price: '$75,000 USD',
-    year: 2023,
-    mileage: '15,000 km',
-    transmission: 'Automática',
-    fuel: 'Diésel',
-    color: 'Azul Metálizado',
-    description: 'Toyota Hilux SRX en excelente estado, con historial de mantenimiento completo y documentación al día.'
-  }
-];
-
-const { id } = Astro.params;
-const vehicle = vehicles.find(v => v.id === id);
-
-if (!vehicle) {
-  return Astro.redirect('/');
+interface Vehicle {
+  id: string;
+  image: string;
+  name: string;
+  price: string;
+  year: number;
+  mileage: string;
+  transmission: string;
+  fuel: string;
+  color: string;
+  description: string;
 }
+
+interface Props {
+  vehicle: Vehicle;
+}
+
+export function getStaticPaths(): any[] {
+  const vehicles: Vehicle[] = [
+    {
+      id: "1",
+      image: "/hilux-prueba.webp",
+      name: "Toyota Hilux SRX",
+      price: "$75,000 USD",
+      year: 2023,
+      mileage: "15,000 km",
+      transmission: "Automática",
+      fuel: "Diésel",
+      color: "Azul Metálizado",
+      description:
+        "Toyota Hilux SRX en excelente estado, con historial de mantenimiento completo y documentación al día.",
+    },
+    {
+      id: "2",
+      image: "/hilux-prueba.webp",
+      name: "Toyota Hilux SRX",
+      price: "$75,000 USD",
+      year: 2023,
+      mileage: "15,000 km",
+      transmission: "Automática",
+      fuel: "Diésel",
+      color: "Azul Metálizado",
+      description:
+        "Toyota Hilux SRX en excelente estado, con historial de mantenimiento completo y documentación al día.",
+    },
+    {
+      id: "3",
+      image: "/hilux-prueba.webp",
+      name: "Toyota Hilux SRX",
+      price: "$75,000 USD",
+      year: 2023,
+      mileage: "15,000 km",
+      transmission: "Automática",
+      fuel: "Diésel",
+      color: "Azul Metálizado",
+      description:
+        "Toyota Hilux SRX en excelente estado, con historial de mantenimiento completo y documentación al día.",
+    },
+    {
+      id: "4",
+      image: "/hilux-prueba.webp",
+      name: "Toyota Hilux SRX",
+      price: "$75,000 USD",
+      year: 2023,
+      mileage: "15,000 km",
+      transmission: "Automática",
+      fuel: "Diésel",
+      color: "Azul Metálizado",
+      description:
+        "Toyota Hilux SRX en excelente estado, con historial de mantenimiento completo y documentación al día.",
+    },
+  ];
+
+  return vehicles.map((vehicle) => ({
+    params: { id: vehicle.id },
+    props: { vehicle },
+  }));
+}
+
+const { vehicle } = Astro.props as Props;
 ---
 
 <Layout title={vehicle.name}>
-  <main class="w-full min-h-screen bg-fvantracita-950 py-12">
+  <Header />
+  <main class="w-full mt-6 min-h-screen bg-fvantracita-950 py-12">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <!-- Back Button -->
-      <a href="/" class="inline-flex items-center gap-2 text-fvplata-300 hover:text-fvplata-100 transition mb-8">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-        Volver al inventario
-      </a>
-
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Image Section -->
+        <!-- Image Gallery Section -->
         <div class="lg:col-span-2">
-          <div class="relative overflow-hidden rounded-lg h-96 lg:h-full">
-            <img
-              src={vehicle.image}
-              alt={vehicle.name}
-              class="w-full h-full object-cover"
-            />
+          <div class="flex flex-col gap-4">
+            <!-- Main Image -->
+            <div class="relative overflow-hidden rounded-lg h-96 lg:h-[500px] bg-fvantracita-900">
+              <img
+                id="mainImage"
+                src={vehicle.image}
+                alt={vehicle.name}
+                class="w-full h-full object-cover"
+              />
+              
+              <!-- Navigation Buttons -->
+              <button
+                id="prevBtn"
+                class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/75 text-white p-3 rounded-full transition z-10"
+              >
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+              </button>
+              
+              <button
+                id="nextBtn"
+                class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/75 text-white p-3 rounded-full transition z-10"
+              >
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+
+              <!-- Image Counter -->
+              <div class="absolute top-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm font-bold">
+                <span id="imageCounter">1</span> / <span id="totalImages">4</span>
+              </div>
+            </div>
+
+            <!-- Thumbnails -->
+            <div class="flex gap-3 overflow-x-auto pb-2">
+              <button
+                class="thumbnail active flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 border-fvplata-300 hover:border-fvplata-100 transition"
+                data-index="0"
+              >
+                <img src={vehicle.image} alt="Thumbnail 1" class="w-full h-full object-cover" />
+              </button>
+              <button
+                class="thumbnail flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 border-transparent hover:border-fvplata-300 transition"
+                data-index="1"
+              >
+                <img src={vehicle.image} alt="Thumbnail 2" class="w-full h-full object-cover" />
+              </button>
+              <button
+                class="thumbnail flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 border-transparent hover:border-fvplata-300 transition"
+                data-index="2"
+              >
+                <img src={vehicle.image} alt="Thumbnail 3" class="w-full h-full object-cover" />
+              </button>
+              <button
+                class="thumbnail flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 border-transparent hover:border-fvplata-300 transition"
+                data-index="3"
+              >
+                <img src={vehicle.image} alt="Thumbnail 4" class="w-full h-full object-cover" />
+              </button>
+            </div>
           </div>
         </div>
+        <!-- Back Button -->
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 text-fvplata-300 hover:text-fvplata-100 transition mb-8"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Volver al inventario
+        </a>
 
         <!-- Details Section -->
         <div class="flex flex-col justify-between">
           <div>
-            <h1 class="text-4xl font-bold text-white font-primary tracking-wide mb-2">
+            <h1
+              class="text-4xl font-bold text-white font-primary tracking-wide mb-2"
+            >
               {vehicle.name}
             </h1>
             <p class="text-4xl font-bold text-fvplata-300 mb-6">
@@ -101,15 +195,23 @@ if (!vehicle) {
                   <p class="text-white text-lg font-bold">{vehicle.year}</p>
                 </div>
                 <div class="bg-fvantracita-900 p-4 rounded-lg">
-                  <p class="text-fvplata-300 text-sm font-overpass">Kilometraje</p>
+                  <p class="text-fvplata-300 text-sm font-overpass">
+                    Kilometraje
+                  </p>
                   <p class="text-white text-lg font-bold">{vehicle.mileage}</p>
                 </div>
                 <div class="bg-fvantracita-900 p-4 rounded-lg">
-                  <p class="text-fvplata-300 text-sm font-overpass">Transmisión</p>
-                  <p class="text-white text-lg font-bold">{vehicle.transmission}</p>
+                  <p class="text-fvplata-300 text-sm font-overpass">
+                    Transmisión
+                  </p>
+                  <p class="text-white text-lg font-bold">
+                    {vehicle.transmission}
+                  </p>
                 </div>
                 <div class="bg-fvantracita-900 p-4 rounded-lg">
-                  <p class="text-fvplata-300 text-sm font-overpass">Combustible</p>
+                  <p class="text-fvplata-300 text-sm font-overpass">
+                    Combustible
+                  </p>
                   <p class="text-white text-lg font-bold">{vehicle.fuel}</p>
                 </div>
                 <div class="bg-fvantracita-900 p-4 rounded-lg col-span-2">
@@ -120,7 +222,9 @@ if (!vehicle) {
             </div>
 
             <div class="bg-fvantracita-900 p-6 rounded-lg mb-8">
-              <h3 class="text-white font-bold mb-3 font-primary">Descripción</h3>
+              <h3 class="text-white font-bold mb-3 font-primary">
+                Descripción
+              </h3>
               <p class="text-fvplata-300 leading-relaxed font-overpass">
                 {vehicle.description}
               </p>
@@ -128,11 +232,55 @@ if (!vehicle) {
           </div>
 
           <!-- CTA Button -->
-          <button class="w-full bg-fvplata-300 hover:bg-fvplata-200 text-black font-bold py-3 px-6 rounded-lg transition duration-300 font-primary tracking-wide">
+          <button
+            class="w-full bg-fvplata-300 hover:bg-fvplata-200 text-black font-bold py-3 px-6 rounded-lg transition duration-300 font-primary tracking-wide"
+          >
             SOLICITAR INFORMACIÓN
           </button>
         </div>
       </div>
     </div>
   </main>
+  <Footer />
 </Layout>
+
+<script>
+  const mainImage = document.getElementById('mainImage');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const imageCounter = document.getElementById('imageCounter');
+  const thumbnails = document.querySelectorAll('.thumbnail');
+  
+  let currentIndex = 0;
+  const totalImages = thumbnails.length;
+
+  function updateImage(index) {
+    currentIndex = index;
+    const thumbnail = thumbnails[index];
+    const imgSrc = thumbnail.querySelector('img').src;
+    mainImage.src = imgSrc;
+    imageCounter.textContent = currentIndex + 1;
+
+    // Update thumbnail border
+    thumbnails.forEach(thumb => thumb.classList.remove('border-fvplata-300'));
+    thumbnails.forEach(thumb => thumb.classList.add('border-transparent'));
+    thumbnail.classList.remove('border-transparent');
+    thumbnail.classList.add('border-fvplata-300');
+  }
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+    updateImage(currentIndex);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % totalImages;
+    updateImage(currentIndex);
+  });
+
+  thumbnails.forEach((thumbnail, index) => {
+    thumbnail.addEventListener('click', () => {
+      updateImage(index);
+    });
+  });
+</script>
