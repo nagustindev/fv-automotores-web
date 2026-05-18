@@ -1,0 +1,40 @@
+---
+interface Props {
+	label: 'Año' | 'Kilometraje';
+	value: string | number;
+	variant?: 'glass' | 'plata';
+	class?: string;
+}
+
+const {
+	label,
+	value,
+	variant = 'glass',
+	class: className = '',
+} = Astro.props;
+
+const variants = {
+	glass: [
+		'border-fv-antracita-700/5 bg-primary/40 text-white/85 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] hover:bg-primary/50 hover:text-fvplata-50 hover:shadow-[0_0_0_1px_rgba(198,210,219,0.14),0_0_18px_rgba(198,210,219,0.22)]',
+	],
+	plata: [
+		'border-fvplata-300/80 bg-fvplata-300 text-fvantracita-950 shadow-[0_0_0_1px_rgba(255,255,255,0.18)] hover:bg-fvplata-100 hover:text-fvantracita-950 hover:shadow-[0_0_0_1px_rgba(198,210,219,0.18),0_0_18px_rgba(198,210,219,0.28)]',
+	],
+} as const;
+
+const badgeVariant = variant === 'plata' ? 'plata' : 'glass';
+
+const baseClasses = [
+	'group relative inline-flex items-center justify-between gap-3 overflow-hidden rounded-full border px-4 py-2 text-center backdrop-blur-md backdrop-saturate-150 font-primary text-[0.65rem] uppercase tracking-[0.34em] transition duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fvazul-300 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent active:translate-y-0',
+	variants[badgeVariant],
+].join(' ');
+
+const valueClasses = [
+	'relative z-10 font-overpass text-[0.8rem] font-semibold tracking-[0.12em] normal-case',
+].join(' ');
+---
+
+<span class:list={[baseClasses, className]}>
+	<span class="relative z-10 text-[0.58rem] opacity-80">{label}</span>
+	<span class={valueClasses}>{value}</span>
+</span>
