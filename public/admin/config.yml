@@ -1,0 +1,28 @@
+backend:
+  name: github
+  repo: nagustindev/fv-automotores-web.git # REEMPLAZÁ CON TU REPO REAL
+  branch: main # O la rama que uses (master/main)
+
+media_folder: "public/images/showroom"
+public_folder: "/images/showroom"
+
+collections:
+  - name: "showroom"
+    label: "Nuevos Ingresos"
+    folder: "src/content/showroom" # Asegurate de que esta carpeta exista en tu proyecto
+    create: true
+    extension: "json"
+    format: "json"
+    slug: "{{year}}-{{fields.title}}"
+    fields:
+      - { label: "Título del Vehículo", name: "title", widget: "string" }
+      - { label: "Año", name: "year", widget: "number" }
+      - { label: "Link de Facebook Marketplace", name: "marketplace_url", widget: "string" }
+      - { label: "Badges Técnicos", name: "badges", widget: "list", summary: "{{fields.value}}" }
+      - { label: "Foto de Portada (Grilla Principal)", name: "foto_portada", widget: "image" }
+      - { 
+          label: "Fotos Secundarias (Para la Galería/Modal)", 
+          name: "fotos_galeria", 
+          widget: "list", 
+          field: { widget: "image", label: "Subir Foto" } 
+        }
