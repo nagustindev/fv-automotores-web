@@ -1,5 +1,5 @@
 backend:
-  name: github
+  name: git-gateway
   repo: nagustindev/fv-automotores-web.git # REEMPLAZÁ CON TU REPO REAL
   branch: main # O la rama que uses (master/main)
 
