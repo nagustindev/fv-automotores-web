@@ -1,15 +1,14 @@
 ---
 interface Props {
-  id: string;
   image: string;
   name: string;
   price: string;
 }
 
-const { id, image, name, price } = Astro.props;
+const { image, name, price } = Astro.props;
 ---
 
-<a href={`/vehicles/${id}`} class="group relative block overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl hover:scale-105">
+<div class="group relative block overflow-hidden rounded-lg shadow-lg">
   <div class="relative h-88 w-full overflow-hidden bg-fvantracita-950 sm:h-96 lg:h-96">
     <img
       src={image}
@@ -28,4 +27,4 @@ const { id, image, name, price } = Astro.props;
       </h3>
     </div>
   </div>
-</a>
+</div>
