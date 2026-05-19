@@ -1,16 +1,20 @@
 ---
 interface Props {
-	label: 'Año' | 'Kilometraje';
-	value: string | number;
+	label: string;
+	value?: string | number;
 	variant?: 'glass' | 'plata';
+	compact?: boolean;
 	class?: string;
+	id?: string;
 }
 
 const {
 	label,
 	value,
 	variant = 'glass',
+	compact = false,
 	class: className = '',
+	...rest
 } = Astro.props;
 
 const variants = {
@@ -25,7 +29,8 @@ const variants = {
 const badgeVariant = variant === 'plata' ? 'plata' : 'glass';
 
 const baseClasses = [
-	'group relative inline-flex items-center justify-between gap-3 overflow-hidden rounded-full border px-4 py-2 text-center backdrop-blur-md backdrop-saturate-150 font-primary text-[0.65rem] uppercase tracking-[0.34em] transition duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fvazul-300 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent active:translate-y-0',
+	'group relative inline-flex items-center overflow-hidden rounded-full border text-center backdrop-blur-md backdrop-saturate-150 font-primary uppercase tracking-[0.34em] transition duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fvazul-300 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent active:translate-y-0',
+	compact ? 'justify-center gap-2 px-4 py-2 text-[0.62rem]' : 'justify-between gap-3 px-4 py-2 text-[0.65rem]',
 	variants[badgeVariant],
 ].join(' ');
 
@@ -34,7 +39,7 @@ const valueClasses = [
 ].join(' ');
 ---
 
-<span class:list={[baseClasses, className]}>
-	<span class="relative z-10 text-[0.58rem] opacity-80">{label}</span>
-	<span class={valueClasses}>{value}</span>
+<span {...rest} class:list={[baseClasses, className]}>
+	<span data-vehicle-badge-label class="relative z-10 text-[0.58rem] opacity-80">{label}</span>
+	{!compact && <span data-vehicle-badge-value class={valueClasses}>{value}</span>}
 </span>

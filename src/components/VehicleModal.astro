@@ -1,0 +1,186 @@
+---
+// Si necesitás meter algún import de Astro va acá, sino queda vacío
+import Button from '@/components/Button.astro';
+import VehicleBadge from '@/components/VehicleBadge.astro';
+---
+
+<div id="vehicle-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 opacity-0 pointer-events-none backdrop-blur-md transition-opacity duration-300">
+  <div class="relative w-full max-w-5xl overflow-hidden text-white">
+    <div class="max-h-[90vh] overflow-y-auto">
+      <div class="p-4 md:p-6">
+        {/* Botón Volver */}
+        <button id="close-modal" class="mb-4 inline-flex items-center px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-white transition-colors
+        hover:text-fvplata-300 cursor-pointer">
+          Volver al inicio
+        </button>
+
+        {/* Galería / Visor Principal */}
+        <div class="relative overflow-hidden rounded-3xl border border-white/10 bg-[#050505]">
+          <div class="aspect-4/5 md:aspect-video">
+            <img id="modal-main-img" src="" alt="" class="h-full w-full object-cover" />
+          </div>
+
+          <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(215,191,130,0.12),transparent_42%),linear-gradient(to_top,rgba(0,0,0,0.72),transparent_44%)]"></div>
+        </div>
+
+        <div class="mt-3 overflow-hidden px-3 py-3">
+          <div id="modal-thumbnails" class="flex gap-2 overflow-x-auto pb-1"></div>
+        </div>
+
+        {/* Ficha Técnica y Botones CTA */}
+        <div class="mt-5 flex flex-col gap-5 md:mt-6">
+          <div class="space-y-4">
+            <div class="flex flex-wrap items-center gap-2">
+              <VehicleBadge id="modal-year" label="Año" value="" variant="plata" class="w-fit" />
+              <VehicleBadge id="modal-mileage" label="Kilometraje" value="" variant="plata" class="w-fit" />
+              <div id="modal-badges" class="flex flex-wrap gap-2"></div>
+            </div>
+            <h3 id="modal-title" class="font-primary text-[clamp(2.1rem,6vw,4.9rem)] leading-[0.9] uppercase tracking-[0.02em] text-white"></h3>
+          </div>
+
+          <div class="grid gap-3 sm:grid-cols-2">
+            <Button id="modal-wp-btn" href="" target="_blank" rel="noreferrer" text="Consultar por WhatsApp" variant="plata" class="w-full" />
+            <Button id="modal-marketplace-btn" href="" target="_blank" rel="noreferrer" text="Ver en Mercado Libre" variant="glass" class="w-full" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<template id="modal-badge-template">
+  <VehicleBadge label="Badge" value="" variant="glass" compact class="modal-badge-chip" />
+</template>
+
+<script>
+  import { urlFor } from '@/lib/sanity';
+
+  const modal = document.getElementById('vehicle-modal') as HTMLDivElement | null;
+  const closeBtn = document.getElementById('close-modal') as HTMLButtonElement | null;
+  const modalTitle = document.getElementById('modal-title') as HTMLHeadingElement | null;
+  const modalYear = document.getElementById('modal-year') as HTMLElement | null;
+  const modalMileage = document.getElementById('modal-mileage') as HTMLElement | null;
+  const badgesContainer = document.getElementById('modal-badges') as HTMLDivElement | null;
+  const thumbContainer = document.getElementById('modal-thumbnails') as HTMLDivElement | null;
+  const mainImg = document.getElementById('modal-main-img') as HTMLImageElement | null;
+  const modalWpBtn = document.getElementById('modal-wp-btn') as HTMLAnchorElement | null;
+  const modalMarketplaceBtn = document.getElementById('modal-marketplace-btn') as HTMLAnchorElement | null;
+  const badgeTemplate = document.getElementById('modal-badge-template') as HTMLTemplateElement | null;
+  const rootElement = document.documentElement;
+  const bodyElement = document.body;
+  let previousBodyOverflow = '';
+  let previousRootOverflow = '';
+
+  if (!modal || !closeBtn || !modalTitle || !modalYear || !modalMileage || !badgesContainer || !thumbContainer || !mainImg || !modalWpBtn || !modalMarketplaceBtn || !badgeTemplate) {
+    throw new Error('Vehicle modal markup is incomplete');
+  }
+
+  type ModalVehicleData = {
+    title: string;
+    year: number | string;
+    mileage?: string;
+    badges?: string[];
+    mainImage?: unknown;
+    gallery?: unknown[];
+    marketplaceUrl?: string;
+  };
+
+  // Escuchamos los clicks de los botones de las tarjetas
+  document.querySelectorAll('[data-open-modal]').forEach(button => {
+    button.addEventListener('click', () => {
+      const vehicleJson = button.getAttribute('data-vehicle');
+
+      if (!vehicleJson) {
+        return;
+      }
+
+      const vehicleData = JSON.parse(vehicleJson) as ModalVehicleData;
+      const imageAssets = [vehicleData.mainImage, ...(vehicleData.gallery ?? [])].filter(Boolean);
+      const primaryAsset = imageAssets[0];
+      
+      // Inyección de textos básicos
+      modalTitle.innerText = vehicleData.title;
+      setBadgeValue(modalYear, String(vehicleData.year));
+      setBadgeValue(modalMileage, vehicleData.mileage || 'N/A');
+      
+      // Seteamos el visor principal optimizado
+      if (primaryAsset) {
+        mainImg.src = urlFor(primaryAsset).width(1200).format('webp').url();
+      } else {
+        mainImg.removeAttribute('src');
+      }
+      mainImg.alt = vehicleData.title;
+
+      // Inyección limpia de badges dinámicos
+      badgesContainer.innerHTML = '';
+      vehicleData.badges?.forEach((badge: string) => {
+        const badgeNode = badgeTemplate.content.firstElementChild?.cloneNode(true) as HTMLElement | null;
+
+        if (!badgeNode) {
+          return;
+        }
+
+        const labelNode = badgeNode.querySelector('[data-vehicle-badge-label]');
+        const valueNode = badgeNode.querySelector('[data-vehicle-badge-value]');
+
+        labelNode && (labelNode.textContent = badge);
+        valueNode && (valueNode.textContent = '');
+
+        badgesContainer.appendChild(badgeNode);
+      });
+
+      // Construcción de la galería de miniaturas interactiva
+      thumbContainer.innerHTML = '';
+
+      imageAssets.forEach((imgAsset, index) => createThumb(imgAsset, mainImg, thumbContainer, index === 0));
+
+      // Personalización del botón de WhatsApp para que Fabio sepa qué auto miran
+      const encodedMsg = encodeURIComponent(`Hola Juan Pablo, me interesa el vehículo ${vehicleData.title} año ${vehicleData.year} que vi en la web.`);
+      modalWpBtn.href = `https://wa.me/54911XXXXXXXX?text=${encodedMsg}`; // Reemplazar X por número real
+      modalMarketplaceBtn.href = vehicleData.marketplaceUrl || '#';
+
+      // Efecto fluido de apertura
+      previousBodyOverflow = bodyElement.style.overflow;
+      previousRootOverflow = rootElement.style.overflow;
+      bodyElement.style.overflow = 'hidden';
+      rootElement.style.overflow = 'hidden';
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+    });
+  });
+
+  function createThumb(asset: unknown, mainImgElement: HTMLImageElement, container: HTMLDivElement, isActive = false) {
+    const thumbUrl = urlFor(asset).width(160).height(100).format('webp').url();
+    const fullUrl = urlFor(asset).width(1200).format('webp').url();
+    const thumb = document.createElement('button');
+    thumb.type = 'button';
+    thumb.className = `shrink-0 overflow-hidden rounded-xl border transition-all ${isActive ? 'border-fvplata-300 ring-2 ring-fvplata-300/35' : 'border-white/10 hover:border-fvplata-300/70'}`;
+    thumb.innerHTML = `<img src="${thumbUrl}" alt="Miniatura del vehículo" class="h-20 w-32 object-cover md:h-24 md:w-36" />`;
+    thumb.addEventListener('click', () => {
+      mainImgElement.src = fullUrl;
+      container.querySelectorAll('button').forEach((button: HTMLButtonElement) => {
+        button.classList.remove('border-fvplata-300', 'ring-2', 'ring-fvplata-300/35');
+        button.classList.add('border-white/10');
+      });
+      thumb.classList.add('border-fvplata-300', 'ring-2', 'ring-fvplata-300/35');
+      thumb.classList.remove('border-white/10');
+    });
+    container.appendChild(thumb);
+  }
+
+  function setBadgeValue(badgeRoot: HTMLElement, value: string) {
+    const valueNode = badgeRoot.querySelector('[data-vehicle-badge-value]');
+
+    if (valueNode) {
+      valueNode.textContent = value;
+    }
+  }
+
+  function closeModal() {
+    modal!.classList.add('opacity-0', 'pointer-events-none');
+    bodyElement.style.overflow = previousBodyOverflow;
+    rootElement.style.overflow = previousRootOverflow;
+  }
+
+  closeBtn?.addEventListener('click', closeModal);
+  modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+</script>

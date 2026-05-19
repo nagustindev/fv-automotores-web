@@ -1,30 +1,33 @@
 ---
-interface Props {
-  image: string;
-  name: string;
-  price: string;
-}
+import { urlFor } from '@/lib/sanity';
 
-const { image, name, price } = Astro.props;
+const { vehicle } = Astro.props;
 ---
 
-<div class="group relative block overflow-hidden rounded-lg shadow-lg">
-  <div class="relative h-88 w-full overflow-hidden bg-fvantracita-950 sm:h-96 lg:h-96">
-    <img
-      src={image}
-      alt={name}
-      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-    />
+<div class="bg-[#242424] border border-zinc-800 rounded-xl overflow-hidden group transition-all duration-300">
+  
+  {/* Imagen Principal de Portada */}
+  <div 
+    class="relative overflow-hidden aspect-16/10 bg-zinc-900 cursor-pointer"
+    data-open-modal
+    data-vehicle={JSON.stringify(vehicle)}
+  >
+    {vehicle.mainImage && (
+      <img 
+        src={urlFor(vehicle.mainImage).width(600).format('webp').url()} 
+        alt={vehicle.title}
+        loading="lazy"
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+      />
+    )}
     
-    <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
-
-    <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-5">
-      <p class="text-lg font-bold text-fvplata-300 sm:text-xl">
-        {price}
-      </p>
-      <h3 class="mt-1 text-xl font-bold text-white font-primary tracking-wide sm:text-2xl">
-        {name}
-      </h3>
+    {/* Título sobre la imagen */}
+    <div class="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black/80 to-transparent">
+      <div class="flex justify-between items-end gap-2">
+        <h3 class="font-primary font-bold text-white text-xl uppercase tracking-wide">
+          {vehicle.title}
+        </h3>
+      </div>
     </div>
   </div>
 </div>

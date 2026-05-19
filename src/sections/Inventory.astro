@@ -1,12 +1,30 @@
 ---
 import VehicleGrid from '@/components/VehicleGrid.astro';
+import VehicleModal from '@/components/VehicleModal.astro';
+
+// Importamos el cliente conector que creamos en src/lib/sanity.ts
+import { sanityClient } from '@/lib/sanity';
+
+// Hacemos la consulta GROQ para traer los vehículos reales publicados por Fabio
+const vehicles = await sanityClient.fetch(`
+  *[_type == "vehicle"] | order(_createdAt desc) {
+    _id,
+    title,
+    year,
+    mileage,
+    marketplaceUrl,
+    mainImage,
+    badges,
+    gallery
+  }
+`);
 ---
 
 <section class="relative w-full overflow-hidden px-4 py-20 sm:px-6 lg:py-28" aria-labelledby="inventory-title">
-    <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-fvplata-300/30 to-transparent"></div>
-    <div
+  <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-fvplata-300/30 to-transparent"></div>
+  <div
     aria-hidden="true"
-    class="pointer-events-none absolute inset-x-0 top-0 z-0 h-72 bg-[radial-gradient(ellipse_at_top,_var(--color-fvplata-300)_0%,_transparent_70%)] opacity-[0.05]"
+    class="pointer-events-none absolute inset-x-0 top-0 z-0 h-72 bg-[radial-gradient(ellipse_at_top,var(--color-fvplata-300)_0%,transparent_70%)] opacity-[0.05]"
   >
   </div>
   <div class="relative mx-auto flex max-w-6xl flex-col items-center">
@@ -22,7 +40,10 @@ import VehicleGrid from '@/components/VehicleGrid.astro';
       Unidades destacadas de la semana, listas para transferir
     </p>
   </div>
-  <VehicleGrid />
 
-    
+  {/* Le pasamos los datos reales a la grilla por Props */}
+  <VehicleGrid vehicles={vehicles} />
+  
+  {/* El modal queda listo al fondo esperando que JS lo despierte */}
+  <VehicleModal />
 </section>
