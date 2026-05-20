@@ -1,23 +1,4 @@
 ---
-import VehicleGrid from '@/components/VehicleGrid.astro';
-import VehicleModal from '@/components/VehicleModal.astro';
-
-// Importamos el cliente conector que creamos en src/lib/sanity.ts
-import { sanityClient } from '@/lib/sanity';
-
-// Hacemos la consulta GROQ para traer los vehículos reales publicados por Fabio
-const vehicles = await sanityClient.fetch(`
-  *[_type == "vehicle"] | order(_createdAt desc) {
-    _id,
-    title,
-    year,
-    mileage,
-    marketplaceUrl,
-    mainImage,
-    badges,
-    gallery
-  }
-`);
 ---
 
 <section class="relative w-full overflow-hidden px-4 py-20 sm:px-6 lg:py-28" aria-labelledby="inventory-title">
@@ -40,10 +21,4 @@ const vehicles = await sanityClient.fetch(`
       Unidades destacadas de la semana, listas para transferir
     </p>
   </div>
-
-  {/* Le pasamos los datos reales a la grilla por Props */}
-  <VehicleGrid vehicles={vehicles} />
-  
-  {/* El modal queda listo al fondo esperando que JS lo despierte */}
-  <VehicleModal />
 </section>

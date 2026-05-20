@@ -29,14 +29,24 @@ const shouldReloadNavItem = (href: string) => currentPath === "/" && href === "/
             class="group flex items-center gap-3 outline-none focus-visible:ring-2 focus-visible:ring-fvazul-300 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent"
             aria-label="FV Automotores - Inicio"
         >
-            <img
-                src="/logo.svg"
-                alt=""
-                class="h-7 w-auto transition duration-500 group-hover:-rotate-2 sm:h-10"
-                width="30"
-                height="30"
-                decoding="async"
-            />
+            <span data-logo-reveal class="relative flex h-7 w-36 items-center justify-center sm:h-10 sm:w-52" aria-hidden="true">
+                <img
+                    src="/logo.svg"
+                    alt=""
+                    class="absolute inset-0 h-full w-full object-contain transition duration-700 ease-out group-hover:-rotate-2"
+                    width="30"
+                    height="30"
+                    decoding="async"
+                />
+                <img
+                    src="/25anios.svg"
+                    alt=""
+                    class="absolute inset-0 h-full w-full object-contain opacity-0 scale-[0.98] transition duration-700 ease-out"
+                    width="30"
+                    height="30"
+                    decoding="async"
+                />
+            </span>
         </a>
 
         <nav class="hidden justify-self-center md:block" aria-label="Navegación principal">
@@ -128,6 +138,36 @@ const shouldReloadNavItem = (href: string) => currentPath === "/" && href === "/
 </header>
 
 <style>
+    [data-logo-reveal] > img {
+        will-change: opacity, transform;
+    }
+
+    [data-logo-reveal][data-logo-state='reveal'] > img:first-child {
+        opacity: 0;
+        transform: scale(0.985);
+    }
+
+    [data-logo-reveal][data-logo-state='reveal'] > img:last-child {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    [data-logo-reveal][data-logo-state='settle'] > img:first-child {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    [data-logo-reveal][data-logo-state='settle'] > img:last-child {
+        opacity: 0;
+        transform: scale(0.985);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        [data-logo-reveal] > img {
+            transition: none;
+        }
+    }
+
     [data-nav-link] [data-nav-underline] {
         clip-path: inset(0 100% 0 0);
     }
@@ -166,10 +206,12 @@ const shouldReloadNavItem = (href: string) => currentPath === "/" && href === "/
 <script>
     const SCROLL_THRESHOLD = 24;
     const UNDERLINE_DURATION = 300;
+    const LOGO_REVEAL_DURATION = 1100;
 
     let scrollAbortController: AbortController | null = null;
     let menuAbortController: AbortController | null = null;
     let navUnderlineAbortController: AbortController | null = null;
+    let logoRevealTimeout: number | undefined;
 
     function setupHeaderScroll() {
         const header = document.querySelector('[data-header]');
@@ -193,6 +235,29 @@ const shouldReloadNavItem = (href: string) => currentPath === "/" && href === "/
             passive: true,
             signal: scrollAbortController.signal,
         });
+    }
+
+    function setupLogoReveal() {
+        const logo = document.querySelector('[data-logo-reveal]') as HTMLElement | null;
+        if (!logo) return;
+
+        if (logoRevealTimeout !== undefined) {
+            window.clearTimeout(logoRevealTimeout);
+        }
+
+        const navEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+        const isReload = navEntry?.type === 'reload';
+
+        if (!isReload) {
+            logo.removeAttribute('data-logo-state');
+            return;
+        }
+
+        logo.dataset.logoState = 'reveal';
+
+        logoRevealTimeout = window.setTimeout(() => {
+            logo.dataset.logoState = 'settle';
+        }, LOGO_REVEAL_DURATION);
     }
 
     function setupMobileMenu() {
@@ -285,6 +350,7 @@ const shouldReloadNavItem = (href: string) => currentPath === "/" && href === "/
 
     document.addEventListener('astro:page-load', () => {
         setupHeaderScroll();
+        setupLogoReveal();
         setupMobileMenu();
         setupNavUnderline();
     });

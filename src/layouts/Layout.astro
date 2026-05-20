@@ -8,17 +8,17 @@ interface Props {
 }
 
 const { 
-	title = "FV Automotores - Selección Exclusiva", 
+	title, 
 	description = "25 años de trayectoria garantizando tu próximo vehículo seleccionado." 
 } = Astro.props;
 
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-AR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{description}">
+    <meta name="description" content={description}>
     <title>{title}</title>
     <link rel="preload" href="/fonts/Microgramma-Bold-Extended.otf" as="font" type="font/otf" crossorigin="anonymous" />
     <ClientRouter />
@@ -27,5 +27,49 @@ const {
     <main>
         <slot />
     </main>
+    <script inline defer>
+        // Guardamos el título base que vino del servidor
+        const originalTitle = document.title;
+
+        // 1. Lógica para cuando abren o cierran el modal de un auto
+        window.addEventListener('update-modal-title', (e) => {
+            if (e.detail && e.detail.carName) {
+                document.title = `${e.detail.carName} Seleccionado — FV Automotores`;
+            } else {
+                document.title = originalTitle;
+            }
+        });
+
+        // 2. Lógica para cambiar el título según la sección del scroll
+        const setupScrollObserver = () => {
+            const sections = {
+                'inventory': 'Nuevos Ingresos en Stock — FV Automotores',
+                'about': '25 Años de Trayectoria — FV Automotores',
+                'contact': 'Contacto y Ubicación en Zona Sur — FV Automotores'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionId = entry.target.id;
+                        if (sections[sectionId]) {
+                            document.title = sections[sectionId];
+                        } else {
+                            document.title = originalTitle; // Si vuelve al Hero
+                        }
+                    }
+                });
+            }, { root: null, threshold: 0.5 }); // Se activa al tener el 50% de la sección visible
+
+            // Observamos las secciones reales
+            Object.keys(sections).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) observer.observe(el);
+            });
+        };
+
+        // Escucha el ciclo de vida del ClientRouter de Astro
+        document.addEventListener('astro:page-load', setupScrollObserver);
+    </script>
 </body>
 </html>
