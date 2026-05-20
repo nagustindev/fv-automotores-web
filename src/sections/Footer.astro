@@ -1,8 +1,13 @@
 ---
 import TiktokBrandIcon from '@/assets/svg/tiktok.svg';
 import InstagramBrandIcon from '@/assets/svg/instagram.svg';
-import FacebookBrandIcon from '@/assets/svg/facebook.svg';
 import Button from '@/components/Button.astro';
+
+const whatsappNumber = "5491144441290";
+const defaultMessage =
+  "Hola! Vi la página web de FV Automotores y quería consultar por los vehículos en stock.";
+
+const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
 ---
 <footer class="relative w-full overflow-hidden">
     <picture class="absolute inset-0">
@@ -60,11 +65,10 @@ import Button from '@/components/Button.astro';
             <div>
                 <h3 class="mb-4 font-overpass text-sm font-bold tracking-widest text-white">Contacto</h3>
                 <ul class="space-y-2">
-                    <li><a href="#" data-nav-link class="relative text-sm text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"><span aria-hidden="true" data-nav-underline class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-fvplata-300" />WhatsApp - Juampi</a></li>
-                    <li><a href="#" data-nav-link class="relative text-sm text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"><span aria-hidden="true" data-nav-underline class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-fvplata-300" />+54 9 11 4444-1290</a></li>
+                    <li><a href={whatsappUrl} target="_blank" rel="noopener noreferrer" data-nav-link class="relative text-sm text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"><span aria-hidden="true" data-nav-underline class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-fvplata-300" />WhatsApp - Juampi</a></li>
                     <li>
                         <a
-                            href="#"
+                            href="https://maps.app.goo.gl/47jRbT5xKREkKUKAA" target="_blank" rel="noopener noreferrer"
                             data-nav-link
                             class="group relative inline-block max-w-[30ch] text-sm leading-relaxed text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"
                         >
@@ -83,14 +87,11 @@ import Button from '@/components/Button.astro';
             <div>
                 <h3 class="mb-4 font-overpass text-sm font-bold tracking-widest text-white">Redes</h3>
                 <div class="flex gap-4">
-                    <a href="#" aria-label="Seguir a FV Automotores en Instagram" target="_blank" class="transition duration-300 hover:opacity-75 focus-visible:opacity-75">
+                    <a href="https://www.instagram.com/fabioviolaautomotores/" aria-label="Seguir a FV Automotores en Instagram" target="_blank" rel="noopener noreferrer" class="transition duration-300 hover:opacity-75 focus-visible:opacity-75">
                         <InstagramBrandIcon class="size-6 text-white" />
                     </a>
-                    <a href="#" aria-label="Seguir a FV Automotores en TikTok" target="_blank" class="transition duration-300 hover:opacity-75 focus-visible:opacity-75">
+                    <a href="https://www.tiktok.com/@fabioviolaautomotores" aria-label="Seguir a FV Automotores en TikTok" target="_blank" rel="noopener noreferrer" class="transition duration-300 hover:opacity-75 focus-visible:opacity-75">
                         <TiktokBrandIcon class="size-6 text-white" />
-                    </a>
-                    <a href="#" aria-label="Consultar stock de autos en Facebook" target="_blank" class="transition duration-300 hover:opacity-75 focus-visible:opacity-75">
-                        <FacebookBrandIcon class="size-6 text-white" />
                     </a>
                 </div>
             </div>

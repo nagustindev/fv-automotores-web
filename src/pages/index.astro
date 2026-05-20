@@ -7,13 +7,13 @@ import About from '@/sections/About.astro';
 import Contact from '@/sections/Contact.astro';
 import Footer from '@/sections/Footer.astro';
 
-import '../styles/global.css';
+import '@/styles/global.css';
 
-const title = 'FV Automotores - Compra y Venta de Autos en Zona Sur';
-const description = 'Concesionaria líder con 25 años de trayectoria en Adrogué. Encontrá tu próximo auto con atención directa por sus dueños.';
+const seoTitle = 'Compra y Venta de Autos en Adrogué - Fabio Viola Automotores';
+const seoDescription = 'Comprá o vendé tu auto con la tranquilidad de una agencia familiar con 25 años de trayectoria en Adrogué. ¡Consultá por nuestros seleccionados vía WhatsApp!';
 ---
 
-<Layout title={title} description={description}>
+<Layout title={seoTitle} description={seoDescription}>
 	<Header />
 	<Hero />
 	<Inventory />
@@ -22,10 +22,7 @@ const description = 'Concesionaria líder con 25 años de trayectoria en Adrogu�
 	{/* Bloque informativo accesible (lectores de pantalla) y rastreable por motores de búsqueda. Aporta valor al contenido. */}
 	<aside class="sr-only" aria-labelledby="dealer-details-title">
 		<h2 id="dealer-details-title">Detalles del concesionario</h2>
-		<p>FV Automotores, con más de 25 años de experiencia, se especializa en la venta de autos usados en Zona Sur. Ofrecemos una amplia selección de vehículos de calidad, atención personalizada y las mejores opciones de financiación para ayudarte a encontrar tu próximo auto. Visitanos y descubrí por qué somos la elección confiable para los compradores de autos usados en la región.</p>
-		<h3>Nuevos ingresos</h3>
-		<p>Contamos con una amplia gama de vehículos nuevos y usados en stock, garantizando la calidad y el servicio que mereces.</p>
-		{/* Agregar un map de cada auto disponible */}
+		<p>Fabio Viola Automotores, con más de 25 años de experiencia, se especializa en la venta de autos usados en Zona Sur, Adrogué. Ofrecemos una amplia selección de vehículos de calidad, atención personalizada y las mejores opciones de financiación para ayudarte a encontrar tu próximo auto. Visita nuestro showroom y descubrí por qué somos la elección confiable para comprar tu próximo vehículo.</p>
 	</aside>
 	<Footer />
 </Layout>

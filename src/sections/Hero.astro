@@ -1,61 +1,91 @@
 ---
-import Button from "@/components/Button.astro"
+import Button from "@/components/Button.astro";
+
+const whatsappNumber = "5491144441290";
+const defaultMessage =
+  "Hola! Vi la página web de FV Automotores y quería consultar por los vehículos en stock.";
+
+const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
 ---
 
 <section
-    class="relative w-full overflow-hidden bg-primary"
-    aria-label="Presentación de FV Automotores"
+  class="relative w-full overflow-hidden bg-primary"
+  aria-label="Presentación de FV Automotores"
 >
-    <picture class="absolute inset-0 z-0" aria-hidden="true">
-        <source
-            type="image/webp"
-            srcset="/hero_background.webp 1x"
-        />
-        <img
-            src="/hero_background.webp"
-            alt=""
-            role="presentation"
-            class="h-full w-full object-cover object-center"
-            fetchpriority="high"
-            decoding="async"
-        />
-    </picture>
+  <picture class="absolute inset-0 z-0" aria-hidden="true">
+    <source type="image/webp" srcset="/hero_background.webp 1x" />
+    <img
+      src="/hero_background.webp"
+      alt=""
+      role="presentation"
+      class="h-full w-full object-cover object-center"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </picture>
 
-    <div
-        class="absolute inset-0 z-1 bg-linear-to-b from-black/35 via-black/10 to-primary/85"
-        aria-hidden="true"
-    ></div>
+  <div
+    class="absolute inset-0 z-1 bg-linear-to-b from-black/35 via-black/10 to-primary/85"
+    aria-hidden="true"
+  >
+  </div>
 
-    <header class="relative z-10 flex min-h-screen w-full flex-col items-start justify-end px-4 pb-10 pt-16 text-left sm:px-6 lg:px-8 lg:pb-14">
-        <span class="font-overpass text-xs uppercase tracking-widest text-fvplata-300 font-semibold">FABIO VIOLA AUTOMOTORES</span>
-        <h1 class="text-balance font-primary text-3xl font-bold tracking-[0.18em] text-white sm:text-4xl lg:text-6xl">
-            COMPRA Y VENTA DE AUTOS EN ZONA SUR
-        </h1>
-        <p class="mt-4 max-w-2xl text-balance font-overpass text-base text-fvplata-300 sm:text-xl lg:text-2xl">
-            25 años de trayectoria y seguridad garantizando tu próximo vehículo.
-        </p>
-        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Button href="#" text="INGRESOS" variant="plata" />
-            <Button href="#" text="COORDINAR VISITA" />
-        </div>
-    </header>
+  <header
+    class="relative z-10 flex min-h-screen w-full flex-col items-start justify-end px-4 pb-10 pt-16 text-left sm:px-6 lg:px-8 lg:pb-14"
+  >
+    <span
+      class="font-overpass text-xs uppercase tracking-widest text-fvplata-300 font-semibold"
+      >FABIO VIOLA AUTOMOTORES</span
+    >
+    <h1
+      class="text-balance font-primary text-3xl font-bold tracking-[0.18em] text-white sm:text-4xl lg:text-6xl"
+    >
+      COMPRA Y VENTA DE AUTOS EN ADROGUÉ
+    </h1>
+    <p
+      class="mt-4 max-w-2xl text-balance font-overpass text-base text-fvplata-300 sm:text-xl lg:text-2xl"
+    >
+      Más de 25 años en el rubro garantizando la tranquilidad y seguridad en tu
+      próximo vehículo seleccionado.
+    </p>
+    <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+      <Button
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        text="CONSULTAR POR WHATSAPP"
+        variant="plata"
+      />
+      <Button
+        href="https://vehiculos.mercadolibre.com.ar/_CustId_129556687"
+        target="_blank"
+        rel="noopener noreferrer"
+        text="STOCK ACTIVO"
+      />
+    </div>
+  </header>
 </section>
 
 <style>
-    picture {
-        -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
-        mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
-    }
+  picture {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 72%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+  }
 
+  img {
+    transform: scale(var(--hero-bg-scale, 1));
+    transform-origin: center center;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
     img {
-        transform: scale(var(--hero-bg-scale, 1));
-        transform-origin: center center;
-        will-change: transform;
+      transform: none;
     }
-
-    @media (prefers-reduced-motion: reduce) {
-        img {
-            transform: none;
-        }
-    }
+  }
 </style>
