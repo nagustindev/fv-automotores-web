@@ -1,5 +1,7 @@
 ---
 import Button from "@/components/Button.astro";
+import WhatsAppIcon from '@/assets/svg/whatsapp.svg';
+import MercadoLibreIcon from '@/assets/svg/mercadolibre.svg';
 
 const whatsappNumber = "5491144441290";
 const defaultMessage =
@@ -54,6 +56,8 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
         target="_blank"
         rel="noopener noreferrer"
         text="CONSULTAR POR WHATSAPP"
+        icon={WhatsAppIcon}
+        iconClass="size-6"
         variant="plata"
       />
       <Button
@@ -61,6 +65,8 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
         target="_blank"
         rel="noopener noreferrer"
         text="STOCK ACTIVO"
+        icon={MercadoLibreIcon}
+        iconClass="size-6"
       />
     </div>
   </header>

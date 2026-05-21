@@ -2,11 +2,13 @@
 const {
 	href,
 	text = 'COORDINAR VISITA',
+	icon: Icon,
 	class: className = '',
 	variant = 'glass',
 	type = 'button',
 	target,
 	rel,
+	iconClass = '',
 	...rest
 } = Astro.props;
 
@@ -28,10 +30,16 @@ const baseClasses = [
 ---
 {href !== undefined ? (
 	<a {...rest} class:list={[baseClasses, className]} href={href} target={target} rel={rel}>
-		<span class="relative z-10">{text}</span>
+		<span class:list={["relative z-10 inline-flex items-center gap-2", Icon && 'pl-0']}>
+			{Icon ? <Icon class:list={["size-4 shrink-0", iconClass]} aria-hidden="true" /> : null}
+			<span>{text}</span>
+		</span>
 	</a>
 ) : (
 	<button {...rest} class:list={[baseClasses, className]} type={type}>
-		<span class="relative z-10">{text}</span>
+		<span class:list={["relative z-10 inline-flex items-center gap-2", Icon && 'pl-0']}>
+			{Icon ? <Icon class:list={["size-4 shrink-0", iconClass]} aria-hidden="true" /> : null}
+			<span>{text}</span>
+		</span>
 	</button>
 )}
