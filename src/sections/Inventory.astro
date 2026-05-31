@@ -1,4 +1,5 @@
 ---
+import StockBridge from "@/components/StockBridge.astro"
 ---
 
 <section class="relative w-full overflow-hidden px-4 py-20 sm:px-6 lg:py-28" aria-labelledby="inventory-title">
@@ -13,12 +14,13 @@
       id="inventory-title"
       class="mb-3 text-center font-primary text-3xl font-bold tracking-[0.18em] text-white sm:text-4xl md:text-5xl"
     >
-      NUEVOS INGRESOS
+      SHOWROOM ONLINE
     </h2>
     <p
       class="mb-12 max-w-xl text-center font-overpass text-xs font-medium tracking-[0.25em] text-balance text-fvplata-300 sm:mb-16 sm:text-sm"
     >
-      Unidades destacadas de la semana, listas para transferir
+      Seleciona uno de nuestros canales oficiales para ver las unidades disponibles.
     </p>
   </div>
+  <StockBridge />
 </section>
