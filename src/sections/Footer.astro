@@ -1,7 +1,7 @@
 ---
-import TiktokBrandIcon from '@/assets/svg/tiktok.svg';
-import InstagramBrandIcon from '@/assets/svg/instagram.svg';
-import Button from '@/components/Button.astro';
+import TiktokBrandIcon from "@/assets/svg/tiktok.svg";
+import InstagramBrandIcon from "@/assets/svg/instagram.svg";
+import Button from "@/components/Button.astro";
 
 const whatsappNumber = "5491144441290";
 const defaultMessage =
@@ -9,280 +9,451 @@ const defaultMessage =
 
 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
 ---
+
 <footer class="relative w-full overflow-hidden">
-    <picture class="absolute inset-0">
-        <source
-            type="image/webp"
-            srcset="/footer_background.webp 1x"
-        />
-        <img
-            src="/footer_background.webp"
-            alt=""
-            role="presentation"
-            class="h-full w-full object-cover object-center"
-            fetchpriority="high"
-            decoding="async"
-        />
-    </picture>
-    <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-fvplata-300/30 to-transparent z-10"></div>
-     <div
-        class="pointer-events-none absolute inset-0 bg-linear-to-b from-black/15 via-black/30 to-primary/55"
-        aria-hidden="true"
-    ></div>
-    <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 z-0 h-40 bg-[radial-gradient(ellipse_at_top,var(--color-fvplata-300)_0%,transparent_70%)] opacity-[0.05]"></div>
-    <header class="relative z-20 flex w-full flex-col items-start justify-center px-4 py-20 text-left sm:px-6 sm:py-28 lg:px-8 lg:py-32">
-        <h2 class="text-balance font-primary text-3xl font-bold tracking-[0.18em] text-white sm:text-4xl lg:text-6xl">
-            EL SHOWROOM ESTÁ ABIERTO PARA VOS
-        </h2>
-        <p class="mt-4 max-w-2xl text-balance font-overpass text-base text-fvplata-300 sm:text-xl lg:text-2xl">
-           Vení a conocernos, tomá un café y mirá nuestro stock con total tranquilidad. Te ofrecemos un espacio transparente y sin presiones para elegir tu próximo vehículo.
-        </p>
-        <Button href="#" text="COORDINAR VISITA" class="mt-6 self-start" variant="plata"/>
-    </header>
+  <picture class="absolute inset-0">
+    <source type="image/webp" srcset="/footer_background.webp 1x" />
+    <img
+      src="/footer_background.webp"
+      alt=""
+      role="presentation"
+      class="h-full w-full object-cover object-center"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </picture>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-fvplata-300/30 to-transparent z-10"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute inset-0 bg-linear-to-b from-black/15 via-black/30 to-primary/55"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 top-0 z-0 h-40 bg-[radial-gradient(ellipse_at_top,var(--color-fvplata-300)_0%,transparent_70%)] opacity-[0.05]"
+  >
+  </div>
+  <header
+    class="relative z-20 flex w-full flex-col items-start justify-center px-4 py-20 text-left sm:px-6 sm:py-28 lg:px-8 lg:py-32"
+  >
+    <h2
+      class="text-balance font-primary text-3xl font-bold tracking-[0.18em] text-white sm:text-4xl lg:text-6xl"
+    >
+      EL SHOWROOM ESTÁ ABIERTO PARA VOS
+    </h2>
+    <p
+      class="mt-4 max-w-2xl text-balance font-overpass text-base text-fvplata-300 sm:text-xl lg:text-2xl"
+    >
+      Vení a conocernos, tomá un café y mirá nuestro stock con total
+      tranquilidad. Te ofrecemos un espacio transparente y sin presiones para
+      elegir tu próximo vehículo.
+    </p>
+    <Button
+      href="#"
+      text="COORDINAR VISITA"
+      class="mt-6 self-start"
+      variant="plata"
+    />
+  </header>
 </footer>
 
-<footer class="relative w-full bg-fvantracita-950 px-4 sm:px-6 lg:py-28 lg:px-8">
-    <div class="mx-auto max-w-6xl">
-        <div class="grid grid-cols-2 gap-8 md:grid-cols-4 lg:gap-12">
-            <div>
-                <h3 class="mb-4 font-overpass text-sm font-bold tracking-widest text-white">Navegación</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" data-nav-link class="relative text-sm text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"><span aria-hidden="true" data-nav-underline class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-fvplata-300" />Inicio</a></li>
-                    <li><a href="#" data-nav-link class="relative text-sm text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"><span aria-hidden="true" data-nav-underline class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-fvplata-300" />Nuevos Ingresos</a></li>
-                    <li><a href="#" data-nav-link class="relative text-sm text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"><span aria-hidden="true" data-nav-underline class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-fvplata-300" />Acerca de Nosotros</a></li>
-                    <li><a href="#" data-nav-link class="relative text-sm text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"><span aria-hidden="true" data-nav-underline class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-fvplata-300" />Ubicación</a></li>
-                </ul>
-            </div>
+<footer
+  class="relative w-full bg-fvantracita-950 px-4 pb-0 sm:px-6 lg:pt-28 lg:pb-0 lg:px-8"
+>
+  <div class="mx-auto max-w-6xl">
+    <div class="grid grid-cols-2 gap-8 md:grid-cols-4 lg:gap-12">
+      <div>
+        <h3
+          class="mb-4 font-overpass text-sm font-bold tracking-widest text-white"
+        >
+          Navegación
+        </h3>
+        <ul class="space-y-2">
+          <li>
+            <a
+              href="#"
+              data-nav-link
+              class="relative text-sm text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"
+              ><span
+                aria-hidden="true"
+                data-nav-underline
+                class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-fvplata-300"
+              ></span>Inicio</a>
+          </li>
+          <li>
+            <a
+              href="#"
+              data-nav-link
+              class="relative text-sm text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"
+              ><span
+                aria-hidden="true"
+                data-nav-underline
+                class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-fvplata-300"
+              ></span>Nuevos Ingresos</a>
+          </li>
+          <li>
+            <a
+              href="#"
+              data-nav-link
+              class="relative text-sm text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"
+              ><span
+                aria-hidden="true"
+                data-nav-underline
+                class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-fvplata-300"
+              ></span>Acerca de Nosotros</a>
+          </li>
+          <li>
+            <a
+              href="#"
+              data-nav-link
+              class="relative text-sm text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"
+              ><span
+                aria-hidden="true"
+                data-nav-underline
+                class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-fvplata-300"
+              ></span>Ubicación</a>
+          </li>
+        </ul>
+      </div>
 
-            <div>
-                <h3 class="mb-4 font-overpass text-sm font-bold tracking-widest text-white">Empresa</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" data-nav-link class="relative text-sm text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"><span aria-hidden="true" data-nav-underline class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-fvplata-300" />Legal</a></li>
-                    <li><a href="#" data-nav-link class="relative text-sm text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"><span aria-hidden="true" data-nav-underline class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-fvplata-300" />Política de Privacidad</a></li>
-                </ul>
-            </div>
+      <div>
+        <h3
+          class="mb-4 font-overpass text-sm font-bold tracking-widest text-white"
+        >
+          Empresa
+        </h3>
+        <ul class="space-y-2">
+          <li>
+            <a
+              href="#"
+              data-nav-link
+              class="relative text-sm text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"
+              ><span
+                aria-hidden="true"
+                data-nav-underline
+                class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-fvplata-300"
+              ></span>Legal</a>
+          </li>
+          <li>
+            <a
+              href="#"
+              data-nav-link
+              class="relative text-sm text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"
+              ><span
+                aria-hidden="true"
+                data-nav-underline
+                class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-fvplata-300"
+              ></span>Política de Privacidad</a>
+          </li>
+        </ul>
+      </div>
 
-            <div>
-                <h3 class="mb-4 font-overpass text-sm font-bold tracking-widest text-white">Contacto</h3>
-                <ul class="space-y-2">
-                    <li><a href={whatsappUrl} target="_blank" rel="noopener noreferrer" data-nav-link class="relative text-sm text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"><span aria-hidden="true" data-nav-underline class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-fvplata-300" />WhatsApp - Juampi</a></li>
-                    <li>
-                        <a
-                            href="https://maps.app.goo.gl/47jRbT5xKREkKUKAA" target="_blank" rel="noopener noreferrer"
-                            data-nav-link
-                            class="group relative inline-block max-w-[30ch] text-sm leading-relaxed text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"
-                        >
-                            <span
-                                aria-hidden="true"
-                                data-nav-underline
-                                class="pointer-events-none absolute inset-x-0 -bottom-1 h-px bg-fvplata-300"
-                            />
-                            Ceferino Ramírez 1079, B1846 Adrogué, Buenos Aires
-                        </a>
-                    </li>
+      <div>
+        <h3
+          class="mb-4 font-overpass text-sm font-bold tracking-widest text-white"
+        >
+          Contacto
+        </h3>
+        <ul class="space-y-2">
+          <li>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-nav-link
+              class="relative text-sm text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"
+              ><span
+                aria-hidden="true"
+                data-nav-underline
+                class="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-fvplata-300"
+              ></span>WhatsApp - Juampi</a>
+          </li>
+          <li>
+            <a
+              href="https://maps.app.goo.gl/47jRbT5xKREkKUKAA"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-nav-link
+              class="group relative inline-block max-w-[30ch] text-sm leading-relaxed text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"
+            >
+              <span
+                aria-hidden="true"
+                data-nav-underline
+                class="pointer-events-none absolute inset-x-0 -bottom-1 h-px bg-fvplata-300"
+              ></span>
+              Ceferino Ramírez 1079, B1846 Adrogué, Buenos Aires
+            </a>
+          </li>
+        </ul>
+      </div>
 
-                </ul>
-            </div>
-
-            <div>
-                <h3 class="mb-4 font-overpass text-sm font-bold tracking-widest text-white">Redes</h3>
-                <div class="flex gap-4">
-                    <a href="https://www.instagram.com/fabioviolaautomotores/" aria-label="Seguir a FV Automotores en Instagram" target="_blank" rel="noopener noreferrer" class="transition duration-300 hover:opacity-75 focus-visible:opacity-75">
-                        <InstagramBrandIcon class="size-6 text-white" />
-                    </a>
-                    <a href="https://www.tiktok.com/@fabioviolaautomotores" aria-label="Seguir a FV Automotores en TikTok" target="_blank" rel="noopener noreferrer" class="transition duration-300 hover:opacity-75 focus-visible:opacity-75">
-                        <TiktokBrandIcon class="size-6 text-white" />
-                    </a>
-                </div>
-            </div>
+      <div>
+        <h3
+          class="mb-4 font-overpass text-sm font-bold tracking-widest text-white"
+        >
+          Redes
+        </h3>
+        <div class="flex gap-4">
+          <a
+            href="https://www.instagram.com/fabioviolaautomotores/"
+            aria-label="Seguir a FV Automotores en Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="transition duration-300 hover:opacity-75 focus-visible:opacity-75"
+          >
+            <InstagramBrandIcon class="size-6 text-white" />
+          </a>
+          <a
+            href="https://www.tiktok.com/@fabioviolaautomotores"
+            aria-label="Seguir a FV Automotores en TikTok"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="transition duration-300 hover:opacity-75 focus-visible:opacity-75"
+          >
+            <TiktokBrandIcon class="size-6 text-white" />
+          </a>
         </div>
-
-        <div class="my-6 h-px bg-linear-to-r from-transparent via-fvplata-300/20 to-transparent"></div>
-         <p class="mb-3 text-left text-sm text-white/90 font-overpass font-medium">&copy; {new Date().getFullYear()} FV Automotores. Todos los derechos reservados.</p>
-        <div class="max-w-4xl text-left font-overpass text-[11px] leading-relaxed text-fvplata-300/40 font-light">
-            <p>
-                <strong>FV Automotores</strong> es una concesionaria de autos usados seleccionados y vehículos utilitarios ubicada en <strong>Adrogué</strong>. Ofrecemos asesoramiento y comercialización de unidades con un estricto estándar de calidad y documentación garantizada, con zona de influencia en Adrogué, Lomas de Zamora, Llavalol y todo <strong>Zona Sur</strong> del Gran Buenos Aires.
-            </p>
-        </div>
+      </div>
     </div>
-
-
 
     <div
-        id="fv-interactive-logo"
-        class="relative mt-10 overflow-hidden select-none pointer-events-auto w-full max-w-[120%] fade-right"
+      class="my-6 h-px bg-linear-to-r from-transparent via-fvplata-300/20 to-transparent"
     >
-        <div class="z-0 opacity-10 mix-blend-soft-light transition-opacity duration-500">
-            <img
-                src="/logo.svg"
-                alt=""
-                aria-hidden="true"
-                class="w-full h-auto object-left object-contain brightness-75 contrast-125"
-            />
-        </div>
+    </div>
+    <p class="mb-3 text-left text-sm text-white/90 font-overpass font-medium">
+      © {new Date().getFullYear()} FV Automotores. Todos los derechos reservados.
+    </p>
+    <div
+      class="max-w-4xl text-left font-overpass text-[11px] leading-relaxed text-fvplata-300/40 font-light"
+    >
+      <p>
+        <strong>FV Automotores</strong> es una concessionaria de autos usados seleccionados
+        y vehículos utilitarios ubicada en <strong>Adrogué</strong>. Ofrecemos
+        asesoramiento y comercialización de unidades con un estricto estándar de
+        calidad y documentación garantizada, con zona de influencia en Adrogué,
+        Lomas de Zamora, Llavalol y todo <strong>Zona Sur</strong> del Gran Buenos
+        Aires.
+      </p>
+    </div>
+  </div>
 
-        <div
-            id="fv-revealed-layer"
-            class="absolute inset-0 z-10 opacity-0 transition-opacity duration-500 ease-out"
-            style="mask-image: radial-gradient(circle 260px at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.65) 45%, rgba(0,0,0,0.3) 75%, transparent 100%); -webkit-mask-image: radial-gradient(circle 260px at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.65) 45%, rgba(0,0,0,0.3) 75%, transparent 100%);"
-        >
-            <img
-                src="/logo.svg"
-                alt=""
-                aria-hidden="true"
-                class="w-full h-auto object-left object-contain brightness-125"
-            />
-        </div>
-
-        <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-20 fv-logo-grain"></div>
+  <div
+    id="fv-interactive-logo"
+    class="relative mt-10 overflow-hidden select-none pointer-events-auto w-full max-w-[120%] fade-right"
+  >
+    <div
+      class="z-0 opacity-10 mix-blend-soft-light transition-opacity duration-500"
+    >
+      <img
+        src="/logo-footer.svg"
+        alt=""
+        aria-hidden="true"
+        class="w-full h-auto object-left object-contain brightness-75 contrast-125"
+      />
     </div>
 
+    <div
+      id="fv-revealed-layer"
+      class="absolute inset-0 z-10 opacity-0"
+      style="mask-image: radial-gradient(circle 260px at calc(var(--mouse-x, 0) * 1px) calc(var(--mouse-y, 0) * 1px), rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.65) 45%, rgba(0,0,0,0.3) 75%, transparent 100%); -webkit-mask-image: radial-gradient(circle 260px at calc(var(--mouse-x, 0) * 1px) calc(var(--mouse-y, 0) * 1px), rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.65) 45%, rgba(0,0,0,0.3) 75%, transparent 100%);"
+    >
+      <img
+        src="/logo-footer.svg"
+        alt=""
+        aria-hidden="true"
+        class="w-full h-auto object-left object-contain brightness-125"
+      />
+    </div>
+
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 z-20 fv-logo-grain"
+    >
+    </div>
+  </div>
+</footer>
+
 <style>
-    picture {
-        -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 80%, rgba(0,0,0,0.5) 90%, transparent 100%);
-        mask-image: linear-gradient(to bottom, #000 0%, #000 80%, rgba(0,0,0,0.5) 90%, transparent 100%);
-    }
+  picture {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 80%,
+      rgba(0, 0, 0, 0.5) 90%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 80%,
+      rgba(0, 0, 0, 0.5) 90%,
+      transparent 100%
+    );
+  }
 
+  img {
+    transform: scale(var(--hero-bg-scale, 1));
+    transform-origin: center center;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
     img {
-        transform: scale(var(--hero-bg-scale, 1));
-        transform-origin: center center;
-        will-change: transform;
+      transform: none;
     }
+  }
 
-    @media (prefers-reduced-motion: reduce) {
-        img {
-            transform: none;
-        }
-    }
+  .fade-right {
+    opacity: 0.2;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      #000 0%,
+      #000 60%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(to right, #000 0%, #000 60%, transparent 100%);
+  }
 
-    .fade-right {
-        opacity: 0.2;
-        -webkit-mask-image: linear-gradient(to right, #000 0%, #000 60%, transparent 100%);
-        mask-image: linear-gradient(to right, #000 0%, #000 60%, transparent 100%);
-    }
+  #fv-revealed-layer {
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+  }
 
-    #fv-revealed-layer {
-        mask-repeat: no-repeat;
-        -webkit-mask-repeat: no-repeat;
-    }
+  .fv-logo-grain {
+    opacity: 0.14;
+    mix-blend-mode: soft-light;
+    background-image:
+      radial-gradient(rgba(255, 255, 255, 0.26) 0.5px, transparent 0.7px),
+      radial-gradient(rgba(255, 255, 255, 0.18) 0.5px, transparent 0.7px);
+    background-size:
+      2px 2px,
+      3px 3px;
+    background-position:
+      0 0,
+      1px 1px;
+    filter: contrast(130%);
+  }
 
-    .fv-logo-grain {
-        opacity: 0.14;
-        mix-blend-mode: soft-light;
-        background-image:
-            radial-gradient(rgba(255, 255, 255, 0.26) 0.5px, transparent 0.7px),
-            radial-gradient(rgba(255, 255, 255, 0.18) 0.5px, transparent 0.7px);
-        background-size: 2px 2px, 3px 3px;
-        background-position: 0 0, 1px 1px;
-        filter: contrast(130%);
-    }
-
-    [data-nav-link] [data-nav-underline] {
-        clip-path: inset(0 100% 0 0);
-    }
-
-    [data-nav-link]:hover [data-nav-underline],
-    [data-nav-link]:focus-visible [data-nav-underline],
-    [data-nav-link][data-underline-state="opening"] [data-nav-underline] {
-        animation: nav-underline-open 300ms ease-out forwards;
-    }
-
-    [data-nav-link][data-underline-state="closing"] [data-nav-underline] {
-        animation: nav-underline-close 300ms ease-out forwards;
-    }
-
-    @keyframes nav-underline-open {
-        from {
-            clip-path: inset(0 100% 0 0);
-        }
-
-        to {
-            clip-path: inset(0 0 0 0);
-        }
-    }
-
-    @keyframes nav-underline-close {
-        from {
-            clip-path: inset(0 0 0 0);
-        }
-
-        to {
-            clip-path: inset(0 0 0 100%);
-        }
-    }
 </style>
 
 <script>
-    let interactiveLogoAbortController: AbortController | null = null;
-    const SPOTLIGHT_ACTIVATION_PADDING = 320;
+  import { gsap } from "gsap";
 
-    function setupInteractiveLogo() {
-        const container = document.getElementById('fv-interactive-logo');
-        const revealedLayer = document.getElementById('fv-revealed-layer');
+  let cleanupListeners: (() => void) | null = null;
+  const SPOTLIGHT_ACTIVATION_PADDING = 320;
 
-        if (!container || !revealedLayer) return;
+  function setupNavLinks() {
+    const links = document.querySelectorAll("[data-nav-link]");
+    
+    links.forEach((link) => {
+      const underline = link.querySelector("[data-nav-underline]");
+      if (!underline) return;
 
-        if (interactiveLogoAbortController) {
-            interactiveLogoAbortController.abort();
-        }
+      gsap.set(underline, { clipPath: "inset(0 100% 0 0)" });
 
-        interactiveLogoAbortController = new AbortController();
-        const { signal } = interactiveLogoAbortController;
+      link.addEventListener("pointerenter", () => {
+        gsap.killTweensOf(underline);
+        gsap.to(underline, {
+          clipPath: "inset(0 0% 0 0)",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
 
-        const updateSpotlight = (clientX: number, clientY: number) => {
-            const rect = container.getBoundingClientRect();
+      link.addEventListener("pointerleave", () => {
+        gsap.killTweensOf(underline);
+        gsap.to(underline, {
+          clipPath: "inset(0 0% 0 100%)",
+          duration: 0.3,
+          ease: "power2.inOut",
+          onComplete: () => {
+            gsap.set(underline, { clipPath: "inset(0 100% 0 0)" });
+          }
+        });
+      });
+    });
+  }
 
-            const dx = Math.max(rect.left - clientX, 0, clientX - rect.right);
-            const dy = Math.max(rect.top - clientY, 0, clientY - rect.bottom);
-            const distance = Math.hypot(dx, dy);
-            const normalized = Math.max(0, 1 - distance / SPOTLIGHT_ACTIVATION_PADDING);
-            const opacity = Math.min(0.8, normalized * 0.8);
+  function setupInteractiveLogo(): (() => void) | null {
+    const container = document.getElementById("fv-interactive-logo");
+    const revealedLayer = document.getElementById("fv-revealed-layer");
 
-            if (opacity <= 0) {
-                revealedLayer.style.opacity = '0';
-                return;
-            }
+    if (!container || !revealedLayer) return null;
 
-            revealedLayer.style.opacity = `${opacity}`;
+    let rect = container.getBoundingClientRect();
 
-            const x = Math.min(Math.max(clientX - rect.left, 0), rect.width);
-            const y = Math.min(Math.max(clientY - rect.top, 0), rect.height);
+    const cacheRect = () => {
+      rect = container.getBoundingClientRect();
+    };
 
-            revealedLayer.style.setProperty('--mouse-x', `${x}px`);
-            revealedLayer.style.setProperty('--mouse-y', `${y}px`);
-        };
+    window.addEventListener("resize", cacheRect, { passive: true });
+    window.addEventListener("scroll", cacheRect, { passive: true });
 
-        window.addEventListener(
-            'pointermove',
-            (e) => {
-                if (e.pointerType === 'touch') return;
+    const xTo = gsap.quickTo(revealedLayer, "--mouse-x", {
+      duration: 0.32,
+      ease: "power2.out",
+    });
+    const yTo = gsap.quickTo(revealedLayer, "--mouse-y", {
+      duration: 0.32,
+      ease: "power2.out",
+    });
+    const opacityTo = gsap.quickTo(revealedLayer, "opacity", {
+      duration: 0.25,
+      ease: "power1.out",
+    });
 
-                updateSpotlight(e.clientX, e.clientY);
-            },
-            { signal, passive: true }
-        );
+    const updateSpotlight = (clientX: number, clientY: number) => {
+      const dx = Math.max(rect.left - clientX, 0, clientX - rect.right);
+      const dy = Math.max(rect.top - clientY, 0, clientY - rect.bottom);
+      const distance = Math.hypot(dx, dy);
+      const normalized = Math.max(
+        0,
+        1 - distance / SPOTLIGHT_ACTIVATION_PADDING,
+      );
+      const opacity = Math.min(0.8, normalized * 0.8);
 
-        window.addEventListener(
-            'pointerleave',
-            () => {
-                revealedLayer.style.opacity = '0';
-            },
-            { signal }
-        );
+      if (opacity <= 0) {
+        opacityTo(0);
+        return;
+      }
 
-        container.addEventListener(
-            'pointermove',
-            (e) => {
-                const rect = container.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
+      opacityTo(opacity);
 
-                revealedLayer.style.setProperty('--mouse-x', `${x}px`);
-                revealedLayer.style.setProperty('--mouse-y', `${y}px`);
-            },
-            { signal }
-        );
-    }
+      const x = Math.min(Math.max(clientX - rect.left, 0), rect.width);
+      const y = Math.min(Math.max(clientY - rect.top, 0), rect.height);
 
-    document.addEventListener('astro:page-load', setupInteractiveLogo);
+      xTo(x);
+      yTo(y);
+    };
+
+    const handlePointerMove = (e: PointerEvent) => {
+      if (e.pointerType === "touch") return;
+      updateSpotlight(e.clientX, e.clientY);
+    };
+
+    const handlePointerLeave = () => {
+      opacityTo(0);
+    };
+
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
+    window.addEventListener("pointerleave", handlePointerLeave, { passive: true });
+
+    return () => {
+      window.removeEventListener("resize", cacheRect);
+      window.removeEventListener("scroll", cacheRect);
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerleave", handlePointerLeave);
+    };
+  }
+
+  document.addEventListener("astro:page-load", () => {
+    setupNavLinks();
+
+    if (cleanupListeners) cleanupListeners();
+    cleanupListeners = setupInteractiveLogo();
+  });
 </script>

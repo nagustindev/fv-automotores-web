@@ -9,78 +9,66 @@ const PLATFORMS = {
 
 <section
   id="stock"
-  class="bg-fvantracita-950 py-32 px-4 sm:px-6 lg:px-8 border-t border-fvantracita-900 relative overflow-hidden"
+  class="relative overflow-hidden border-t border-fvantracita-900 bg-fvantracita-950 px-4 py-32 sm:px-6 lg:px-8"
 >
-  <div class="w-full">
-    <div class="grid grid-cols-1 relative min-h-100">
-      <div class="w-full flex flex-col border-t border-fvantracita-900 z-10">
+  <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-fvplata-300/30 to-transparent"></div>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 top-0 z-0 h-72 bg-[radial-gradient(ellipse_at_top,var(--color-fvplata-300)_0%,transparent_70%)] opacity-[0.05]"
+  >
+  </div>
+
+  <div class="relative z-10 w-full">
+    <div class="relative grid min-h-100 grid-cols-1">
+      <div class="z-10 flex w-full flex-col border-t border-fvantracita-900">
+        
         <a
           href={PLATFORMS.marketplace}
           target="_blank"
           rel="noopener noreferrer"
           data-hover-circle
-          class="group relative flex flex-col md:flex-row md:items-center md:justify-between gap-6 py-10 px-4 md:px-6 border-b border-fvantracita-900 transition-all duration-300 hover:bg-fvantracita-900/20 hover:border-fvplata-300 focus:outline-none lg:cursor-none"
+          class="group relative flex flex-col gap-6 border-b border-fvantracita-900 px-4 py-10 transition-all duration-300 hover:border-fvplata-300 hover:bg-fvantracita-900/20 focus:outline-none md:flex-row md:items-center md:justify-between md:px-6 lg:cursor-none"
         >
-          <div
-            class="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 md:flex-1 md:min-w-0"
-          >
-            <span
-              class="text-fvantracita-700 font-primary text-lg tracking-widest transition-colors duration-300 group-hover:text-fvplata-300"
-            >
+          <div class="flex min-w-0 flex-1 flex-col gap-6 md:flex-row md:items-center md:gap-12">
+            <span class="font-primary text-lg tracking-widest text-fvantracita-700 transition-colors duration-300 group-hover:text-fvplata-300">
               01 //
             </span>
             <div class="space-y-1">
-              <h3
-                class="text-fvantracita-200 font-primary text-sm uppercase tracking-wider transition-colors duration-300 group-hover:text-white"
-              >
+              <h3 class="font-primary text-sm uppercase tracking-wider text-fvantracita-200 transition-colors duration-300 group-hover:text-white">
                 Facebook Marketplace
               </h3>
-              <p
-                class="text-fvantracita-400 font-overpass text-xs font-light max-w-md"
-              >
+              <p class="max-w-md font-overpass text-xs font-light text-fvantracita-400">
                 Explorá nuestro catálogo de unidades seleccionadas a través de
                 Facebook. Inspección fotográfica, especificaciones completas y
                 respuesta inmediata.
               </p>
-              <div
-                class="mt-4 inline-flex items-center gap-1 text-[0.66rem] font-semibold uppercase tracking-[0.42em] text-fvplata-300 transition duration-300 group-hover:text-white"
-              >
+              <div class="mt-4 inline-flex items-center gap-1 text-[0.66rem] font-semibold uppercase tracking-[0.42em] text-fvplata-300 transition duration-300 group-hover:text-white">
                 <span>Ingresar</span>
                 <ArrowRightIcon class="size-4 shrink-0 transition duration-300 group-hover:translate-x-1" />
               </div>
             </div>
           </div>
 
-          <div
-            class="group relative mt-6 h-44 w-full overflow-hidden rounded-3xl border border-fvplata-300/30 bg-black transition duration-500 ease-out hover:border-fvplata-100/60 sm:h-52 md:mt-0 md:h-56 md:w-[46%] md:shrink-0 lg:hidden"
-          >
+          <div class="group relative mt-6 h-44 w-full overflow-hidden rounded-3xl border border-fvplata-300/30 bg-black transition duration-500 ease-out hover:border-fvplata-100/60 sm:h-52 md:mt-0 md:h-56 md:w-[46%] md:shrink-0 lg:hidden">
             <img
               src="/preview-marketplace.png"
               alt="Inspection Preview Marketplace"
               class="h-full w-full object-cover object-center transition duration-700 ease-out group-hover:scale-105"
             />
-            <div
-              class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14)_0%,transparent_40%),linear-gradient(to_top,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.5)_42%,rgba(0,0,0,0.22)_100%)] transition duration-500 group-hover:bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.22)_0%,transparent_38%),linear-gradient(to_top,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.38)_40%,rgba(0,0,0,0.12)_100%)]"
-            >
-            </div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14)_0%,transparent_40%),linear-gradient(to_top,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.5)_42%,rgba(0,0,0,0.22)_100%)] transition duration-500 group-hover:bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.22)_0%,transparent_38%),linear-gradient(to_top,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.38)_40%,rgba(0,0,0,0.12)_100%)]"></div>
           </div>
 
-          <div
-            class="pointer-events-none absolute top-0 right-0 hidden h-full w-[38%] overflow-hidden rounded-3xl border border-fvplata-300/30 bg-black transition duration-500 ease-out lg:block opacity-0 scale-[0.99] group-hover:opacity-100 group-hover:scale-100"
-          >
+          <div class="pointer-events-none absolute right-0 top-0 hidden h-full w-[38%] overflow-hidden rounded-3xl border border-fvplata-300/30 bg-black opacity-0 scale-[0.99] transition duration-500 ease-out lg:block group-hover:opacity-100 group-hover:scale-100">
             <img
               src="/preview-marketplace.png"
               alt="Inspection Preview Marketplace"
               class="h-full w-full object-cover object-center transition duration-700 ease-out group-hover:scale-105"
             />
-            <div
-              class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14)_0%,transparent_40%),linear-gradient(to_top,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.5)_42%,rgba(0,0,0,0.22)_100%)] transition duration-500 group-hover:bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.22)_0%,transparent_38%),linear-gradient(to_top,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.38)_40%,rgba(0,0,0,0.12)_100%)]"
-            >
-            </div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14)_0%,transparent_40%),linear-gradient(to_top,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.5)_42%,rgba(0,0,0,0.22)_100%)] transition duration-500 group-hover:bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.22)_0%,transparent_38%),linear-gradient(to_top,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.38)_40%,rgba(0,0,0,0.12)_100%)]"></div>
           </div>
 
           <span
-            class="pointer-events-none absolute left-0 top-0 z-30 hidden h-32 w-32 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-fvplata-300/55 bg-white/12 text-[0.66rem] font-semibold uppercase tracking-[0.42em] text-white opacity-0 scale-90 backdrop-blur-md transition-all duration-200 lg:flex"
+            class="pointer-events-none absolute left-0 top-0 z-30 hidden h-32 w-32 items-center justify-center rounded-full border border-fvplata-300/55 bg-white/12 text-[0.66rem] font-semibold uppercase tracking-[0.42em] text-white opacity-0 scale-90 backdrop-blur-md lg:flex"
             data-hover-circle-label
           >
             INGRESAR
@@ -92,68 +80,48 @@ const PLATFORMS = {
           target="_blank"
           rel="noopener noreferrer"
           data-hover-circle
-          class="group relative flex flex-col md:flex-row md:items-center md:justify-between gap-6 py-10 px-4 md:px-6 border-b border-fvantracita-900 transition-all duration-300 hover:bg-fvantracita-900/20 hover:border-fvplata-300 focus:outline-none lg:cursor-none"
+          class="group relative flex flex-col gap-6 border-b border-fvantracita-900 px-4 py-10 transition-all duration-300 hover:border-fvplata-300 hover:bg-fvantracita-900/20 focus:outline-none md:flex-row md:items-center md:justify-between md:px-6 lg:cursor-none"
         >
-          <div
-            class="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 md:flex-1 md:min-w-0"
-          >
-            <span
-              class="text-fvantracita-700 font-primary text-lg tracking-widest transition-colors duration-300 group-hover:text-fvplata-300"
-            >
+          <div class="flex min-w-0 flex-1 flex-col gap-6 md:flex-row md:items-center md:gap-12">
+            <span class="font-primary text-lg tracking-widest text-fvantracita-700 transition-colors duration-300 group-hover:text-fvplata-300">
               02 //
             </span>
             <div class="space-y-1">
-              <h3
-                class="text-fvantracita-200 font-primary text-sm uppercase tracking-wider transition-colors duration-300 group-hover:text-white"
-              >
+              <h3 class="font-primary text-sm uppercase tracking-wider text-fvantracita-200 transition-colors duration-300 group-hover:text-white">
                 Mercado Libre
               </h3>
-              <p
-                class="text-fvantracita-400 font-overpass text-xs font-light max-w-md"
-              >
+              <p class="max-w-md font-overpass text-xs font-light text-fvantracita-400">
                 Explorá nuestro catálogo de unidades seleccionadas a través de
                 Mercado Libre. Inspección fotográfica, especificaciones
                 completas y respuesta inmediata.
               </p>
-              <div
-                class="mt-4 inline-flex items-center gap-1 text-[0.66rem] font-semibold uppercase tracking-[0.42em] text-fvplata-300 transition duration-300 group-hover:text-white"
-              >
+              <div class="mt-4 inline-flex items-center gap-1 text-[0.66rem] font-semibold uppercase tracking-[0.42em] text-fvplata-300 transition duration-300 group-hover:text-white">
                 <span>Ingresar</span>
                 <ArrowRightIcon class="size-4 shrink-0 transition duration-300 group-hover:translate-x-1" />
               </div>
             </div>
           </div>
 
-          <div
-            class="group relative mt-6 h-44 w-full overflow-hidden rounded-3xl border border-fvplata-300/30 bg-black transition duration-500 ease-out hover:border-fvplata-100/60 sm:h-52 md:mt-0 md:h-56 md:w-[46%] md:shrink-0 lg:hidden"
-          >
+          <div class="group relative mt-6 h-44 w-full overflow-hidden rounded-3xl border border-fvplata-300/30 bg-black transition duration-500 ease-out hover:border-fvplata-100/60 sm:h-52 md:mt-0 md:h-56 md:w-[46%] md:shrink-0 lg:hidden">
             <img
-              src="/public/preview-mercadolibre.png"
+              src="/preview-mercadolibre.png"
               alt="Inspection Preview MercadoLibre"
               class="h-full w-full object-cover object-center transition duration-700 ease-out group-hover:scale-105"
             />
-            <div
-              class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14)_0%,transparent_40%),linear-gradient(to_top,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.5)_42%,rgba(0,0,0,0.22)_100%)] transition duration-500 group-hover:bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.22)_0%,transparent_38%),linear-gradient(to_top,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.38)_40%,rgba(0,0,0,0.12)_100%)]"
-            >
-            </div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14)_0%,transparent_40%),linear-gradient(to_top,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.5)_42%,rgba(0,0,0,0.22)_100%)] transition duration-500 group-hover:bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.22)_0%,transparent_38%),linear-gradient(to_top,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.38)_40%,rgba(0,0,0,0.12)_100%)]"></div>
           </div>
 
-          <div
-            class="pointer-events-none absolute top-0 right-0 hidden h-full w-[38%] overflow-hidden rounded-3xl border border-fvplata-300/30 bg-black transition duration-500 ease-out lg:block opacity-0 scale-[0.99] group-hover:opacity-100 group-hover:scale-100"
-          >
+          <div class="pointer-events-none absolute right-0 top-0 hidden h-full w-[38%] overflow-hidden rounded-3xl border border-fvplata-300/30 bg-black opacity-0 scale-[0.99] transition duration-500 ease-out lg:block group-hover:opacity-100 group-hover:scale-100">
             <img
-              src="/public/preview-mercadolibre.png"
+              src="/preview-mercadolibre.png"
               alt="Inspection Preview MercadoLibre"
               class="h-full w-full object-cover object-center transition duration-700 ease-out group-hover:scale-105"
             />
-            <div
-              class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14)_0%,transparent_40%),linear-gradient(to_top,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.5)_42%,rgba(0,0,0,0.22)_100%)] transition duration-500 group-hover:bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.22)_0%,transparent_38%),linear-gradient(to_top,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.38)_40%,rgba(0,0,0,0.12)_100%)]"
-            >
-            </div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14)_0%,transparent_40%),linear-gradient(to_top,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.5)_42%,rgba(0,0,0,0.22)_100%)] transition duration-500 group-hover:bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.22)_0%,transparent_38%),linear-gradient(to_top,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.38)_40%,rgba(0,0,0,0.12)_100%)]"></div>
           </div>
 
           <span
-            class="pointer-events-none absolute left-0 top-0 z-30 hidden h-32 w-32 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-fvplata-300/55 bg-white/12 text-[0.66rem] font-semibold uppercase tracking-[0.42em] text-white opacity-0 scale-90 backdrop-blur-md transition-all duration-200 lg:flex"
+            class="pointer-events-none absolute left-0 top-0 z-30 hidden h-32 w-32 items-center justify-center rounded-full border border-fvplata-300/55 bg-white/12 text-[0.66rem] font-semibold uppercase tracking-[0.42em] text-white opacity-0 scale-90 backdrop-blur-md lg:flex"
             data-hover-circle-label
           >
             INGRESAR
@@ -164,32 +132,66 @@ const PLATFORMS = {
   </div>
 
   <script>
-    const hoverTargets = document.querySelectorAll<HTMLElement>(
-      "[data-hover-circle]",
-    );
+    import { gsap } from "gsap";
+    const hoverTargets = document.querySelectorAll("[data-hover-circle]");
 
     hoverTargets.forEach((target) => {
-      const circle = target.querySelector<HTMLElement>(
-        "[data-hover-circle-label]",
-      );
+      const circle = target.querySelector("[data-hover-circle-label]");
+      if (!(circle instanceof HTMLElement)) return;
 
-      if (!circle) return;
+      let rect = target.getBoundingClientRect();
 
-      const moveCircle = (event: PointerEvent) => {
-        const rect = target.getBoundingClientRect();
-        circle.style.left = `${event.clientX - rect.left}px`;
-        circle.style.top = `${event.clientY - rect.top}px`;
-        circle.style.opacity = "1";
-        circle.style.transform = "translate(-50%, -50%) scale(1)";
+      const xTo = gsap.quickTo(circle, "x", {
+        duration: 0.28,
+        ease: "power3.out",
+      });
+      const yTo = gsap.quickTo(circle, "y", {
+        duration: 0.28,
+        ease: "power3.out",
+      });
+
+      gsap.set(circle, {
+        xPercent: -50,
+        yPercent: -50,
+        opacity: 0,
+        scale: 0.9,
+        transformOrigin: "center center",
+      });
+
+      const moveCircle = (pointerEvent: PointerEvent) => {
+        xTo(pointerEvent.clientX - rect.left);
+        yTo(pointerEvent.clientY - rect.top);
       };
 
-      target.addEventListener("pointerenter", moveCircle);
-      target.addEventListener("pointermove", moveCircle);
+      target.addEventListener("pointerenter", (event) => {
+        const pointerEvent = event as PointerEvent;
+        rect = target.getBoundingClientRect();
+
+        gsap.set(circle, {
+          x: pointerEvent.clientX - rect.left,
+          y: pointerEvent.clientY - rect.top,
+        });
+
+        xTo(pointerEvent.clientX - rect.left);
+        yTo(pointerEvent.clientY - rect.top);
+
+        gsap.to(circle, {
+          opacity: 1,
+          scale: 1,
+          duration: 0.25,
+          ease: "power2.out",
+        });
+      });
+
+      target.addEventListener("pointermove", (e) => moveCircle(e as PointerEvent));
+      
       target.addEventListener("pointerleave", () => {
-        circle.style.left = "0px";
-        circle.style.top = "0px";
-        circle.style.opacity = "0";
-        circle.style.transform = "translate(-50%, -50%) scale(0.9)";
+        gsap.to(circle, {
+          opacity: 0,
+          scale: 0.9,
+          duration: 0.25,
+          ease: "power2.inOut",
+        });
       });
     });
   </script>

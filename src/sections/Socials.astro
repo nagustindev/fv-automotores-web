@@ -1,11 +1,19 @@
 ---
+// src/components/NuestrasRedes.astro
 import SocialGrid from "@/components/SocialGrid.astro";
 import InstagramIcon from "@/assets/svg/instagram.svg";
 import TiktokIcon from "@/assets/svg/tiktok.svg";
 ---
 
-<section class="relative w-full overflow-hidden bg-[#1A1A1A] py-20 px-4">
-  <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-fvplata-300/30 to-transparent"></div>
+<section
+  id="social-section"
+  class="relative w-full overflow-hidden bg-[#1A1A1A] py-20 px-4"
+>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-fvplata-300/30 to-transparent"
+  >
+  </div>
   <div
     aria-hidden="true"
     class="pointer-events-none absolute inset-x-0 top-0 z-0 h-72 bg-[radial-gradient(ellipse_at_top,var(--color-fvplata-300)_0%,transparent_70%)] opacity-[0.05]"
@@ -22,15 +30,18 @@ import TiktokIcon from "@/assets/svg/tiktok.svg";
     <p
       class="mb-12 max-w-xl text-center font-overpass text-xs font-medium tracking-[0.25em] text-balance text-fvplata-300 sm:mb-16 sm:text-sm"
     >
-      Todo lo que neccesitas saber de nuestro stock, novedades y eventos en un
+      Todo lo que necesitas saber de nuestro stock, novedades y eventos en un
       solo lugar.
     </p>
 
-    <div class="mb-10 flex flex-col items-center gap-4 sm:mb-14 sm:flex-row sm:gap-8">
+    <div
+      class="mb-10 flex flex-col items-center gap-4 sm:mb-14 sm:flex-row sm:gap-8"
+    >
       <a
         href="https://www.instagram.com/fabioviolaautomotores/"
         data-nav-link
-        target="_blank" rel="noopener noreferrer"
+        target="_blank"
+        rel="noopener noreferrer"
         aria-label="Instagram de FV Automotores"
         class="group relative inline-flex items-center gap-3 font-overpass text-sm font-semibold tracking-[0.24em] text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"
       >
@@ -48,7 +59,8 @@ import TiktokIcon from "@/assets/svg/tiktok.svg";
       <a
         href="https://www.tiktok.com/@fabioviolaautomotores"
         data-nav-link
-        target="_blank" rel="noopener noreferrer"
+        target="_blank"
+        rel="noopener noreferrer"
         aria-label="TikTok de FV Automotores"
         class="group relative inline-flex items-center gap-3 font-overpass text-sm font-semibold tracking-[0.24em] text-white transition duration-300 hover:text-fvplata-50 focus-visible:text-fvplata-50"
       >
@@ -72,33 +84,42 @@ import TiktokIcon from "@/assets/svg/tiktok.svg";
   [data-nav-link] [data-nav-underline] {
     clip-path: inset(0 100% 0 0);
   }
-
-  [data-nav-link]:hover [data-nav-underline],
-  [data-nav-link]:focus-visible [data-nav-underline] {
-    animation: nav-underline-open 300ms ease-out forwards;
-  }
-
-  [data-nav-link]:not(:hover):not(:focus-visible) [data-nav-underline] {
-    animation: nav-underline-close 300ms ease-out forwards;
-  }
-
-  @keyframes nav-underline-open {
-    from {
-      clip-path: inset(0 100% 0 0);
-    }
-
-    to {
-      clip-path: inset(0 0 0 0);
-    }
-  }
-
-  @keyframes nav-underline-close {
-    from {
-      clip-path: inset(0 0 0 0);
-    }
-
-    to {
-      clip-path: inset(0 0 0 100%);
-    }
-  }
 </style>
+
+<script>
+  import { gsap } from "gsap";
+
+  function setupSocialSectionHovers() {
+    const links = document.querySelectorAll("#social-section [data-nav-link]");
+
+    links.forEach((link) => {
+      const underline = link.querySelector("[data-nav-underline]");
+      if (!underline) return;
+
+      gsap.set(underline, { clipPath: "inset(0 100% 0 0)" });
+
+      link.addEventListener("pointerenter", () => {
+        gsap.killTweensOf(underline);
+        gsap.to(underline, {
+          clipPath: "inset(0 0% 0 0)",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
+
+      link.addEventListener("pointerleave", () => {
+        gsap.killTweensOf(underline);
+        gsap.to(underline, {
+          clipPath: "inset(0 0% 0 100%)",
+          duration: 0.3,
+          ease: "power2.inOut",
+          onComplete: () => {
+            gsap.set(underline, { clipPath: "inset(0 100% 0 0)" });
+          },
+        });
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", setupSocialSectionHovers);
+</script>
