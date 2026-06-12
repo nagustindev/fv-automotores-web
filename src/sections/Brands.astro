@@ -1,0 +1,68 @@
+---
+import VolkswagenLogo from "@/assets/svg/car-brands/volkswagen.svg";
+import ChevroletLogo from "@/assets/svg/car-brands/simple-icons_chevrolet.svg";
+import RenaultLogo from "@/assets/svg/car-brands/Renault_2021.svg";
+import FordLogo from "@/assets/svg/car-brands/Ford_logo_flat.svg";
+import ToyotaLogo from "@/assets/svg/car-brands/Toyota_EU 1.svg";
+import PeugeotLogo from "@/assets/svg/car-brands/simple-icons_peugeot.svg";
+import NissanLogo from "@/assets/svg/car-brands/Vector.svg";
+import HondaLogo from "@/assets/svg/car-brands/Group.svg";
+import FiatLogo from "@/assets/svg/car-brands/Warstwa_x0020_1-5.svg";
+
+const BRANDS = [
+	{ name: "Volkswagen", Logo: VolkswagenLogo, logoClass: "w-[90%] max-w-80" },
+	{ name: "Chevrolet", Logo: ChevroletLogo, logoClass: "w-[65%] max-w-30" },
+	{ name: "Renault", Logo: RenaultLogo, logoClass: "w-[65%] max-w-30" },
+	{ name: "Ford", Logo: FordLogo, logoClass: "w-[65%] max-w-30" },
+	{ name: "Toyota", Logo: ToyotaLogo, logoClass: "w-[65%] max-w-30" },
+	{ name: "Peugeot", Logo: PeugeotLogo, logoClass: "w-[65%] max-w-30" },
+	{ name: "Nissan", Logo: NissanLogo, logoClass: "w-[65%] max-w-30" },
+	{ name: "Honda", Logo: HondaLogo, logoClass: "w-[65%] max-w-30" },
+	{ name: "Fiat", Logo: FiatLogo, logoClass: "w-[65%] max-w-30" },
+] as const;
+---
+
+<section
+	id="brands"
+	class="relative w-full overflow-hidden px-4 py-20 sm:px-6 lg:py-28"
+	aria-labelledby="brands-title"
+>
+	<div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 z-0 flex justify-center pt-6 sm:pt-8">
+		<div class="flex items-center gap-3 sm:gap-4">
+			<span class="h-px w-12 bg-fvplata-300/30 sm:w-16"></span>
+			<span class="text-[0.7rem] leading-none text-fvplata-300/80 sm:text-xs">✦</span>
+			<span class="h-px w-12 bg-fvplata-300/30 sm:w-16"></span>
+		</div>
+	</div>
+
+	<div class="relative z-10 mx-auto flex max-w-6xl flex-col items-center">
+		<h2
+			id="brands-title"
+			class="mb-3 text-center font-primary text-3xl font-bold tracking-[0.18em] text-white sm:text-4xl md:text-5xl"
+		>
+			MARCAS SELECCIONADAS
+		</h2>
+		<p class="mb-12 max-w-2xl text-center font-overpass text-xs font-medium tracking-[0.25em] text-balance text-fvplata-300 sm:mb-16 sm:text-sm">
+			Vas a encontrar utilitarios, camionetas y autos usados de las marcas más buscadas del mercado. 
+		</p>
+
+		<ul class="flex w-full flex-wrap items-stretch justify-center gap-4 sm:gap-5 lg:flex-nowrap lg:gap-4">
+			{
+				BRANDS.map(({ name, Logo, logoClass }) => (
+					<li class="w-[calc(50%-0.5rem)] sm:w-[calc(33.333%-0.9rem)] lg:w-auto lg:flex-1">
+						<div class="group flex h-24 items-center justify-center px-5 transition duration-500 ease-out hover:-translate-y-1">
+							<Logo
+								aria-hidden="true"
+								class:list={[
+									"h-20 text-white/80 transition duration-500 ease-out group-hover:text-fvplata-300 group-hover:filter-[drop-shadow(0_0_16px_rgba(198,210,219,0.65))]",
+									logoClass,
+								]}
+							/>
+							<span class="sr-only">{name}</span>
+						</div>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>

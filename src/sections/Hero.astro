@@ -1,4 +1,5 @@
 ---
+import { gsap } from "gsap";
 import Button from "@/components/Button.astro";
 import WhatsAppIcon from '@/assets/svg/whatsapp.svg';
 import MercadoLibreIcon from '@/assets/svg/mercadolibre.svg';
@@ -11,12 +12,14 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
 ---
 
 <section
+  data-hero
   class="relative w-full overflow-hidden bg-primary"
   aria-label="Presentación de FV Automotores"
 >
   <picture class="absolute inset-0 z-0" aria-hidden="true">
     <source type="image/webp" srcset="/hero_background.webp 1x" />
     <img
+      data-hero-image
       src="/hero_background.webp"
       alt=""
       role="presentation"
@@ -35,23 +38,26 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
   <header
     class="relative z-10 flex min-h-screen w-full flex-col items-start justify-end px-4 pb-10 pt-16 text-left sm:px-6 lg:px-8 lg:pb-14"
   >
-    <span
-      class="font-overpass text-xs uppercase tracking-widest text-fvplata-300 font-semibold"
-      >FABIO VIOLA AUTOMOTORES</span
-    >
-    <h1
-      class="text-balance font-primary text-3xl font-bold tracking-[0.18em] text-white sm:text-4xl lg:text-6xl"
-    >
-      COMPRA Y VENTA DE AUTOS EN ADROGUÉ
-    </h1>
-    <p
-      class="mt-4 max-w-2xl text-balance font-overpass text-base text-fvplata-300 sm:text-xl lg:text-2xl"
-    >
-      Más de 25 años en el rubro garantizando la tranquilidad y seguridad en tu
-      próximo vehículo seleccionado.
-    </p>
-    <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+    <div data-hero-copy class="flex max-w-4xl flex-col items-start">
+      <span
+        class="font-overpass text-xs font-semibold uppercase tracking-widest text-fvplata-300"
+        >FABIO VIOLA AUTOMOTORES</span
+      >
+      <h1
+        class="text-balance font-primary text-3xl font-bold tracking-[0.18em] text-white sm:text-4xl lg:text-6xl"
+      >
+        COMPRA Y VENTA DE AUTOS EN ADROGUÉ
+      </h1>
+      <p
+        class="mt-4 max-w-2xl text-balance font-overpass text-base text-fvplata-300 sm:text-xl lg:text-2xl"
+      >
+        Más de 25 años en el rubro garantizando la tranquilidad y seguridad en tu
+        próximo vehículo seleccionado.
+      </p>
+    </div>
+    <div data-hero-actions class="mt-6 flex flex-col gap-3 sm:flex-row">
       <Button
+        data-hero-cta="primary"
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
@@ -61,6 +67,7 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
         variant="plata"
       />
       <Button
+        data-hero-cta="stock"
         href="https://vehiculos.mercadolibre.com.ar/_CustId_129556687"
         target="_blank"
         rel="noopener noreferrer"
@@ -95,3 +102,86 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
     }
   }
 </style>
+
+<script>
+  import { gsap } from "gsap";
+
+  function setupHeroAnimation() {
+    const hero = document.querySelector("[data-hero]") as HTMLElement | null;
+    const heroImage = document.querySelector(
+      "[data-hero-image]",
+    ) as HTMLImageElement | null;
+    const heroCopy = document.querySelector(
+      "[data-hero-copy]",
+    ) as HTMLElement | null;
+    const heroActions = document.querySelector(
+      "[data-hero-actions]",
+    ) as HTMLElement | null;
+    const heroButtons = heroActions
+      ? Array.from(heroActions.querySelectorAll("[data-hero-cta]"))
+      : [];
+
+    if (!hero || !heroImage || !heroCopy || !heroActions || heroButtons.length === 0) return;
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reducedMotion) return;
+
+    gsap.set(heroCopy, { opacity: 0, y: 28 });
+    gsap.set(heroButtons, { opacity: 0, y: 18, filter: "blur(8px)" });
+    gsap.set(heroImage, { scale: 1 });
+
+    gsap
+      .timeline({ defaults: { ease: "power3.out" } })
+      .to(heroCopy, { opacity: 1, y: 0, duration: 1.05 }, 0)
+      .to(
+        heroButtons,
+        {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          duration: 0.95,
+          ease: "power2.out",
+        },
+        0.28,
+      );
+
+    let scrollAbortController: AbortController | null = null;
+
+    const setupImageScroll = () => {
+      scrollAbortController?.abort();
+      scrollAbortController = new AbortController();
+      const { signal } = scrollAbortController;
+
+      const updateScale = () => {
+        const start = hero.offsetTop;
+        const progress = Math.max(0, Math.min(1, (window.scrollY - start) / 900));
+        const scale = 1 + progress * 0.055;
+
+        gsap.to(heroImage, {
+          scale,
+          duration: 0.2,
+          ease: "power1.out",
+          overwrite: true,
+        });
+      };
+
+      updateScale();
+
+      window.addEventListener("scroll", updateScale, {
+        passive: true,
+        signal,
+      });
+      window.addEventListener("resize", updateScale, {
+        passive: true,
+        signal,
+      });
+    };
+
+    setupImageScroll();
+  }
+
+  document.addEventListener("astro:page-load", setupHeroAnimation);
+</script>

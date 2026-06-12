@@ -1,4 +1,6 @@
 ---
+import { gsap } from "gsap";
+
 const NAV_ITEMS = [
   {
     label: "Ingresos",
@@ -35,21 +37,32 @@ const shouldReloadNavItem = (href: string) =>
     >
       <span
         data-logo-reveal
-        class="relative flex h-7 w-36 items-center justify-center sm:h-10 sm:w-52"
+        class="group/logo relative flex h-7 w-36 items-center justify-center sm:h-10 sm:w-52"
         aria-hidden="true"
       >
         <img
+          data-logo-base
           src="/logo.svg"
           alt=""
-          class="absolute inset-0 h-full w-full object-contain transition duration-700 ease-out group-hover:-rotate-2"
+          class="absolute inset-0 h-full w-full object-contain"
           width="30"
           height="30"
           decoding="async"
         />
         <img
+          data-logo-chrome
+          src="/logo-cromado.svg"
+          alt=""
+          class="absolute inset-0 h-full w-full object-contain opacity-0"
+          width="30"
+          height="30"
+          decoding="async"
+        />
+        <img
+          data-logo-anniversary
           src="/25anios.svg"
           alt=""
-          class="absolute inset-0 h-full w-full object-contain opacity-0 scale-[0.98] transition duration-700 ease-out"
+          class="absolute inset-0 h-full w-full object-contain opacity-0"
           width="30"
           height="30"
           decoding="async"
@@ -156,26 +169,11 @@ const shouldReloadNavItem = (href: string) =>
 <style>
   [data-logo-reveal] > img {
     will-change: opacity, transform;
+    transform-origin: center center;
   }
 
-  [data-logo-reveal][data-logo-state="reveal"] > img:first-child {
-    opacity: 0;
-    transform: scale(0.985);
-  }
-
-  [data-logo-reveal][data-logo-state="reveal"] > img:last-child {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  [data-logo-reveal][data-logo-state="settle"] > img:first-child {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  [data-logo-reveal][data-logo-state="settle"] > img:last-child {
-    opacity: 0;
-    transform: scale(0.985);
+  [data-logo-chrome] {
+    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-fvplata-300) 58%, transparent));
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -190,14 +188,16 @@ const shouldReloadNavItem = (href: string) =>
 </style>
 
 <script>
+  import { gsap } from "gsap";
+
   const SCROLL_THRESHOLD = 24;
-  const UNDERLINE_DURATION = 300;
-  const LOGO_REVEAL_DURATION = 1100;
+  const LOGO_REVEAL_DURATION = 1.05;
 
   let scrollAbortController: AbortController | null = null;
   let menuAbortController: AbortController | null = null;
   let navUnderlineAbortController: AbortController | null = null;
-  let logoRevealTimeout: number | undefined;
+  let logoHoverAbortController: AbortController | null = null;
+  let logoRevealTimeline: gsap.core.Timeline | null = null;
 
   function setupHeaderScroll() {
     const header = document.querySelector("[data-header]");
@@ -227,10 +227,27 @@ const shouldReloadNavItem = (href: string) =>
     const logo = document.querySelector(
       "[data-logo-reveal]",
     ) as HTMLElement | null;
-    if (!logo) return;
+    const baseLogo = logo?.querySelector("[data-logo-base]") as
+      | HTMLElement
+      | null;
+    const chromeLogo = logo?.querySelector("[data-logo-chrome]") as
+      | HTMLElement
+      | null;
+    const anniversaryLogo = logo?.querySelector("[data-logo-anniversary]") as
+      | HTMLElement
+      | null;
 
-    if (logoRevealTimeout !== undefined) {
-      window.clearTimeout(logoRevealTimeout);
+    if (!logo || !baseLogo || !chromeLogo || !anniversaryLogo) return;
+
+    logoRevealTimeline?.kill();
+
+    gsap.killTweensOf([baseLogo, chromeLogo, anniversaryLogo]);
+    gsap.set(baseLogo, { opacity: 1, scale: 1, y: 0, rotate: 0 });
+    gsap.set(chromeLogo, { opacity: 0, scale: 0.965, y: 1, rotate: 0 });
+    gsap.set(anniversaryLogo, { opacity: 0, scale: 0.96, y: 4, rotate: 0 });
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
     }
 
     const navEntry = performance.getEntriesByType("navigation")[0] as
@@ -239,15 +256,94 @@ const shouldReloadNavItem = (href: string) =>
     const isReload = navEntry?.type === "reload";
 
     if (!isReload) {
-      logo.removeAttribute("data-logo-state");
       return;
     }
 
-    logo.dataset.logoState = "reveal";
+    logoRevealTimeline = gsap
+      .timeline({ defaults: { ease: "power2.out" } })
+      .to(baseLogo, { opacity: 0.2, scale: 0.985, duration: 0.18 }, 0)
+      .to(
+        anniversaryLogo,
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.34,
+          ease: "power3.out",
+        },
+        0.08,
+      )
+      .to(
+        anniversaryLogo,
+        {
+          opacity: 0,
+          scale: 1.02,
+          y: -2,
+          duration: 0.3,
+          ease: "power2.in",
+        },
+        `+=${LOGO_REVEAL_DURATION - 0.48}`,
+      )
+      .to(baseLogo, { opacity: 1, scale: 1, y: 0, duration: 0.18 }, "<");
+  }
 
-    logoRevealTimeout = window.setTimeout(() => {
-      logo.dataset.logoState = "settle";
-    }, LOGO_REVEAL_DURATION);
+  function setupLogoHover() {
+    const logo = document.querySelector(
+      "[data-logo-reveal]",
+    ) as HTMLElement | null;
+    const baseLogo = logo?.querySelector("[data-logo-base]") as
+      | HTMLElement
+      | null;
+    const chromeLogo = logo?.querySelector("[data-logo-chrome]") as
+      | HTMLElement
+      | null;
+
+    if (!logo || !baseLogo || !chromeLogo) return;
+
+    logoHoverAbortController?.abort();
+    logoHoverAbortController = new AbortController();
+    const { signal } = logoHoverAbortController;
+
+    const showChrome = () => {
+      gsap.killTweensOf([baseLogo, chromeLogo]);
+      gsap.to(baseLogo, {
+        opacity: 0,
+        scale: 0.975,
+        y: 1,
+        duration: 0.32,
+        ease: "power2.out",
+      });
+      gsap.to(chromeLogo, {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.42,
+        ease: "power3.out",
+      });
+    };
+
+    const showBase = () => {
+      gsap.killTweensOf([baseLogo, chromeLogo]);
+      gsap.to(chromeLogo, {
+        opacity: 0,
+        scale: 0.965,
+        y: 1,
+        duration: 0.28,
+        ease: "power2.inOut",
+      });
+      gsap.to(baseLogo, {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.34,
+        ease: "power2.out",
+      });
+    };
+
+    logo.addEventListener("pointerenter", showChrome, { signal });
+    logo.addEventListener("pointerleave", showBase, { signal });
+    logo.addEventListener("focusin", showChrome, { signal });
+    logo.addEventListener("focusout", showBase, { signal });
   }
 
   function setupMobileMenu() {
@@ -363,6 +459,7 @@ const shouldReloadNavItem = (href: string) =>
   document.addEventListener("astro:page-load", () => {
     setupHeaderScroll();
     setupLogoReveal();
+    setupLogoHover();
     setupMobileMenu();
     setupNavUnderline();
   });
