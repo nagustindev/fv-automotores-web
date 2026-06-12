@@ -1,25 +1,18 @@
 ---
-import { gsap } from "gsap";
-
 const NAV_ITEMS = [
   {
-    label: "Ingresos",
-    href: "/ingresos",
+    label: "Showroom",
+    href: "#showroom",
   },
   {
     label: "Nosotros",
-    href: "/nosotros",
+    href: "#nosotros", 
   },
   {
     label: "Contacto",
-    href: "/contacto",
+    href: "#contacto", 
   },
 ] as const;
-
-const currentPath = Astro.url.pathname;
-
-const shouldReloadNavItem = (href: string) =>
-  currentPath === "/" && href === "/nosotros";
 ---
 
 <header
@@ -32,6 +25,7 @@ const shouldReloadNavItem = (href: string) =>
   >
     <a
       href="/"
+      data-nav-link
       class="group flex items-center gap-3 outline-none focus-visible:ring-2 focus-visible:ring-fvazul-300 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent"
       aria-label="FV Automotores - Inicio"
     >
@@ -80,9 +74,6 @@ const shouldReloadNavItem = (href: string) =>
             <li>
               <a
                 href={item.href}
-                data-astro-reload={
-                  shouldReloadNavItem(item.href) ? true : undefined
-                }
                 data-nav-link
                 class="group relative inline-flex items-center px-3 py-2 font-primary text-[0.65rem] font-bold tracking-[0.25em] text-white/85 transition duration-300 outline-none hover:text-fvplata-50 focus-visible:text-fvplata-50 sm:px-4 sm:text-xs"
               >
@@ -144,9 +135,6 @@ const shouldReloadNavItem = (href: string) =>
             <li class="w-full">
               <a
                 href={item.href}
-                data-astro-reload={
-                  shouldReloadNavItem(item.href) ? true : undefined
-                }
                 data-mobile-menu-link
                 data-nav-link
                 class="group relative flex items-center justify-center rounded-2xl border border-fvazul-200/35 bg-fvazul-200/10 px-5 py-5 text-center font-display text-lg font-bold tracking-[0.28em] text-fvplata-50 outline-none transition duration-300 hover:border-fvazul-300 hover:bg-fvazul-400/20 focus-visible:ring-2 focus-visible:ring-fvazul-300 focus-visible:ring-offset-4 focus-visible:ring-offset-transparent"
@@ -197,6 +185,7 @@ const shouldReloadNavItem = (href: string) =>
   let menuAbortController: AbortController | null = null;
   let navUnderlineAbortController: AbortController | null = null;
   let logoHoverAbortController: AbortController | null = null;
+  let internalNavigationAbortController: AbortController | null = null;
   let logoRevealTimeline: gsap.core.Timeline | null = null;
 
   function setupHeaderScroll() {
@@ -216,87 +205,88 @@ const shouldReloadNavItem = (href: string) =>
     };
 
     update();
-
     window.addEventListener("scroll", update, {
       passive: true,
       signal: scrollAbortController.signal,
     });
   }
 
+  function setupInternalNavigation() {
+    const links = document.querySelectorAll("[data-nav-link]");
+    
+    internalNavigationAbortController?.abort();
+    internalNavigationAbortController = new AbortController();
+    const { signal } = internalNavigationAbortController;
+
+    links.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const href = link.getAttribute("href");
+
+        if (href && href.startsWith("#")) {
+          e.preventDefault();
+          
+          const targetSection = document.querySelector(href);
+          if (!targetSection) return;
+
+          const headerOffset = 75; 
+          const elementPosition = targetSection.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+          const scrollTarget = { y: window.scrollY };
+          gsap.to(scrollTarget, {
+            y: offsetPosition,
+            duration: 1.2,
+            ease: "power4.out",
+            onUpdate: () => window.scrollTo(0, scrollTarget.y)
+          });
+        } else if (href === "#" || href === "/") {
+          e.preventDefault();
+          const scrollTarget = { y: window.scrollY };
+          gsap.to(scrollTarget, {
+            y: 0,
+            duration: 1.2,
+            ease: "power4.out",
+            onUpdate: () => window.scrollTo(0, scrollTarget.y)
+          });
+        }
+      }, { signal });
+    });
+  }
+
   function setupLogoReveal() {
-    const logo = document.querySelector(
-      "[data-logo-reveal]",
-    ) as HTMLElement | null;
-    const baseLogo = logo?.querySelector("[data-logo-base]") as
-      | HTMLElement
-      | null;
-    const chromeLogo = logo?.querySelector("[data-logo-chrome]") as
-      | HTMLElement
-      | null;
-    const anniversaryLogo = logo?.querySelector("[data-logo-anniversary]") as
-      | HTMLElement
-      | null;
+    const logo = document.querySelector("[data-logo-reveal]") as HTMLElement | null;
+    const baseLogo = logo?.querySelector("[data-logo-base]") as HTMLElement | null;
+    const chromeLogo = logo?.querySelector("[data-logo-chrome]") as HTMLElement | null;
+    const anniversaryLogo = logo?.querySelector("[data-logo-anniversary]") as HTMLElement | null;
 
     if (!logo || !baseLogo || !chromeLogo || !anniversaryLogo) return;
 
     logoRevealTimeline?.kill();
-
     gsap.killTweensOf([baseLogo, chromeLogo, anniversaryLogo]);
+    
     gsap.set(baseLogo, { opacity: 1, scale: 1, y: 0, rotate: 0 });
     gsap.set(chromeLogo, { opacity: 0, scale: 0.965, y: 1, rotate: 0 });
     gsap.set(anniversaryLogo, { opacity: 0, scale: 0.96, y: 4, rotate: 0 });
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return;
-    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const navEntry = performance.getEntriesByType("navigation")[0] as
-      | PerformanceNavigationTiming
-      | undefined;
+    const navEntry = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
     const isReload = navEntry?.type === "reload";
 
-    if (!isReload) {
-      return;
-    }
+    if (!isReload) return;
 
     logoRevealTimeline = gsap
       .timeline({ defaults: { ease: "power2.out" } })
       .to(baseLogo, { opacity: 0.2, scale: 0.985, duration: 0.18 }, 0)
-      .to(
-        anniversaryLogo,
-        {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          duration: 0.34,
-          ease: "power3.out",
-        },
-        0.08,
-      )
-      .to(
-        anniversaryLogo,
-        {
-          opacity: 0,
-          scale: 1.02,
-          y: -2,
-          duration: 0.3,
-          ease: "power2.in",
-        },
-        `+=${LOGO_REVEAL_DURATION - 0.48}`,
-      )
+      .to(anniversaryLogo, { opacity: 1, scale: 1, y: 0, duration: 0.34, ease: "power3.out" }, 0.08)
+      .to(anniversaryLogo, { opacity: 0, scale: 1.02, y: -2, duration: 0.3, ease: "power2.in" }, `+=${LOGO_REVEAL_DURATION - 0.48}`)
       .to(baseLogo, { opacity: 1, scale: 1, y: 0, duration: 0.18 }, "<");
   }
 
   function setupLogoHover() {
-    const logo = document.querySelector(
-      "[data-logo-reveal]",
-    ) as HTMLElement | null;
-    const baseLogo = logo?.querySelector("[data-logo-base]") as
-      | HTMLElement
-      | null;
-    const chromeLogo = logo?.querySelector("[data-logo-chrome]") as
-      | HTMLElement
-      | null;
+    const logo = document.querySelector("[data-logo-reveal]") as HTMLElement | null;
+    const baseLogo = logo?.querySelector("[data-logo-base]") as HTMLElement | null;
+    const chromeLogo = logo?.querySelector("[data-logo-chrome]") as HTMLElement | null;
 
     if (!logo || !baseLogo || !chromeLogo) return;
 
@@ -306,38 +296,14 @@ const shouldReloadNavItem = (href: string) =>
 
     const showChrome = () => {
       gsap.killTweensOf([baseLogo, chromeLogo]);
-      gsap.to(baseLogo, {
-        opacity: 0,
-        scale: 0.975,
-        y: 1,
-        duration: 0.32,
-        ease: "power2.out",
-      });
-      gsap.to(chromeLogo, {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        duration: 0.42,
-        ease: "power3.out",
-      });
+      gsap.to(baseLogo, { opacity: 0, scale: 0.975, y: 1, duration: 0.32, ease: "power2.out" });
+      gsap.to(chromeLogo, { opacity: 1, scale: 1, y: 0, duration: 0.42, ease: "power3.out" });
     };
 
     const showBase = () => {
       gsap.killTweensOf([baseLogo, chromeLogo]);
-      gsap.to(chromeLogo, {
-        opacity: 0,
-        scale: 0.965,
-        y: 1,
-        duration: 0.28,
-        ease: "power2.inOut",
-      });
-      gsap.to(baseLogo, {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        duration: 0.34,
-        ease: "power2.out",
-      });
+      gsap.to(chromeLogo, { opacity: 0, scale: 0.965, y: 1, duration: 0.28, ease: "power2.inOut" });
+      gsap.to(baseLogo, { opacity: 1, scale: 1, y: 0, duration: 0.34, ease: "power2.out" });
     };
 
     logo.addEventListener("pointerenter", showChrome, { signal });
@@ -347,18 +313,10 @@ const shouldReloadNavItem = (href: string) =>
   }
 
   function setupMobileMenu() {
-    const header = document.querySelector(
-      "[data-header]",
-    ) as HTMLElement | null;
-    const menu = document.querySelector(
-      "[data-mobile-menu]",
-    ) as HTMLElement | null;
-    const button = document.querySelector(
-      "[data-mobile-menu-button]",
-    ) as HTMLButtonElement | null;
-    const links = Array.from(
-      document.querySelectorAll("[data-mobile-menu-link]"),
-    ) as HTMLAnchorElement[];
+    const header = document.querySelector("[data-header]") as HTMLElement | null;
+    const menu = document.querySelector("[data-mobile-menu]") as HTMLElement | null;
+    const button = document.querySelector("[data-mobile-menu-button]") as HTMLButtonElement | null;
+    const links = Array.from(document.querySelectorAll("[data-mobile-menu-link]")) as HTMLAnchorElement[];
 
     if (!header || !menu || !button) return;
 
@@ -383,37 +341,23 @@ const shouldReloadNavItem = (href: string) =>
 
     setMenuOpen(false);
 
-    button.addEventListener(
-      "click",
-      () => {
-        setMenuOpen(button.getAttribute("aria-expanded") !== "true");
-      },
-      { signal },
-    );
+    button.addEventListener("click", () => {
+      setMenuOpen(button.getAttribute("aria-expanded") !== "true");
+    }, { signal });
 
     links.forEach((link) => {
-      link.addEventListener(
-        "click",
-        () => {
-          setMenuOpen(false);
-        },
-        { signal },
-      );
+      link.addEventListener("click", () => {
+        setMenuOpen(false);
+      }, { signal });
     });
 
-    window.addEventListener(
-      "keydown",
-      (event) => {
-        if (event.key === "Escape") setMenuOpen(false);
-      },
-      { signal },
-    );
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    }, { signal });
   }
 
   function setupNavUnderline() {
-    const links = Array.from(
-      document.querySelectorAll("[data-nav-link]"),
-    ) as HTMLAnchorElement[];
+    const links = Array.from(document.querySelectorAll("[data-nav-link]")) as HTMLAnchorElement[];
 
     navUnderlineAbortController?.abort();
     navUnderlineAbortController = new AbortController();
@@ -425,34 +369,22 @@ const shouldReloadNavItem = (href: string) =>
 
       gsap.set(underline, { clipPath: "inset(0 100% 0 0)" });
 
-      link.addEventListener(
-        "pointerenter",
-        () => {
-          gsap.killTweensOf(underline);
-          gsap.to(underline, {
-            clipPath: "inset(0 0% 0 0)",
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        },
-        { signal },
-      );
+      link.addEventListener("pointerenter", () => {
+        gsap.killTweensOf(underline);
+        gsap.to(underline, { clipPath: "inset(0 0% 0 0)", duration: 0.3, ease: "power2.out" });
+      }, { signal });
 
-      link.addEventListener(
-        "pointerleave",
-        () => {
-          gsap.killTweensOf(underline);
-          gsap.to(underline, {
-            clipPath: "inset(0 0% 0 100%)",
-            duration: 0.3,
-            ease: "power2.inOut",
-            onComplete: () => {
-              gsap.set(underline, { clipPath: "inset(0 100% 0 0)" });
-            },
-          });
-        },
-        { signal },
-      );
+      link.addEventListener("pointerleave", () => {
+        gsap.killTweensOf(underline);
+        gsap.to(underline, {
+          clipPath: "inset(0 0% 0 100%)",
+          duration: 0.3,
+          ease: "power2.inOut",
+          onComplete: () => {
+            gsap.set(underline, { clipPath: "inset(0 100% 0 0)" });
+          },
+        });
+      }, { signal });
     });
   }
 
@@ -462,5 +394,6 @@ const shouldReloadNavItem = (href: string) =>
     setupLogoHover();
     setupMobileMenu();
     setupNavUnderline();
+    setupInternalNavigation(); 
   });
 </script>
