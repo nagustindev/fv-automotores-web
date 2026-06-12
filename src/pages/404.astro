@@ -1,0 +1,339 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Inventory from "@/sections/Inventory.astro";
+import Footer from "@/sections/Footer.astro";
+import Button from "@/components/Button.astro";
+import ArrowLeftIcon from "@/assets/svg/arrow-left.svg";
+import ArrowDownIcon from "@/assets/svg/arrow-down.svg";
+
+import "@/styles/global.css";
+
+const errorTitle = "404 - Fabio Viola Automotores";
+const errorDescription =
+  "Pagina no encontrada. Volve al inicio para seguir explorando nuestro stock de autos usados en Adrogué.";
+---
+
+<Layout title={errorTitle} description={errorDescription}>
+  <section
+    data-hero
+    class="relative w-full overflow-hidden bg-primary"
+    aria-label="Presentación de FV Automotores"
+  >
+    <picture class="absolute inset-0 z-0" aria-hidden="true">
+      <source type="image/webp" srcset="/hero_background.webp 1x" />
+      <img
+        data-hero-image
+        src="/hero_background.webp"
+        alt=""
+        role="presentation"
+        class="h-full w-full object-cover object-center"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </picture>
+
+    <div
+  class="absolute inset-0 z-1 bg-linear-to-b from-black/65 via-black/40 to-primary/95"
+  aria-hidden="true"
+>
+</div>
+
+    <header
+      class="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-4 pb-10 pt-16 text-center sm:px-6 lg:px-8 lg:pb-14"
+    >
+      <div data-hero-copy class="flex max-w-4xl flex-col items-center">
+        <span
+          class="font-overpass text-xs font-semibold uppercase tracking-widest text-fvplata-300"
+          >ERROR 404</span
+        >
+        <h1
+          class="text-balance font-primary text-3xl font-bold tracking-[0.18em] text-white sm:text-4xl lg:text-6xl"
+        >
+          ERROR 404
+        </h1>
+        <p
+          class="mt-4 max-w-2xl text-balance font-overpass text-base text-fvplata-300 sm:text-xl lg:text-2xl"
+        >
+          Esta pagina no existe o no se pudo encontrar. Volve al inicio para
+          seguir explorando nuestro stock de autos usados.
+        </p>
+      </div>
+      <div data-hero-actions class="mt-6 flex flex-col gap-3 sm:flex-row">
+        <Button
+          data-hero-cta="primary"
+          href="/"
+          text="VOLVER AL INICIO"
+          icon={ArrowLeftIcon}
+          iconClass="size-6"
+          variant="plata"
+        />
+        <Button
+          data-hero-cta="stock"
+          href="#showroom"
+          text="STOCK ACTIVO"
+          icon={ArrowDownIcon}
+          iconClass="size-6"
+        />
+      </div>
+    </header>
+  </section>
+
+  <style>
+    picture {
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 72%,
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 72%,
+        transparent 100%
+      );
+    }
+
+    img {
+      transform: scale(var(--hero-bg-scale, 1));
+      transform-origin: center center;
+      will-change: transform;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      img {
+        transform: none;
+      }
+    }
+  </style>
+
+  <div id="showroom">
+    <Inventory />
+  </div>
+  {
+    /* Bloque informativo accesible (lectores de pantalla) y rastreable por motores de búsqueda. Aporta valor al contenido. */
+  }
+  <aside class="sr-only" aria-labelledby="dealer-details-title">
+    <h2 id="dealer-details-title">Detalles del concesionario</h2>
+    <p>
+      Fabio Viola Automotores, con más de 25 años de experiencia, se especializa
+      en la venta de autos usados en Zona Sur, Adrogué. Ofrecemos una amplia
+      selección de vehículos de calidad, atención personalizada y las mejores
+      opciones de financiación para ayudarte a encontrar tu próximo auto. Visita
+      nuestro showroom y descubrí por qué somos la elección confiable para
+      comprar tu próximo vehículo.
+    </p>
+  </aside>
+  <Footer />
+</Layout>
+<script>
+  import { set } from "astro:schema";
+import { gsap } from "gsap";
+
+  function setupHeroAnimation() {
+    const hero = document.querySelector("[data-hero]") as HTMLElement | null;
+    const heroImage = document.querySelector(
+      "[data-hero-image]",
+    ) as HTMLImageElement | null;
+    const heroCopy = document.querySelector(
+      "[data-hero-copy]",
+    ) as HTMLElement | null;
+    const heroActions = document.querySelector(
+      "[data-hero-actions]",
+    ) as HTMLElement | null;
+    const heroButtons = heroActions
+      ? Array.from(heroActions.querySelectorAll("[data-hero-cta]"))
+      : [];
+
+    if (
+      !hero ||
+      !heroImage ||
+      !heroCopy ||
+      !heroActions ||
+      heroButtons.length === 0
+    )
+      return;
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reducedMotion) return;
+
+    gsap.set(heroCopy, { opacity: 0, y: 28 });
+    gsap.set(heroButtons, { opacity: 0, y: 18, filter: "blur(8px)" });
+    gsap.set(heroImage, { scale: 1 });
+
+    gsap
+      .timeline({ defaults: { ease: "power3.out" } })
+      .to(heroCopy, { opacity: 1, y: 0, duration: 1.05 }, 0)
+      .to(
+        heroButtons,
+        {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          duration: 0.95,
+          ease: "power2.out",
+        },
+        0.28,
+      );
+
+    let scrollAbortController: AbortController | null = null;
+
+    const setupImageScroll = () => {
+      scrollAbortController?.abort();
+      scrollAbortController = new AbortController();
+      const { signal } = scrollAbortController;
+
+      const updateScale = () => {
+        const start = hero.offsetTop;
+        const progress = Math.max(
+          0,
+          Math.min(1, (window.scrollY - start) / 900),
+        );
+        const scale = 1 + progress * 0.055;
+
+        gsap.to(heroImage, {
+          scale,
+          duration: 0.2,
+          ease: "power1.out",
+          overwrite: true,
+        });
+      };
+
+      updateScale();
+      window.addEventListener("scroll", updateScale, { passive: true, signal });
+      window.addEventListener("resize", updateScale, { passive: true, signal });
+    };
+
+    setupImageScroll();
+  }
+
+function setupBackButtonInteraction() {
+  const backButton = document.querySelector('[data-hero-cta="primary"]');
+  if (!backButton) return;
+
+  const arrowIcon = backButton.querySelector('svg');
+
+  // Centramos el eje de transformación para que el giro sea natural desde el medio
+  gsap.set(backButton, { transformOrigin: "center center" });
+
+  backButton.addEventListener("pointerenter", () => {
+    gsap.killTweensOf([backButton, arrowIcon]);
+
+    // Clona el comportamiento de La Velada: sube 4px y se inclina -1.5 grados a la izquierda
+    gsap.to(backButton, {
+      y: -4,
+      rotation: -1.5,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+
+    // La flecha hace el sutil amague de retroceso hacia la izquierda
+    if (arrowIcon) {
+      gsap.to(arrowIcon, {
+        x: -4,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    }
+  });
+
+  backButton.addEventListener("pointerleave", () => {
+    gsap.killTweensOf([backButton, arrowIcon]);
+
+    // Resetea el botón a su posición plana e inicial
+    gsap.to(backButton, {
+      y: 0,
+      rotation: 0,
+      duration: 0.25,
+      ease: "power2.out",
+    });
+
+    if (arrowIcon) {
+      gsap.to(arrowIcon, {
+        x: 0,
+        duration: 0.25,
+        ease: "power2.out",
+      });
+    }
+  });
+}
+
+function setupStockButtonInteraction() {
+  const stockButton = document.querySelector('[data-hero-cta="stock"]');
+  if (!stockButton) return;
+
+  const arrowIcon = stockButton.querySelector('svg');
+
+  stockButton.addEventListener("pointerenter", () => {
+    // Matamos cualquier animación previa para evitar tirones
+    gsap.killTweensOf([stockButton, arrowIcon]);
+
+    // El cuerpo del botón sube levemente (simula el -translate-y-0.5 de La Velada)
+    gsap.to(stockButton, {
+      y: -2,
+      duration: 0.25,
+      ease: "power2.out"
+    });
+
+    // La flecha empuja hacia abajo (simula el group-hover:translate-y-0.5)
+    if (arrowIcon) {
+      gsap.to(arrowIcon, {
+        y: 4,
+        duration: 0.25,
+        ease: "power2.out"
+      });
+    }
+  });
+
+  stockButton.addEventListener("pointerleave", () => {
+    gsap.killTweensOf([stockButton, arrowIcon]);
+
+    // Ambos elementos regresan a su punto de origen de forma limpia
+    gsap.to(stockButton, {
+      y: 0,
+      duration: 0.25,
+      ease: "power2.out"
+    });
+
+    if (arrowIcon) {
+      gsap.to(arrowIcon, {
+        y: 0,
+        duration: 0.25,
+        ease: "power2.out"
+      });
+    }
+  });
+}
+
+  function setup404SmoothScroll() {
+    const stockButton = document.querySelector('[data-hero-cta="stock"]');
+    const targetSection = document.querySelector("#showroom");
+
+    if (!stockButton || !targetSection) return;
+
+    stockButton.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const elementPosition = targetSection.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY;
+
+      const scrollTarget = { y: window.scrollY };
+
+      gsap.to(scrollTarget, {
+        y: offsetPosition,
+        duration: 1.2,
+        ease: "power4.out",
+        onUpdate: () => window.scrollTo(0, scrollTarget.y),
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", () => {
+    setupHeroAnimation();
+    setup404SmoothScroll();
+    setupBackButtonInteraction();
+    setupStockButtonInteraction();
+  });
+</script>
