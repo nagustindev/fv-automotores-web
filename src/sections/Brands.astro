@@ -36,15 +36,6 @@ const BRANDS = [
 	</div>
 
 	<div class="relative z-10 mx-auto flex max-w-6xl flex-col items-center">
-		<h2
-			id="brands-title"
-			class="mb-3 text-center font-primary text-3xl font-bold tracking-[0.18em] text-white sm:text-4xl md:text-5xl"
-		>
-			MARCAS SELECCIONADAS
-		</h2>
-		<p class="mb-12 max-w-2xl text-center font-overpass text-xs font-medium tracking-[0.25em] text-balance text-fvplata-300 sm:mb-16 sm:text-sm">
-			Vas a encontrar utilitarios, camionetas y autos usados de las marcas más buscadas del mercado. 
-		</p>
 
 		<ul class="flex w-full flex-wrap items-stretch justify-center gap-4 sm:gap-5 lg:flex-nowrap lg:gap-4">
 			{
@@ -54,7 +45,7 @@ const BRANDS = [
 							<Logo
 								aria-hidden="true"
 								class:list={[
-									"h-20 text-white/80 transition duration-500 ease-out group-hover:text-fvplata-300 group-hover:filter-[drop-shadow(0_0_16px_rgba(198,210,219,0.65))]",
+									"h-11 text-white/80 transition duration-500 ease-out group-hover:text-fvplata-300 group-hover:filter-[drop-shadow(0_0_16px_rgba(198,210,219,0.65))] lg:h-20",
 									logoClass,
 								]}
 							/>
