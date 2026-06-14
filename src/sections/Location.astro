@@ -28,7 +28,7 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
 
 <section
   id="contacto"
-  class="relative w-full overflow-hidden bg-primary py-24 sm:py-32"
+  class="relative w-full overflow-hidden bg-primary py-24 sm:px-6 lg:py-32"
   aria-labelledby="map-title"
 >
   <div id="fva-marker-template" class="hidden" aria-hidden="true">
@@ -75,21 +75,7 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
 
   <div class="relative w-full isolate mt-8 px-0">
     
-    <div
-      class="w-full min-h-[540px] md:min-h-[640px] overflow-hidden border-y border-fvantracita-900 bg-fvantracita-950 shadow-[0_24px_60px_rgba(0,0,0,0.7)] z-0"
-    >
-      <div
-        id="fva-interactive-map"
-        class="h-full min-h-[540px] w-full md:min-h-[640px]"
-        data-latitude={VENUE_COORDINATES.latitude}
-        data-longitude={VENUE_COORDINATES.longitude}
-        data-zoom={VENUE_COORDINATES.zoom}
-        aria-label="Mapa interactivo con la ubicación exacta de FV Automotores en Adrogué"
-      >
-      </div>
-    </div>
-
-    <div class="absolute bottom-4 left-4 right-4 md:bottom-auto md:right-auto md:top-12 md:left-12 lg:left-24 z-[1005] w-[calc(100%-2rem)] sm:w-[360px] md:w-[380px]">
+    <div class="relative w-full mb-8 px-4 lg:absolute lg:top-12 lg:left-12 xl:left-24 lg:z-[1005] lg:w-[360px] xl:w-[380px] lg:mb-0 lg:px-0">
       <div
         class="group rounded-2xl border border-fvantracita-900/60 bg-fvantracita-950/75 p-6 shadow-2xl backdrop-blur-md transition-all duration-400 hover:border-fvantracita-700 hover:bg-fvantracita-950/90 relative"
       >
@@ -101,35 +87,24 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
         <div class="mb-6">
           <div class="mb-2 flex items-center gap-2.5 text-fvplata-300">
             <LocationDotIcon class="size-4.5" />
-            <p
-              class="font-primary text-[0.65rem] font-bold tracking-[0.25em] uppercase text-white/50"
-            >
+            <p class="font-primary text-[0.65rem] font-bold tracking-[0.25em] uppercase text-white/50">
               DIRECCIÓN
             </p>
           </div>
-          <h3
-            class="font-primary text-lg font-bold tracking-wide text-white uppercase"
-          >
+          <h3 class="font-primary text-lg font-bold tracking-wide text-white uppercase">
             Ceferino Ramírez 1079
           </h3>
-          <p
-            class="font-overpass text-xs font-light leading-relaxed text-fvantracita-400 mt-0.5"
-          >
+          <p class="font-overpass text-xs font-light leading-relaxed text-fvantracita-400 mt-0.5">
             Adrogué, Zona Sur, Buenos Aires
           </p>
         </div>
 
-        <div
-          class="my-6 h-px bg-linear-to-r from-transparent via-fvantracita-800 to-transparent"
-        >
-        </div>
+        <div class="my-6 h-px bg-linear-to-r from-transparent via-fvantracita-800 to-transparent"></div>
 
         <div class="mb-6">
           <div class="mb-2 flex items-center gap-2.5 text-fvplata-300">
             <ClockIcon class="size-4.5" />
-            <p
-              class="font-primary text-[0.65rem] font-bold tracking-[0.25em] uppercase text-white/50"
-            >
+            <p class="font-primary text-[0.65rem] font-bold tracking-[0.25em] uppercase text-white/50">
               HORARIOS
             </p>
           </div>
@@ -147,25 +122,17 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
           </p>
         </div>
 
-        <div
-          class="my-6 h-px bg-linear-to-r from-transparent via-fvantracita-800 to-transparent"
-        >
-        </div>
+        <div class="my-6 h-px bg-linear-to-r from-transparent via-fvantracita-800 to-transparent"></div>
 
         <div class="mb-8">
           <div class="mb-2 flex items-center gap-2.5 text-fvplata-300">
             <CustomerServiceIcon class="size-4.5" />
-            <p
-              class="font-primary text-[0.65rem] font-bold tracking-[0.25em] uppercase text-white/50"
-            >
+            <p class="font-primary text-[0.65rem] font-bold tracking-[0.25em] uppercase text-white/50">
               ATENCIÓN
             </p>
           </div>
-          <p
-            class="font-overpass text-xs font-light text-fvantracita-400 leading-relaxed"
-          >
-            Atendido personalmente por <strong class="font-bold text-white">Fabio y Juan Pablo</strong>. Podés coordinar
-            una cita previa por WhatsApp para congelar el valor de una unidad.
+          <p class="font-overpass text-xs font-light text-fvantracita-400 leading-relaxed">
+            Atendido personalmente por <strong class="font-bold text-white">Fabio y Juan Pablo</strong>. Podés coordinar una cita previa por WhatsApp para congelar el valor de una unidad.
           </p>
         </div>
 
@@ -178,6 +145,20 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
           iconClass="size-6"
           variant="plata"
         />
+      </div>
+    </div>
+
+    <div
+      class="w-full min-h-[420px] lg:min-h-[660px] overflow-hidden border-y border-fvantracita-900 bg-fvantracita-950 shadow-[0_24px_60px_rgba(0,0,0,0.7)] z-0"
+    >
+      <div
+        id="fva-interactive-map"
+        class="h-full min-h-[420px] w-full lg:min-h-[660px]"
+        data-latitude={VENUE_COORDINATES.latitude}
+        data-longitude={VENUE_COORDINATES.longitude}
+        data-zoom={VENUE_COORDINATES.zoom}
+        aria-label="Mapa interactivo con la ubicación exacta de FV Automotores en Adrogué"
+      >
       </div>
     </div>
 
@@ -339,6 +320,10 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
       });
 
       marker.bindPopup(popup).openPopup();
+
+      if (window.innerWidth >= 1024) {
+        mapInstance.panBy([-100, 0], { animate: false });
+      }
 
       setTimeout(() => mapInstance?.invalidateSize(), 250);
     } catch (err) {
