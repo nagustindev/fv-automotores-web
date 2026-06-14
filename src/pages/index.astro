@@ -7,10 +7,13 @@ import Brands from "@/sections/Brands.astro";
 import About from "@/sections/About.astro";
 import Footer from "@/sections/Footer.astro";
 import Socials from "@/sections/Socials.astro";
+import FAQ from "@/sections/FAQ.astro";
+import { HOME_FAQS } from "@/consts/faq";
 
 import "@/styles/global.css";
 import SellYourCar from "@/sections/SellYourCar.astro";
 import Location from "@/sections/Location.astro";
+
 
 const seoTitle = "Compra y Venta de Autos Usados en Adrogué - FV Automotores";
 const seoDescription =
@@ -36,6 +39,7 @@ const seoDescription =
   <div id="ubicacion">
   <Location />
   </div>
+  <FAQ faqs={HOME_FAQS} />
   {
     /* Bloque informativo accesible (lectores de pantalla) y rastreable por motores de búsqueda. Aporta valor al contenido. */
   }
