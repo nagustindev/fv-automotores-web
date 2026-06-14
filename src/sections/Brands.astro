@@ -9,46 +9,52 @@ import NissanLogo from "@/assets/svg/car-brands/Vector.svg";
 import HondaLogo from "@/assets/svg/car-brands/Group.svg";
 import FiatLogo from "@/assets/svg/car-brands/Warstwa_x0020_1-5.svg";
 import SectionDivider from "@/components/SectionDivider.astro";
+import SectionHeader from "@/components/SectionHeader.astro";
 
 const BRANDS = [
-	{ name: "Volkswagen", Logo: VolkswagenLogo, logoClass: "w-[90%] max-w-80" },
-	{ name: "Chevrolet", Logo: ChevroletLogo, logoClass: "w-[65%] max-w-30" },
-	{ name: "Renault", Logo: RenaultLogo, logoClass: "w-[65%] max-w-30" },
-	{ name: "Ford", Logo: FordLogo, logoClass: "w-[65%] max-w-30" },
-	{ name: "Toyota", Logo: ToyotaLogo, logoClass: "w-[65%] max-w-30" },
-	{ name: "Peugeot", Logo: PeugeotLogo, logoClass: "w-[65%] max-w-30" },
-	{ name: "Nissan", Logo: NissanLogo, logoClass: "w-[65%] max-w-30" },
-	{ name: "Honda", Logo: HondaLogo, logoClass: "w-[65%] max-w-30" },
-	{ name: "Fiat", Logo: FiatLogo, logoClass: "w-[65%] max-w-30" },
+  { name: "Volkswagen", Logo: VolkswagenLogo, logoClass: "w-[90%] max-w-80" },
+  { name: "Chevrolet", Logo: ChevroletLogo, logoClass: "w-[65%] max-w-30" },
+  { name: "Renault", Logo: RenaultLogo, logoClass: "w-[65%] max-w-30" },
+  { name: "Ford", Logo: FordLogo, logoClass: "w-[65%] max-w-30" },
+  { name: "Toyota", Logo: ToyotaLogo, logoClass: "w-[65%] max-w-30" },
+  { name: "Peugeot", Logo: PeugeotLogo, logoClass: "w-[65%] max-w-30" },
+  { name: "Nissan", Logo: NissanLogo, logoClass: "w-[65%] max-w-30" },
+  { name: "Honda", Logo: HondaLogo, logoClass: "w-[65%] max-w-30" },
+  { name: "Fiat", Logo: FiatLogo, logoClass: "w-[65%] max-w-30" },
 ] as const;
 ---
 
 <section
-	id="brands"
-	class="relative w-full overflow-hidden px-4 py-20 sm:px-6 lg:py-28"
-	aria-labelledby="brands-title"
+  id="brands"
+  class="relative w-full overflow-hidden px-4 py-20 sm:px-6 lg:py-28"
+  aria-labelledby="brands-title"
 >
-	<SectionDivider />
+  <SectionHeader
+	titleId="brands-title"
+	title="MARCAS"
+	subtitle="Trabajamos con las principales marcas del mercado para ofrecerte una amplia variedad de opciones."
+	  />
 
-	<div class="relative z-10 mx-auto flex max-w-6xl flex-col items-center">
-
-		<ul class="flex w-full flex-wrap items-stretch justify-center gap-4 sm:gap-5 lg:flex-nowrap lg:gap-4">
-			{
-				BRANDS.map(({ name, Logo, logoClass }) => (
-					<li class="w-[calc(50%-0.5rem)] sm:w-[calc(33.333%-0.9rem)] lg:w-auto lg:flex-1">
-						<div class="group flex h-24 items-center justify-center px-5 transition duration-500 ease-out hover:-translate-y-1">
-							<Logo
-								aria-hidden="true"
-								class:list={[
-									"h-11 text-white/80 transition duration-500 ease-out group-hover:text-fvplata-300 group-hover:filter-[drop-shadow(0_0_16px_rgba(198,210,219,0.65))] lg:h-20",
-									logoClass,
-								]}
-							/>
-							<span class="sr-only">{name}</span>
-						</div>
-					</li>
-				))
-			}
-		</ul>
-	</div>
+  <div class="relative z-10 mx-auto flex max-w-6xl flex-col items-center">
+    <ul
+      class="flex w-full flex-wrap items-stretch justify-center gap-4 sm:gap-5 lg:flex-nowrap lg:gap-4"
+    >
+      {
+        BRANDS.map(({ name, Logo, logoClass }) => (
+          <li class="w-[calc(50%-0.5rem)] sm:w-[calc(33.333%-0.9rem)] lg:w-auto lg:flex-1">
+            <div class="group flex h-24 items-center justify-center px-5 transition duration-500 ease-out hover:-translate-y-1">
+              <Logo
+                aria-hidden="true"
+                class:list={[
+                  "h-11 text-white/80 transition duration-500 ease-out group-hover:text-fvplata-300 group-hover:filter-[drop-shadow(0_0_16px_rgba(198,210,219,0.65))] lg:h-20",
+                  logoClass,
+                ]}
+              />
+              <span class="sr-only">{name}</span>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </section>
