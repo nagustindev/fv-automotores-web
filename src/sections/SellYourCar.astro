@@ -13,7 +13,6 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
   class="relative w-full overflow-hidden bg-primary py-24 sm:py-32"
   aria-labelledby="selling-title"
 >
-  <!-- 1. CAPA DE FONDO: Tu imagen original intacta (Z-0) -->
   <picture class="absolute inset-0 z-0" aria-hidden="true">
     <source type="image/webp" srcset="/we_buy_your_usedcar.webp 1x" />
     <img
@@ -25,33 +24,29 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
     />
   </picture>
 
-  <!-- 2. CAPA DE DIFUMINADO SOLIDO (La solución al corte de imagen_2.png) -->
-  <!-- Al arrancar en 'from-primary' sólido, se une de forma invisible con la sección de marcas de arriba -->
   <div
     class="absolute inset-0 z-1 bg-linear-to-b from-primary via-black/40 to-primary"
     aria-hidden="true"
   >
   </div>
 
-  <!-- DECORACIÓN COMPLEMENTARIA ESTILO HERO -->
   <div
     aria-hidden="true"
     class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-fvplata-300/10 to-transparent z-10"
   >
   </div>
-  
+
   <div
     aria-hidden="true"
     class="pointer-events-none absolute inset-x-0 top-0 z-0 h-40 bg-[radial-gradient(ellipse_at_top,var(--color-fvplata-300)_0%,transparent_70%)] opacity-[0.03]"
   >
   </div>
 
-  <!-- 3. CONTENEDOR DE INTERFAZ (Z-10 sólido sobre los velos de fondo) -->
   <div class="relative z-10 mx-auto flex max-w-6xl flex-col items-center px-4">
-    
-    <!-- Bloque de Textos Principales -->
     <div class="flex flex-col items-center text-center max-w-4xl mb-8">
-      <span class="font-overpass text-xs font-semibold uppercase tracking-widest text-fvplata-300">
+      <span
+        class="font-overpass text-xs font-semibold uppercase tracking-widest text-fvplata-300"
+      >
         FABIO VIOLA AUTOMOTORES
       </span>
       <h2
@@ -60,56 +55,87 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
       >
         ¿PENSAS VENDER TU AUTO?
       </h2>
-      <p class="max-w-2xl text-balance font-overpass text-base text-fvplata-300 sm:text-xl">
-        Compartí con nosotros los detalles de tu vehículo y te ofrecemos una tasación inmediata y transparente.
+      <p
+        class="max-w-2xl text-balance font-overpass text-base text-fvplata-300 sm:text-xl"
+      >
+        Compartí con nosotros los detalles de tu vehículo y te ofrecemos una
+        tasación inmediata y transparente.
       </p>
     </div>
 
-    <!-- Tu Botón de WhatsApp Estándar -->
     <div class="flex justify-center mb-20">
       <Button
         data-hero-cta="primary"
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        text="CONSULTAR POR WHATSAPP"
+        text="CONSULTAR"
         icon={WhatsAppIcon}
         iconClass="size-6"
         variant="plata"
       />
     </div>
 
-    <!-- Grilla de Pasos Flotante -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl mx-auto">
-      
-      <!-- Paso 01 -->
-      <div class="group rounded-2xl border border-fvantracita-900/60 bg-fvantracita-950/75 p-6 shadow-2xl backdrop-blur-md transition-all duration-400 hover:border-fvantracita-700 hover:bg-fvantracita-950/90">
-        <span class="block font-primary text-xl font-black text-fvplata-400 mb-2 group-hover:text-white transition-colors duration-400">01</span>
-        <h3 class="font-primary text-sm font-bold text-white uppercase tracking-wider mb-2">Compartí Info</h3>
-        <p class="font-overpass text-xs font-light leading-relaxed text-fvantracita-400">
-          Pasanos el modelo, año y kilometraje real de tu unidad directamente por nuestro WhatsApp.
+      <div
+        class="group rounded-2xl border border-fvantracita-900/60 bg-fvantracita-950/75 p-6 shadow-2xl backdrop-blur-md transition-all duration-400 hover:border-fvantracita-700 hover:bg-fvantracita-950/90"
+      >
+        <span
+          class="block font-primary text-xl font-black text-fvplata-400 mb-2 group-hover:text-white transition-colors duration-400"
+          >01</span
+        >
+        <h3
+          class="font-primary text-sm font-bold text-white uppercase tracking-wider mb-2"
+        >
+          Compartí Info
+        </h3>
+        <p
+          class="font-overpass text-xs font-light leading-relaxed text-fvantracita-400"
+        >
+          Pasanos el modelo, año y kilometraje real de tu unidad directamente
+          por nuestro WhatsApp.
         </p>
       </div>
 
-      <!-- Paso 02 -->
-      <div class="group rounded-2xl border border-fvantracita-900/60 bg-fvantracita-950/75 p-6 shadow-2xl backdrop-blur-md transition-all duration-400 hover:border-fvantracita-700 hover:bg-fvantracita-950/90">
-        <span class="block font-primary text-xl font-black text-fvplata-400 mb-2 group-hover:text-white transition-colors duration-400">02</span>
-        <h3 class="font-primary text-sm font-bold text-white uppercase tracking-wider mb-2">Recibí la Oferta</h3>
-        <p class="font-overpass text-xs font-light leading-relaxed text-fvantracita-400">
-          Evaluamos los parámetros de mercado en Zona Sur y te enviamos una cotización preliminar transparente y competitiva.
+      <div
+        class="group rounded-2xl border border-fvantracita-900/60 bg-fvantracita-950/75 p-6 shadow-2xl backdrop-blur-md transition-all duration-400 hover:border-fvantracita-700 hover:bg-fvantracita-950/90"
+      >
+        <span
+          class="block font-primary text-xl font-black text-fvplata-400 mb-2 group-hover:text-white transition-colors duration-400"
+          >02</span
+        >
+        <h3
+          class="font-primary text-sm font-bold text-white uppercase tracking-wider mb-2"
+        >
+          Recibí la Oferta
+        </h3>
+        <p
+          class="font-overpass text-xs font-light leading-relaxed text-fvantracita-400"
+        >
+          Evaluamos los parámetros de mercado en Zona Sur y te enviamos una
+          cotización preliminar transparente y competitiva.
         </p>
       </div>
 
-      <!-- Paso 03 -->
-      <div class="group rounded-2xl border border-fvantracita-900/60 bg-fvantracita-950/75 p-6 shadow-2xl backdrop-blur-md transition-all duration-400 hover:border-fvantracita-700 hover:bg-fvantracita-950/90">
-        <span class="block font-primary text-xl font-black text-fvplata-400 mb-2 group-hover:text-white transition-colors duration-400">03</span>
-        <h3 class="font-primary text-sm font-bold text-white uppercase tracking-wider mb-2">Cerrá el Trato</h3>
-        <p class="font-overpass text-xs font-light leading-relaxed text-fvantracita-400">
-          Traés el coche al showroom de Adrogué, verificamos el estado general y te llevás el efectivo de forma segura e inmediata.
+      <div
+        class="group rounded-2xl border border-fvantracita-900/60 bg-fvantracita-950/75 p-6 shadow-2xl backdrop-blur-md transition-all duration-400 hover:border-fvantracita-700 hover:bg-fvantracita-950/90"
+      >
+        <span
+          class="block font-primary text-xl font-black text-fvplata-400 mb-2 group-hover:text-white transition-colors duration-400"
+          >03</span
+        >
+        <h3
+          class="font-primary text-sm font-bold text-white uppercase tracking-wider mb-2"
+        >
+          Cerrá el Trato
+        </h3>
+        <p
+          class="font-overpass text-xs font-light leading-relaxed text-fvantracita-400"
+        >
+          Traés el coche al showroom de Adrogué, verificamos el estado general y
+          te llevás el efectivo de forma segura e inmediata.
         </p>
       </div>
-
     </div>
-
   </div>
 </section>

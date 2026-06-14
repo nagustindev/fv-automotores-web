@@ -1,0 +1,355 @@
+---
+import Button from "@/components/Button.astro";
+import WhatsAppIcon from "@/assets/svg/whatsapp.svg";
+import OpenIcon from "@/assets/svg/open-icon.svg";
+import ClockIcon from "@/assets/svg/clock-icon.svg";
+import LocationDotIcon from "@/assets/svg/location-dot.svg";
+import CustomerServiceIcon from "@/assets/svg/customer-service.svg";
+
+const VENUE_COORDINATES = {
+  latitude: -34.80513069445179,
+  longitude: -58.38643322850547,
+  zoom: 16,
+};
+
+const whatsappNumber = "5491144441290";
+const defaultMessage =
+  "Hola, buenas tardes. Me contactaba desde la página web de FV Automotores para coordinar una visita a su showroom y conocer las unidades disponibles. Quedo atento a su respuesta.";
+
+const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
+---
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""
+/>
+
+<section
+  id="contacto"
+  class="relative w-full overflow-hidden bg-primary py-24 sm:py-32"
+  aria-labelledby="map-title"
+>
+  <div id="fva-marker-template" class="hidden" aria-hidden="true">
+    <LocationDotIcon />
+  </div>
+
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 top-0 z-0 flex justify-center pt-6 sm:pt-8"
+  >
+    <div class="flex items-center gap-3 sm:gap-4">
+      <span class="h-px w-12 bg-fvplata-300/30 sm:w-16"></span>
+      <span class="text-[0.7rem] leading-none text-fvplata-300/80 sm:text-xs">✦</span>
+      <span class="h-px w-12 bg-fvplata-300/30 sm:w-16"></span>
+    </div>
+  </div>
+
+  <div class="relative z-10 mx-auto flex max-w-7xl flex-col items-center px-4">
+    <h2
+      id="map-title"
+      class="mb-3 text-center font-primary text-3xl font-bold tracking-[0.18em] text-white sm:text-4xl md:text-5xl"
+    >
+      VENÍ A VISITARNOS
+    </h2>
+    <p
+      class="mb-12 max-w-xl text-center font-overpass text-xs font-medium tracking-[0.25em] text-balance text-fvplata-300 sm:mb-16 sm:text-sm"
+    >
+      Gestiona una cita previa por WhatsApp y vení a conocer nuestro showroom
+      con atención personalizada.
+    </p>
+    <div class="flex justify-center mb-16">
+      <Button
+        data-hero-cta="primary"
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        text="GESTIONAR CITA"
+        icon={WhatsAppIcon}
+        iconClass="size-6"
+        variant="plata"
+      />
+    </div>
+  </div>
+
+  <div class="relative w-full isolate mt-8 px-0">
+    
+    <div
+      class="w-full min-h-[540px] md:min-h-[640px] overflow-hidden border-y border-fvantracita-900 bg-fvantracita-950 shadow-[0_24px_60px_rgba(0,0,0,0.7)] z-0"
+    >
+      <div
+        id="fva-interactive-map"
+        class="h-full min-h-[540px] w-full md:min-h-[640px]"
+        data-latitude={VENUE_COORDINATES.latitude}
+        data-longitude={VENUE_COORDINATES.longitude}
+        data-zoom={VENUE_COORDINATES.zoom}
+        aria-label="Mapa interactivo con la ubicación exacta de FV Automotores en Adrogué"
+      >
+      </div>
+    </div>
+
+    <div class="absolute bottom-4 left-4 right-4 md:bottom-auto md:right-auto md:top-12 md:left-12 lg:left-24 z-[1005] w-[calc(100%-2rem)] sm:w-[360px] md:w-[380px]">
+      <div
+        class="group rounded-2xl border border-fvantracita-900/60 bg-fvantracita-950/75 p-6 shadow-2xl backdrop-blur-md transition-all duration-400 hover:border-fvantracita-700 hover:bg-fvantracita-950/90 relative"
+      >
+        <span aria-hidden="true" class="pointer-events-none absolute top-3 left-3 size-3 border-t border-l border-fvantracita-700 transition-colors duration-500 group-hover:border-white"></span>
+        <span aria-hidden="true" class="pointer-events-none absolute top-3 right-3 size-3 border-t border-r border-fvantracita-700 transition-colors duration-500 group-hover:border-white"></span>
+        <span aria-hidden="true" class="pointer-events-none absolute bottom-3 left-3 size-3 border-b border-l border-fvantracita-700 transition-colors duration-500 group-hover:border-white"></span>
+        <span aria-hidden="true" class="pointer-events-none absolute right-3 bottom-3 size-3 border-r border-b border-fvantracita-700 transition-colors duration-500 group-hover:border-white"></span>
+
+        <div class="mb-6">
+          <div class="mb-2 flex items-center gap-2.5 text-fvplata-300">
+            <LocationDotIcon class="size-4.5" />
+            <p
+              class="font-primary text-[0.65rem] font-bold tracking-[0.25em] uppercase text-white/50"
+            >
+              DIRECCIÓN
+            </p>
+          </div>
+          <h3
+            class="font-primary text-lg font-bold tracking-wide text-white uppercase"
+          >
+            Ceferino Ramírez 1079
+          </h3>
+          <p
+            class="font-overpass text-xs font-light leading-relaxed text-fvantracita-400 mt-0.5"
+          >
+            Adrogué, Zona Sur, Buenos Aires
+          </p>
+        </div>
+
+        <div
+          class="my-6 h-px bg-linear-to-r from-transparent via-fvantracita-800 to-transparent"
+        >
+        </div>
+
+        <div class="mb-6">
+          <div class="mb-2 flex items-center gap-2.5 text-fvplata-300">
+            <ClockIcon class="size-4.5" />
+            <p
+              class="font-primary text-[0.65rem] font-bold tracking-[0.25em] uppercase text-white/50"
+            >
+              HORARIOS
+            </p>
+          </div>
+          <p class="font-overpass text-sm font-medium text-white/80">
+            Lunes a Viernes
+          </p>
+          <p class="font-overpass text-xs font-light text-fvantracita-400">
+            08:00hs a 13:00hs y 15:00hs a 19:00hs
+          </p>
+          <p class="font-overpass text-sm font-medium text-white/80 mt-2">
+            Sábados
+          </p>
+          <p class="font-overpass text-xs font-light text-fvantracita-400">
+            08:00hs a 13:00hs
+          </p>
+        </div>
+
+        <div
+          class="my-6 h-px bg-linear-to-r from-transparent via-fvantracita-800 to-transparent"
+        >
+        </div>
+
+        <div class="mb-8">
+          <div class="mb-2 flex items-center gap-2.5 text-fvplata-300">
+            <CustomerServiceIcon class="size-4.5" />
+            <p
+              class="font-primary text-[0.65rem] font-bold tracking-[0.25em] uppercase text-white/50"
+            >
+              ATENCIÓN
+            </p>
+          </div>
+          <p
+            class="font-overpass text-xs font-light text-fvantracita-400 leading-relaxed"
+          >
+            Atendido personalmente por <strong class="font-bold text-white">Fabio y Juan Pablo</strong>. Podés coordinar
+            una cita previa por WhatsApp para congelar el valor de una unidad.
+          </p>
+        </div>
+
+        <Button
+          data-hero-cta="maps"
+          aria-label="Abrir la ubicación de FV Automotores en MAPS"
+          href="https://maps.app.goo.gl/47jRbT5xKREkKUKAA"
+          text="ABRIR EN MAPS"
+          icon={OpenIcon}
+          iconClass="size-6"
+          variant="plata"
+        />
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  :global(.fva-custom-marker) {
+    background: none !important;
+    border: none !important;
+  }
+
+  :global(.fva-custom-marker svg) {
+    width: 36px !important;
+    height: 36px !important;
+    color: #ffffff !important;
+    fill: currentColor !important;
+    filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.8));
+    cursor: pointer !important; 
+  }
+
+  :global(.leaflet-container) {
+    background: #000000 !important;
+    font-family: "Overpass", sans-serif !important;
+  }
+
+  :global(.leaflet-popup-content-wrapper) {
+    background: #0a0a0a !important;
+    border: 1px solid #1f1f1f !important;
+    border-radius: 0.75rem !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8) !important;
+    color: #ffffff !important;
+  }
+
+  :global(.leaflet-popup-tip) {
+    background: #0a0a0a !important;
+    border: 1px solid #1f1f1f !important;
+  }
+
+  :global(.leaflet-popup-content) {
+    margin: 1rem 1.25rem !important;
+    font-size: 0.75rem !important;
+    line-height: 1.6 !important;
+  }
+
+  :global(.leaflet-control-zoom a) {
+    background: #0a0a0a !important;
+    color: #9ca3af !important;
+    border-color: #1f1f1f !important;
+    border-radius: 0.375rem !important;
+    transition: all 0.2s ease;
+  }
+
+  :global(.leaflet-control-zoom a:hover) {
+    background: #1f1f1f !important;
+    color: #ffffff !important;
+  }
+
+  :global(.leaflet-control-attribution) {
+    background: rgba(0, 0, 0, 0.8) !important;
+    color: rgba(255, 255, 255, 0.2) !important;
+    font-size: 0.55rem !important;
+  }
+</style>
+
+<script>
+  const $ = (selector: string) => document.querySelector(selector);
+
+  let mapInstance: any = null;
+
+  function isAndroid() {
+    return /android/i.test(navigator.userAgent);
+  }
+
+  function updateNativeMapLink() {
+    const link = document.querySelector("[data-geo-href]") as HTMLAnchorElement | null;
+    if (!link || !isAndroid()) return;
+    link.href = link.dataset.geoHref ?? link.href;
+  }
+
+  function destroyCurrentMap() {
+    if (mapInstance) {
+      mapInstance.remove();
+      mapInstance = null;
+    }
+  }
+
+  async function initInteractiveMap() {
+    try {
+      destroyCurrentMap();
+
+      const container = $("#fva-interactive-map") as HTMLElement | null;
+      if (!container) return;
+
+      const lat = Number(container.dataset.latitude);
+      const lng = Number(container.dataset.longitude);
+      const zoom = Number(container.dataset.zoom);
+
+      if (!(window as any).L) {
+        await new Promise<void>((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+          script.integrity = "sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=";
+          script.crossOrigin = "";
+          script.onload = () => resolve();
+          script.onerror = () => reject(new Error("Fallo crítico al inicializar Leaflet Engine."));
+          document.head.appendChild(script);
+        });
+      }
+
+      const L = (window as any).L;
+
+      mapInstance = L.map(container, {
+        center: [lat, lng],
+        zoom,
+        zoomControl: true,
+        scrollWheelZoom: false,
+        attributionControl: true,
+      });
+
+      L.tileLayer(
+        "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+        {
+          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/attributions">CARTO</a>',
+          subdomains: "abcd",
+          maxZoom: 19,
+        },
+      ).addTo(mapInstance);
+
+      const markerTemplate = $("#fva-marker-template");
+      const nativeSvgHtml = markerTemplate ? markerTemplate.innerHTML : "";
+
+      const customIcon = L.divIcon({
+        html: nativeSvgHtml, 
+        className: "fva-custom-marker",
+        iconSize: [36, 36],
+        iconAnchor: [18, 36],
+        popupAnchor: [0, -38],
+      });
+
+      const popup = L.popup({
+        closeButton: false,
+        maxWidth: 240,
+      }).setContent(`
+        <strong style="color:#ffffff; font-family:'Primary',sans-serif; display:block; font-size:0.85rem; letter-spacing:0.05em; text-transform:uppercase;">Fabio Viola Automotores</strong>
+        <span style="color:#9ca3af; font-size:0.7rem; display:block; margin-top:2px;">Ceferino Ramírez — Adrogué</span>
+      `);
+
+      const marker = L.marker([lat, lng], { icon: customIcon }).addTo(mapInstance);
+
+      const mapsButton = $('[data-hero-cta="maps"]') as HTMLAnchorElement | null;
+      const mapsUrl = mapsButton ? mapsButton.getAttribute('href') : '#';
+
+      marker.on('click', (e: any) => {
+        if (e.originalEvent) e.originalEvent.stopPropagation();
+        if (mapsUrl && mapsUrl !== '#') {
+          window.open(mapsUrl, '_blank', 'noopener,noreferrer');
+        }
+      });
+
+      marker.bindPopup(popup).openPopup();
+
+      setTimeout(() => mapInstance?.invalidateSize(), 250);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  document.addEventListener("astro:page-load", () => {
+    updateNativeMapLink();
+    initInteractiveMap();
+  });
+
+  document.addEventListener("astro:before-preparation", destroyCurrentMap);
+</script>
