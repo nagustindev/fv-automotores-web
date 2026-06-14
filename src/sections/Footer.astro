@@ -32,10 +32,15 @@ const defaultMessage =
   "Hola! Vi la página web de FV Automotores y quería consultar por los vehículos en stock.";
 
 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
+
+const PLATFORMS = {
+  marketplace: "https://www.facebook.com/marketplace/profile/100012851116368",
+  mercadolibre: "https://vehiculos.mercadolibre.com.ar/_CustId_129556687",
+};
 ---
 
 <footer class="relative w-full overflow-hidden bg-primary">
-  <picture class="absolute inset-0 z-0" aria-hidden="true">
+  <picture class="absolute inset-0">
     <source type="image/webp" srcset="/footer_background.webp 1x" />
     <img
       src="/footer_background.webp"
@@ -73,13 +78,13 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
     >
       EL SHOWROOM ESTÁ ABIERTO PARA VOS
     </h2>
-    <p
+    <h3
       class="mt-4 max-w-2xl text-balance font-overpass text-base text-fvplata-300 sm:text-xl lg:text-2xl"
     >
       Vení a conocernos, tomá un café y mirá nuestro stock con total
       tranquilidad. Te ofrecemos un espacio transparente y sin presiones para
       elegir tu próximo vehículo.
-    </p>
+    </h3>
     <Button
       data-hero-cta="primary"
       href={whatsappUrl}
@@ -101,9 +106,9 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
     <div class="grid grid-cols-2 gap-8 md:grid-cols-4 lg:gap-12">
       
       <div>
-        <h3 class="mb-5 font-primary text-xs font-bold tracking-[0.2em] text-white uppercase opacity-90">
+        <h4 class="mb-5 font-primary text-xs font-bold tracking-[0.2em] text-white uppercase opacity-90">
           Navegación
-        </h3>
+        </h4>
         <ul class="space-y-3.5">
           {
             NAV_ITEMS.map((item) => (
@@ -129,13 +134,15 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
       </div>
 
       <div>
-        <h3 class="mb-5 font-primary text-xs font-bold tracking-[0.2em] text-white uppercase opacity-90">
-          Empresa
-        </h3>
+        <h4 class="mb-5 font-primary text-xs font-bold tracking-[0.2em] text-white uppercase opacity-90">
+          Stock Activo
+        </h4>
         <ul class="space-y-3.5">
           <li>
             <a
-              href="#"
+              href={PLATFORMS.mercadolibre}
+              target="_blank"
+              rel="noopener noreferrer"
               data-nav-link
               class="group relative inline-flex items-center font-overpass text-sm text-fvantracita-400 transition duration-300 hover:text-white focus-visible:text-white outline-none"
             >
@@ -145,13 +152,15 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
                   data-nav-underline
                   class="pointer-events-none absolute inset-x-0 -bottom-1 h-px bg-fvplata-300"
                 />
-                Legal
+                Mercado Libre
               </span>
             </a>
           </li>
           <li>
             <a
-              href="#"
+              href={PLATFORMS.marketplace}
+              target="_blank"
+              rel="noopener noreferrer"
               data-nav-link
               class="group relative inline-flex items-center font-overpass text-sm text-fvantracita-400 transition duration-300 hover:text-white focus-visible:text-white outline-none"
             >
@@ -161,7 +170,7 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
                   data-nav-underline
                   class="pointer-events-none absolute inset-x-0 -bottom-1 h-px bg-fvplata-300"
                 />
-                Política de Privacidad
+                FB Marketplace
               </span>
             </a>
           </li>
@@ -169,9 +178,9 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
       </div>
 
       <div>
-        <h3 class="mb-5 font-primary text-xs font-bold tracking-[0.2em] text-white uppercase opacity-90">
+        <h4 class="mb-5 font-primary text-xs font-bold tracking-[0.2em] text-white uppercase opacity-90">
           Contacto
-        </h3>
+        </h4>
         <ul class="space-y-3.5">
           <li>
             <a
@@ -213,9 +222,9 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
       </div>
 
       <div>
-        <h3 class="mb-5 font-primary text-xs font-bold tracking-[0.2em] text-white uppercase opacity-90">
+        <h4 class="mb-5 font-primary text-xs font-bold tracking-[0.2em] text-white uppercase opacity-90">
           Redes
-        </h3>
+        </h4>
         <div class="flex gap-4">
           <a
             href="https://www.instagram.com/fabioviolaautomotores/"
@@ -354,7 +363,6 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
   let cleanupListeners: (() => void) | null = null;
   const SPOTLIGHT_ACTIVATION_PADDING = 320;
 
-  // Lógica de subrayado cinemático con GSAP (Sincronizado idéntico al Navbar)
   function setupNavLinks() {
     const links = document.querySelectorAll("[data-nav-link]");
 
@@ -387,7 +395,6 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
     });
   }
 
-  // Lógica interactiva del reflector sobre el isotipo gigante de fondo
   function setupInteractiveLogo(): (() => void) | null {
     const container = document.getElementById("fv-interactive-logo");
     const revealedLayer = document.getElementById("fv-revealed-layer");
