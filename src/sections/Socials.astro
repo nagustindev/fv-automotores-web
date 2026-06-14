@@ -3,36 +3,16 @@
 import SocialGrid from "@/components/SocialGrid.astro";
 import InstagramIcon from "@/assets/svg/instagram.svg";
 import TiktokIcon from "@/assets/svg/tiktok.svg";
+import SectionHeader from "@/components/SectionHeader.astro";
 ---
 
-<section
-  id="social-section"
-  class="relative w-full overflow-hidden bg-[#1A1A1A] py-20 px-4"
->
-  <div
-    aria-hidden="true"
-    class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-fvplata-300/30 to-transparent"
-  >
-  </div>
-  <div
-    aria-hidden="true"
-    class="pointer-events-none absolute inset-x-0 top-0 z-0 h-72 bg-[radial-gradient(ellipse_at_top,var(--color-fvplata-300)_0%,transparent_70%)] opacity-[0.05]"
-  >
-  </div>
-
+<section id="social-section" class="relative w-full overflow-hidden py-20 px-4">
   <div class="relative z-10 flex w-full flex-col items-center">
-    <h2
-      id="inventory-title"
-      class="mb-3 text-center font-primary text-3xl font-bold tracking-[0.18em] text-white sm:text-4xl md:text-5xl"
-    >
-      NUESTRAS REDES
-    </h2>
-    <p
-      class="mb-12 max-w-xl text-center font-overpass text-xs font-medium tracking-[0.25em] text-balance text-fvplata-300 sm:mb-16 sm:text-sm"
-    >
-      Todo lo que necesitas saber de nuestro stock, novedades y eventos en un
-      solo lugar.
-    </p>
+    <SectionHeader
+      titleId="social-title"
+      title="NUESTRAS REDES"
+      subtitle="Todo lo que necesitas saber de nuestro stock, novedades y eventos en un solo lugar."
+    />
 
     <div
       class="mb-10 flex flex-col items-center gap-4 sm:mb-14 sm:flex-row sm:gap-8"

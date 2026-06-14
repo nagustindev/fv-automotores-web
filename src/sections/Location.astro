@@ -5,6 +5,7 @@ import OpenIcon from "@/assets/svg/open-icon.svg";
 import ClockIcon from "@/assets/svg/clock-icon.svg";
 import LocationDotIcon from "@/assets/svg/location-dot.svg";
 import CustomerServiceIcon from "@/assets/svg/customer-service.svg";
+import SectionHeader from "@/components/SectionHeader.astro";
 
 const VENUE_COORDINATES = {
   latitude: -34.80513069445179,
@@ -35,30 +36,12 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
     <LocationDotIcon />
   </div>
 
-  <div
-    aria-hidden="true"
-    class="pointer-events-none absolute inset-x-0 top-0 z-0 flex justify-center pt-6 sm:pt-8"
-  >
-    <div class="flex items-center gap-3 sm:gap-4">
-      <span class="h-px w-12 bg-fvplata-300/30 sm:w-16"></span>
-      <span class="text-[0.7rem] leading-none text-fvplata-300/80 sm:text-xs">✦</span>
-      <span class="h-px w-12 bg-fvplata-300/30 sm:w-16"></span>
-    </div>
-  </div>
-
   <div class="relative z-10 mx-auto flex max-w-7xl flex-col items-center px-4">
-    <h2
-      id="map-title"
-      class="mb-3 text-center font-primary text-3xl font-bold tracking-[0.18em] text-white sm:text-4xl md:text-5xl"
-    >
-      VENÍ A VISITARNOS
-    </h2>
-    <p
-      class="mb-12 max-w-xl text-center font-overpass text-xs font-medium tracking-[0.25em] text-balance text-fvplata-300 sm:mb-16 sm:text-sm"
-    >
-      Gestiona una cita previa por WhatsApp y vení a conocer nuestro showroom
-      con atención personalizada.
-    </p>
+    <SectionHeader
+      titleId="location-title"
+      title=" VENÍ A VISITARNOS "
+      subtitle="Gestiona una cita previa por WhatsApp y vení a conocer nuestro showroom con atención personalizada."
+    />
     <div class="flex justify-center mb-16">
       <Button
         data-hero-cta="primary"
@@ -74,37 +57,61 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
   </div>
 
   <div class="relative w-full isolate mt-8 px-0">
-    
-    <div class="relative w-full mb-8 px-4 lg:absolute lg:top-12 lg:left-12 xl:left-24 lg:z-[1005] lg:w-[360px] xl:w-[380px] lg:mb-0 lg:px-0">
+    <div
+      class="relative w-full mb-8 px-4 lg:absolute lg:top-12 lg:left-12 xl:left-24 lg:z-[1005] lg:w-[360px] xl:w-[380px] lg:mb-0 lg:px-0"
+    >
       <div
         class="group rounded-2xl border border-fvantracita-900/60 bg-fvantracita-950/75 p-6 shadow-2xl backdrop-blur-md transition-all duration-400 hover:border-fvantracita-700 hover:bg-fvantracita-950/90 relative"
       >
-        <span aria-hidden="true" class="pointer-events-none absolute top-3 left-3 size-3 border-t border-l border-fvantracita-700 transition-colors duration-500 group-hover:border-white"></span>
-        <span aria-hidden="true" class="pointer-events-none absolute top-3 right-3 size-3 border-t border-r border-fvantracita-700 transition-colors duration-500 group-hover:border-white"></span>
-        <span aria-hidden="true" class="pointer-events-none absolute bottom-3 left-3 size-3 border-b border-l border-fvantracita-700 transition-colors duration-500 group-hover:border-white"></span>
-        <span aria-hidden="true" class="pointer-events-none absolute right-3 bottom-3 size-3 border-r border-b border-fvantracita-700 transition-colors duration-500 group-hover:border-white"></span>
+        <span
+          aria-hidden="true"
+          class="pointer-events-none absolute top-3 left-3 size-3 border-t border-l border-fvantracita-700 transition-colors duration-500 group-hover:border-white"
+        ></span>
+        <span
+          aria-hidden="true"
+          class="pointer-events-none absolute top-3 right-3 size-3 border-t border-r border-fvantracita-700 transition-colors duration-500 group-hover:border-white"
+        ></span>
+        <span
+          aria-hidden="true"
+          class="pointer-events-none absolute bottom-3 left-3 size-3 border-b border-l border-fvantracita-700 transition-colors duration-500 group-hover:border-white"
+        ></span>
+        <span
+          aria-hidden="true"
+          class="pointer-events-none absolute right-3 bottom-3 size-3 border-r border-b border-fvantracita-700 transition-colors duration-500 group-hover:border-white"
+        ></span>
 
         <div class="mb-6">
           <div class="mb-2 flex items-center gap-2.5 text-fvplata-300">
             <LocationDotIcon class="size-4.5" />
-            <p class="font-primary text-[0.65rem] font-bold tracking-[0.25em] uppercase text-white/50">
+            <p
+              class="font-primary text-[0.65rem] font-bold tracking-[0.25em] uppercase text-white/50"
+            >
               DIRECCIÓN
             </p>
           </div>
-          <h3 class="font-primary text-lg font-bold tracking-wide text-white uppercase">
+          <h3
+            class="font-primary text-lg font-bold tracking-wide text-white uppercase"
+          >
             Ceferino Ramírez 1079
           </h3>
-          <p class="font-overpass text-xs font-light leading-relaxed text-fvantracita-400 mt-0.5">
+          <p
+            class="font-overpass text-xs font-light leading-relaxed text-fvantracita-400 mt-0.5"
+          >
             Adrogué, Zona Sur, Buenos Aires
           </p>
         </div>
 
-        <div class="my-6 h-px bg-linear-to-r from-transparent via-fvantracita-800 to-transparent"></div>
+        <div
+          class="my-6 h-px bg-linear-to-r from-transparent via-fvantracita-800 to-transparent"
+        >
+        </div>
 
         <div class="mb-6">
           <div class="mb-2 flex items-center gap-2.5 text-fvplata-300">
             <ClockIcon class="size-4.5" />
-            <p class="font-primary text-[0.65rem] font-bold tracking-[0.25em] uppercase text-white/50">
+            <p
+              class="font-primary text-[0.65rem] font-bold tracking-[0.25em] uppercase text-white/50"
+            >
               HORARIOS
             </p>
           </div>
@@ -122,17 +129,27 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
           </p>
         </div>
 
-        <div class="my-6 h-px bg-linear-to-r from-transparent via-fvantracita-800 to-transparent"></div>
+        <div
+          class="my-6 h-px bg-linear-to-r from-transparent via-fvantracita-800 to-transparent"
+        >
+        </div>
 
         <div class="mb-8">
           <div class="mb-2 flex items-center gap-2.5 text-fvplata-300">
             <CustomerServiceIcon class="size-4.5" />
-            <p class="font-primary text-[0.65rem] font-bold tracking-[0.25em] uppercase text-white/50">
+            <p
+              class="font-primary text-[0.65rem] font-bold tracking-[0.25em] uppercase text-white/50"
+            >
               ATENCIÓN
             </p>
           </div>
-          <p class="font-overpass text-xs font-light text-fvantracita-400 leading-relaxed">
-            Atendido personalmente por <strong class="font-bold text-white">Fabio y Juan Pablo</strong>. Podés coordinar una cita previa por WhatsApp para congelar el valor de una unidad.
+          <p
+            class="font-overpass text-xs font-light text-fvantracita-400 leading-relaxed"
+          >
+            Atendido personalmente por <strong class="font-bold text-white"
+              >Fabio y Juan Pablo</strong
+            >. Podés coordinar una cita previa por WhatsApp para congelar el
+            valor de una unidad.
           </p>
         </div>
 
@@ -161,7 +178,6 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
       >
       </div>
     </div>
-
   </div>
 </section>
 
@@ -177,7 +193,7 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
     color: #ffffff !important;
     fill: currentColor !important;
     filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.8));
-    cursor: pointer !important; 
+    cursor: pointer !important;
   }
 
   :global(.leaflet-container) {
@@ -234,7 +250,9 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
   }
 
   function updateNativeMapLink() {
-    const link = document.querySelector("[data-geo-href]") as HTMLAnchorElement | null;
+    const link = document.querySelector(
+      "[data-geo-href]",
+    ) as HTMLAnchorElement | null;
     if (!link || !isAndroid()) return;
     link.href = link.dataset.geoHref ?? link.href;
   }
@@ -261,10 +279,12 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
         await new Promise<void>((resolve, reject) => {
           const script = document.createElement("script");
           script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
-          script.integrity = "sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=";
+          script.integrity =
+            "sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=";
           script.crossOrigin = "";
           script.onload = () => resolve();
-          script.onerror = () => reject(new Error("Fallo crítico al inicializar Leaflet Engine."));
+          script.onerror = () =>
+            reject(new Error("Fallo crítico al inicializar Leaflet Engine."));
           document.head.appendChild(script);
         });
       }
@@ -282,7 +302,8 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
       L.tileLayer(
         "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
         {
-          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/attributions">CARTO</a>',
+          attribution:
+            '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/attributions">CARTO</a>',
           subdomains: "abcd",
           maxZoom: 19,
         },
@@ -292,7 +313,7 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
       const nativeSvgHtml = markerTemplate ? markerTemplate.innerHTML : "";
 
       const customIcon = L.divIcon({
-        html: nativeSvgHtml, 
+        html: nativeSvgHtml,
         className: "fva-custom-marker",
         iconSize: [36, 36],
         iconAnchor: [18, 36],
@@ -307,15 +328,19 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
         <span style="color:#9ca3af; font-size:0.7rem; display:block; margin-top:2px;">Ceferino Ramírez — Adrogué</span>
       `);
 
-      const marker = L.marker([lat, lng], { icon: customIcon }).addTo(mapInstance);
+      const marker = L.marker([lat, lng], { icon: customIcon }).addTo(
+        mapInstance,
+      );
 
-      const mapsButton = $('[data-hero-cta="maps"]') as HTMLAnchorElement | null;
-      const mapsUrl = mapsButton ? mapsButton.getAttribute('href') : '#';
+      const mapsButton = $(
+        '[data-hero-cta="maps"]',
+      ) as HTMLAnchorElement | null;
+      const mapsUrl = mapsButton ? mapsButton.getAttribute("href") : "#";
 
-      marker.on('click', (e: any) => {
+      marker.on("click", (e: any) => {
         if (e.originalEvent) e.originalEvent.stopPropagation();
-        if (mapsUrl && mapsUrl !== '#') {
-          window.open(mapsUrl, '_blank', 'noopener,noreferrer');
+        if (mapsUrl && mapsUrl !== "#") {
+          window.open(mapsUrl, "_blank", "noopener,noreferrer");
         }
       });
 

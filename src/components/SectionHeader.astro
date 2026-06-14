@@ -1,0 +1,66 @@
+---
+// src/components/SectionHeader.astro
+import SectionDivider from "./SectionDivider.astro";
+
+interface Props {
+  titleId: string;
+  title: string;
+  subtitle: string;
+  eyebrow?: string;
+  hideDivider?: boolean; // 🔥 Nueva propiedad opcional
+  class?: string;
+  titleClass?: string;
+  subtitleClass?: string;
+  eyebrowClass?: string;
+  dividerClass?: string;
+}
+
+const {
+  titleId,
+  title,
+  subtitle,
+  eyebrow,
+  hideDivider = false, 
+  class: containerClass = "mb-12 sm:mb-16",
+  titleClass = "mb-3",
+  subtitleClass = "max-w-xl text-xs font-medium tracking-[0.25em] text-fvplata-300 sm:text-sm",
+  eyebrowClass = "mb-2 text-xs font-semibold uppercase tracking-widest text-fvplata-300",
+  dividerClass = "mb-4",
+} = Astro.props;
+---
+
+<div class:list={["relative z-30 mx-auto flex w-full max-w-4xl flex-col items-center text-center px-4", containerClass]}>
+  
+  {
+    !hideDivider && (
+      <SectionDivider class={dividerClass} />
+    )
+  }
+
+  {
+    eyebrow && (
+      <span class:list={[eyebrowClass]}>
+        {eyebrow}
+      </span>
+    )
+  }
+
+  <h2
+    id={titleId}
+    class:list={[
+      "font-primary text-3xl font-bold tracking-[0.18em] text-white sm:text-4xl md:text-5xl uppercase text-balance",
+      titleClass,
+    ]}
+  >
+    {title}
+  </h2>
+
+  <p
+    class:list={[
+      "font-overpass text-balance text-fvantracita-400 mt-1",
+      subtitleClass,
+    ]}
+  >
+    {subtitle}
+  </p>
+</div>

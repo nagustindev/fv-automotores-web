@@ -1,55 +1,42 @@
 ---
-// src/components/FaqSection.astro
+import SectionHeader from "@/components/SectionHeader.astro";
+import TiktokIcon from "@/assets/svg/tiktok.svg";
+
 interface FaqItem {
   question: string;
   answer: string;
+  videoUrl?: string;
 }
 
 interface Props {
-  faqs?: readonly FaqItem[]; // Le agregamos el "?" para decirle a TS que puede ser opcional
+  faqs?: readonly FaqItem[];
 }
 
-// 🛡️ Clavamos un array vacío de respaldo por si viene undefined
 const { faqs = [] } = Astro.props;
 ---
 
-
 <section
   id="faq"
-  class="faq-section relative w-full overflow-hidden bg-primary px-4 py-24 sm:px-6 lg:py-32 border-t border-fvantracita-900"
+  class="faq-section relative w-full overflow-hidden bg-primary px-4 py-24 sm:px-6 lg:py-32 "
   aria-labelledby="faq-title"
   itemscope
   itemtype="https://schema.org/FAQPage"
 >
-  <div
-    aria-hidden="true"
-    class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-fvplata-300/20 to-transparent z-10"
-  >
-  </div>
-
-  <div
-    aria-hidden="true"
-    class="pointer-events-none absolute inset-x-0 top-0 -z-0 h-72 bg-[radial-gradient(ellipse_at_top,_var(--color-fvplata-300)_0%,_transparent_70%)] opacity-[0.03]"
-  >
-  </div>
-
   <div class="relative mx-auto flex max-w-4xl flex-col items-center">
-    
     <div class="text-center mb-16 space-y-2">
-      <span class="font-overpass text-xs font-semibold uppercase tracking-widest text-fvplata-300">
-        // Respuestas Inmediatas
-      </span>
-      <h2 id="faq-title" class="font-primary text-3xl font-black tracking-[0.18em] text-white sm:text-4xl md:text-5xl uppercase">
-        DESPEJÁ TUS DUDAS
-      </h2>
-      <p class="font-overpass text-sm font-light tracking-wide text-fvantracita-400 max-w-xl mx-auto text-balance">
-        Todo lo que necesitas saber sobre gestoría, formas de pago, permutas y revisión técnica de nuestros seleccionados.
-      </p>
+      <SectionHeader
+        titleId="faq-title"
+        eyebrow="RESPUESTAS INMEDIATAS"
+        title="DESPEJÁ TUS DUDAS"
+        subtitle="Todo lo que necesitas saber sobre gestoría, formas de pago, permutas y revisión técnica de nuestros seleccionados."
+      />
     </div>
 
-    <ul class="w-full divide-y divide-fvantracita-900/60 border-y border-fvantracita-900/60">
+    <ul
+      class="w-full divide-y divide-fvantracita-900/60 border-y border-fvantracita-900/60"
+    >
       {
-        faqs.map(({ question, answer }) => (
+        faqs.map(({ question, answer, videoUrl }) => (
           <li>
             <details
               class="faq-item group bg-fvantracita-950/20 transition duration-300 open:bg-fvantracita-950/40 hover:bg-fvantracita-950/30"
@@ -65,13 +52,13 @@ const { faqs = [] } = Astro.props;
                 >
                   {question}
                 </h3>
-                
+
                 <span
                   class="relative flex size-9 shrink-0 items-center justify-center rounded-xl border border-fvantracita-800 bg-black/40 text-fvantracita-400 transition duration-300 group-open:rotate-45 group-open:border-white group-open:bg-white group-open:text-black sm:size-10"
                   aria-hidden="true"
                 >
-                  <span class="absolute h-px w-3.5 bg-current"></span>
-                  <span class="absolute h-3.5 w-px bg-current"></span>
+                  <span class="absolute h-px w-3.5 bg-current" />
+                  <span class="absolute h-3.5 w-px bg-current" />
                 </span>
               </summary>
 
@@ -87,6 +74,22 @@ const { faqs = [] } = Astro.props;
                 >
                   {answer}
                 </p>
+
+               {videoUrl && (
+                  <a
+                    href={videoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-6 flex flex-col overflow-hidden rounded-xl border border-fvantracita-800 bg-fvantracita-950/50 transition-all hover:border-fvplata-300/50 hover:bg-fvantracita-900/50 group/video"
+                  >
+                    <div class="flex items-center justify-center py-8">
+                      <TiktokIcon class="size-16 text-fvplata-300/50 group-hover/video:text-white transition-colors duration-300" />
+                    </div>
+                    <div class="bg-fvantracita-950 px-4 py-3 text-[10px] text-fvantracita-400 uppercase tracking-widest text-center group-hover/video:text-white group-hover/video:bg-fvantracita-800 transition-colors">
+                      Ver Guía Visual en Nuestro TikTok 
+                    </div>
+                  </a>
+                )}
               </div>
             </details>
           </li>
@@ -106,14 +109,18 @@ const { faqs = [] } = Astro.props;
     position: relative;
   }
 
-  /* Línea reflectiva superior reactiva al abrir el acordeón */
   .faq-item::before {
-    content: '';
+    content: "";
     position: absolute;
     inset-inline: 0;
     top: -1px;
     height: 1px;
-    background-image: linear-gradient(to right, transparent, var(--color-fvplata-300), transparent);
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      var(--color-fvplata-300),
+      transparent
+    );
     transform: scaleX(0);
     transform-origin: center;
     transition: transform 300ms var(--faq-ease-out);
@@ -124,7 +131,6 @@ const { faqs = [] } = Astro.props;
     transform: scaleX(1);
   }
 
-  /* Motor nativo de expansión fluida (Tailwind 4 / CSS moderno) */
   .faq-item::details-content {
     block-size: 0;
     overflow: clip;
@@ -138,7 +144,6 @@ const { faqs = [] } = Astro.props;
     block-size: auto;
   }
 
-  /* Animación de emergencia de la prosa interna */
   .faq-answer-body {
     opacity: 0;
     transform: translateY(-4px);

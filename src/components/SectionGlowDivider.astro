@@ -1,0 +1,29 @@
+---
+interface Props {
+  glowOpacity?: string; 
+  lineOpacity?: string;
+}
+
+const { 
+  glowOpacity = "opacity-[0.05]", 
+  lineOpacity = "via-fvplata-300/30" 
+} = Astro.props;
+---
+
+<div
+  aria-hidden="true"
+  class:list={[
+    "pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent to-transparent z-10",
+    lineOpacity
+  ]}
+>
+</div>
+
+<div
+  aria-hidden="true"
+  class:list={[
+    "pointer-events-none absolute inset-x-0 top-0 z-0 h-72 bg-[radial-gradient(ellipse_at_top,var(--color-fvplata-300)_0%,transparent_70%)]",
+    glowOpacity
+  ]}
+>
+</div>

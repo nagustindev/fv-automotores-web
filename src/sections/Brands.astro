@@ -8,6 +8,7 @@ import PeugeotLogo from "@/assets/svg/car-brands/simple-icons_peugeot.svg";
 import NissanLogo from "@/assets/svg/car-brands/Vector.svg";
 import HondaLogo from "@/assets/svg/car-brands/Group.svg";
 import FiatLogo from "@/assets/svg/car-brands/Warstwa_x0020_1-5.svg";
+import SectionDivider from "@/components/SectionDivider.astro";
 
 const BRANDS = [
 	{ name: "Volkswagen", Logo: VolkswagenLogo, logoClass: "w-[90%] max-w-80" },
@@ -27,13 +28,7 @@ const BRANDS = [
 	class="relative w-full overflow-hidden px-4 py-20 sm:px-6 lg:py-28"
 	aria-labelledby="brands-title"
 >
-	<div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 z-0 flex justify-center pt-6 sm:pt-8">
-		<div class="flex items-center gap-3 sm:gap-4">
-			<span class="h-px w-12 bg-fvplata-300/30 sm:w-16"></span>
-			<span class="text-[0.7rem] leading-none text-fvplata-300/80 sm:text-xs">✦</span>
-			<span class="h-px w-12 bg-fvplata-300/30 sm:w-16"></span>
-		</div>
-	</div>
+	<SectionDivider />
 
 	<div class="relative z-10 mx-auto flex max-w-6xl flex-col items-center">
 

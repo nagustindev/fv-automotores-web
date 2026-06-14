@@ -1,26 +1,21 @@
 ---
-import StockBridge from "@/components/StockBridge.astro"
+import StockBridge from "@/components/StockBridge.astro";
+import SectionHeader from "@/components/SectionHeader.astro";
+import SectionGlowDivider from "@/components/SectionGlowDivider.astro";
 ---
 
-<section class="relative w-full overflow-hidden px-4 pt-20 pb-0 sm:px-6 lg:pt-28 lg:pb-0" aria-labelledby="inventory-title">
-  <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-fvplata-300/30 to-transparent"></div>
-  <div
-    aria-hidden="true"
-    class="pointer-events-none absolute inset-x-0 top-0 z-0 h-72 bg-[radial-gradient(ellipse_at_top,var(--color-fvplata-300)_0%,transparent_70%)] opacity-[0.05]"
-  >
-  </div>
+<section
+  class="relative w-full overflow-hidden px-4 pt-20 pb-0 sm:px-6 lg:pt-28 lg:pb-0"
+  aria-labelledby="inventory-title"
+>
+  <SectionGlowDivider />
   <div class="relative mx-auto flex max-w-6xl flex-col items-center">
-    <h2
-      id="inventory-title"
-      class="mb-3 text-center font-primary text-3xl font-bold tracking-[0.18em] text-white sm:text-4xl md:text-5xl"
-    >
-      SHOWROOM ONLINE
-    </h2>
-    <p
-      class="mb-12 max-w-xl text-center font-overpass text-xs font-medium tracking-[0.25em] text-balance text-fvplata-300 sm:mb-16 sm:text-sm"
-    >
-      Seleccioná uno de nuestros canales oficiales para ver las unidades disponibles.
-    </p>
+    <SectionHeader
+      hideDivider={true}
+      titleId="inventory-title"
+      title="SHOWROOM ONLINE"
+      subtitle="Seleccioná uno de nuestros canales oficiales para ver las unidades disponibles."
+    />
   </div>
   <StockBridge />
 </section>

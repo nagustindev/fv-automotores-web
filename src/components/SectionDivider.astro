@@ -1,0 +1,21 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div
+  aria-hidden="true"
+  class:list={[
+    "pointer-events-none relative flex w-full justify-center py-6 sm:py-8 z-10",
+    className,
+  ]}
+>
+  <div class="flex items-center gap-3 sm:gap-4">
+    <span class="h-px w-12 bg-fvplata-300/30 sm:w-16"></span>
+    <span class="text-[0.7rem] leading-none text-fvplata-300/80 sm:text-xs">✦</span>
+    <span class="h-px w-12 bg-fvplata-300/30 sm:w-16"></span>
+  </div>
+</div>

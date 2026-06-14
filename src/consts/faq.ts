@@ -1,27 +1,31 @@
 export interface FaqItem {
   question: string
   answer: string
+  videoUrl?: string
 }
 
 export const HOME_FAQS: readonly FaqItem[] = [
   {
-    question: '¿Qué documentación necesito para retirar un vehículo?',
+    question: '¿Cómo saber en qué registro de Zona Sur está radicado tu auto?',
     answer:
-      'Para tu total tranquilidad, todas nuestras unidades se entregan transferidas obligatoriamente. Solo necesitás presentar tu DNI vigente y nosotros nos encargamos de la gestión completa a través de nuestra gestoría oficial.',
+      'Para conocer la radicación exacta de un vehículo por patente en Adrogué o cualquier localidad de Zona Sur, debes ingresar a la web oficial de la DNRPA en la sección "Consultas - Radicación por patentes". Colocando el dominio, el sistema te indicará el número de Registro Seccional correspondiente, su dirección física y datos de contacto.',
+      videoUrl: 'https://www.tiktok.com/@fabioviolaautomotores/video/7626732798442851604?is_from_webapp=1&sender_device=pc' 
   },
   {
-    question: '¿Toman autos usados como parte de pago?',
+    question: '¿Qué informe tengo que sacar al comprar un auto usado en Zona Sur?',
     answer:
-      'Sí, tomamos vehículos usados seleccionados y utilitarios en parte de pago (permutas). Podés coordinar una visita a nuestro showroom en Adrogué para realizar una tasación física y justa de tu unidad en el acto.',
+      'Al comprar un auto usado en Adrogué o cualquier localidad de Zona Sur, es fundamental sacar un Informe Histórico de Titularidad y de Estado de Dominio para verificar que el vehículo no tenga problemas legales. Además, es recomendable solicitar un informe de infracciones de tránsito para asegurarse de que no existan multas pendientes. También es importante revisar la documentación del vehículo, como la cédula verde, el título de propiedad y el último comprobante de pago del impuesto automotor. En FV Automotores, te asesoramos en cada paso para que tu compra sea segura y sin sorpresas.',
   },
   {
-    question: '¿Cuáles son las formas de pago aceptadas?',
+    question: '¿Cómo solicitar un Informe de Dominio para transferir en Adrogué?',
     answer:
-      'Aceptamos operaciones en efectivo (tanto pesos como dólares) y transferencias bancarias directas. También realizamos operaciones combinadas entregando tu usado de menor valor.',
+      'El Informe de Dominio es clave para verificar que el auto no tenga prendas, embargos o inhibiciones antes de comprarlo. Se puede tramitar de forma 100% digital en la web de la DNRPA abonando los aranceles correspondientes. El proceso es sencillo: te dirigis hacia "Turnos e inicio de Trámites", luego a "Informes Online". Ingresás tu CUIL, el número de patente y seleccionas el trámite. Tenes dos opciones: Informe de Estado de Dominio o Informe Histórico de Titularidad y de Estado de Dominio. Nosotros te recomendamos que saques el Informe Histórico de Titularidad y de Estado de Dominio, la diferencia de costo es mínima y te permite más información. Abonas, y en aproximadamente 44, 48 horas recibís el informe completo en tu correo electrónico.',
+      videoUrl: 'https://www.tiktok.com/@fabioviolaautomotores/video/7616038069929561365?is_from_webapp=1&sender_device=pc' 
   },
   {
-    question: '¿Es obligatorio coordinar una cita previa antes de ir?',
+    question: '¿Cómo sacar el informe de infracciones de tránsito en Buenos Aires?',
     answer:
-      'Recomendamos fuertemente gestionar una cita previa mediante nuestro canal de WhatsApp. De esta forma, nos aseguramos de que Fabio o Juan Pablo estén disponibles en el galpón para darte un asesoramiento personalizado y sin apuros.',
+      'El informe ya no se puede solicitar a través del portal de la DNRPA. Para verificar las multas pendientes, debes solicitar un informe a través de la página SUATS (Sistema Unificado de Administraciones Tributarias Subnacionales). Ingresas, elegís la opción inicial (con un costo de $7000 pesos aproximadamente), y luego seguis los pasos que te proporciona el sistema. Es importante destacar que las infracciones les corresponden al vehículo, no a la persona, por lo que el informe se realiza por patente.',
+    videoUrl: 'https://www.tiktok.com/@fabioviolaautomotores/video/7611642180158917909?is_from_webapp=1&sender_device=pc' 
   },
 ] as const
