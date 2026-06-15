@@ -3,12 +3,34 @@ import { TESTIMONIOS } from "@/consts/testimonials";
 import AboutLayerLayering from "@/components/AboutLayerLayering.astro";
 import SectionHeader from "@/components/SectionHeader.astro";
 import OpenIcon from "@/assets/svg/open-icon.svg";
+import SectionGlowDivider from "@/components/SectionGlowDivider.astro";
 ---
 
 <section id="nosotros" class="relative w-full bg-primary py-24 sm:py-32 overflow-hidden">
   <AboutLayerLayering />
 
-  
+  <SectionGlowDivider />
+
+  <div class="relative z-10 mb-20">
+    <SectionHeader
+      titleId="presentacion-title"
+      title="NUESTRO EQUIPO"
+      subtitle="Detrás de cada unidad, hay un compromiso familiar que se mantiene intacto desde 2001. En nuestro showroom, no solo vas a encontrar tu próximo vehículo, sino el asesoramiento honesto que nos define."
+    />
+
+    
+    
+    <!-- Imagen a ancho completo -->
+    <div class="w-full mt-10">
+      <div class="relative w-[100vw] left-[50%] right-[50%] -ml-[50vw] -mr-[50vw]">
+        <img 
+          src="/prueba-gemini-about.webp" 
+          alt="Fabio y Juan Pablo en el showroom de FV Automotores" 
+          class="w-full h-auto object-cover transition-all duration-700 hover:scale-105" 
+        />
+      </div>
+    </div>
+  </div>
 
   <div class="relative z-10">
     <SectionHeader
@@ -30,14 +52,13 @@ import OpenIcon from "@/assets/svg/open-icon.svg";
                   <img 
                     src={t.image} 
                     alt={`Entrega de vehículo - ${t.name}`} 
-                    class="h-full w-full object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-105" 
+                    class="h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105" 
                   />
                   <div class="absolute inset-0 bg-linear-to-t from-fvantracita-950/90 to-transparent"></div>
                 </div>
               )}
               
               <div class="p-8 transition-colors duration-500 group-hover:bg-fvantracita-900/20">
-              
                 <div class="flex gap-1 mb-5">
                   {[...Array(5)].map(() => (
                     <span class="text-fvplata-300 text-sm">★</span>
@@ -50,7 +71,6 @@ import OpenIcon from "@/assets/svg/open-icon.svg";
                 
                 <div class="w-full h-px bg-fvantracita-800 mb-6 transition-colors duration-500 group-hover:bg-fvplata-300/30"></div>
                 
-                <!-- Contenedor ajustado a columna -->
                 <div class="flex flex-col gap-2">
                   <h4 class="font-primary text-sm font-bold text-white uppercase tracking-widest transition-colors duration-500 group-hover:text-fvplata-300">
                     {t.name}
