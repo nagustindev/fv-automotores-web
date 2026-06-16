@@ -148,8 +148,22 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(d
           >
             Atendido personalmente por <strong class="font-bold text-white"
               >Fabio y Juan Pablo</strong
-            >. Podés coordinar una cita previa por WhatsApp para congelar el
-            valor de una unidad.
+            >. Podés coordinar una cita previa al número <a
+              href={whatsappNumber}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-nav-link
+              class="group relative inline-flex items-center font-overpass text-sm text-fvantracita-400 transition duration-300 hover:text-white focus-visible:text-white outline-none"
+            >
+              <span class="relative inline-block">
+                <span
+                  aria-hidden="true"
+                  data-nav-underline
+                  class="pointer-events-none absolute inset-x-0 -bottom-1 h-px bg-fvplata-300"
+                ></span>
+                + {whatsappNumber}
+              </span>
+            </a>.
           </p>
         </div>
 
