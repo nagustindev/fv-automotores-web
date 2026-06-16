@@ -28,4 +28,14 @@ export const HOME_FAQS: readonly FaqItem[] = [
       'El informe ya no se puede solicitar a través del portal de la DNRPA. Para verificar las multas pendientes, debes solicitar un informe a través de la página SUATS (Sistema Unificado de Administraciones Tributarias Subnacionales). Ingresas, elegís la opción inicial (con un costo de $7000 pesos aproximadamente), y luego seguis los pasos que te proporciona el sistema. Es importante destacar que las infracciones les corresponden al vehículo, no a la persona, por lo que el informe se realiza por patente.',
     videoUrl: 'https://www.tiktok.com/@fabioviolaautomotores/video/7611642180158917909?is_from_webapp=1&sender_device=pc' 
   },
+  {
+    question: '¿Toman permutas?',
+    answer:
+      'Sí, en FV Automotores aceptamos permutas. Si estás interesado en realizar una permuta, te invitamos a contactarnos para evaluar tu vehículo y discutir las opciones disponibles.',
+  },
+  {
+    question: '¿Toman consignaciones?',
+    answer:
+      'Sí, en FV Automotores aceptamos consignaciones. Si estás interesado en realizar una consignación, te invitamos a contactarnos para evaluar tu vehículo y discutir las opciones disponibles.',
+  }
 ] as const

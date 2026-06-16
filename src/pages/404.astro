@@ -127,7 +127,6 @@ const errorDescription =
   <Footer />
 </Layout>
 <script>
-  import { set } from "astro:schema";
 import { gsap } from "gsap";
 
   function setupHeroAnimation() {
@@ -215,13 +214,11 @@ function setupBackButtonInteraction() {
 
   const arrowIcon = backButton.querySelector('svg');
 
-  // Centramos el eje de transformación para que el giro sea natural desde el medio
   gsap.set(backButton, { transformOrigin: "center center" });
 
   backButton.addEventListener("pointerenter", () => {
     gsap.killTweensOf([backButton, arrowIcon]);
 
-    // Clona el comportamiento de La Velada: sube 4px y se inclina -1.5 grados a la izquierda
     gsap.to(backButton, {
       y: -4,
       rotation: -1.5,
@@ -229,7 +226,6 @@ function setupBackButtonInteraction() {
       ease: "power2.out",
     });
 
-    // La flecha hace el sutil amague de retroceso hacia la izquierda
     if (arrowIcon) {
       gsap.to(arrowIcon, {
         x: -4,
@@ -242,7 +238,6 @@ function setupBackButtonInteraction() {
   backButton.addEventListener("pointerleave", () => {
     gsap.killTweensOf([backButton, arrowIcon]);
 
-    // Resetea el botón a su posición plana e inicial
     gsap.to(backButton, {
       y: 0,
       rotation: 0,
@@ -267,17 +262,14 @@ function setupStockButtonInteraction() {
   const arrowIcon = stockButton.querySelector('svg');
 
   stockButton.addEventListener("pointerenter", () => {
-    // Matamos cualquier animación previa para evitar tirones
     gsap.killTweensOf([stockButton, arrowIcon]);
 
-    // El cuerpo del botón sube levemente (simula el -translate-y-0.5 de La Velada)
     gsap.to(stockButton, {
       y: -2,
       duration: 0.25,
       ease: "power2.out"
     });
 
-    // La flecha empuja hacia abajo (simula el group-hover:translate-y-0.5)
     if (arrowIcon) {
       gsap.to(arrowIcon, {
         y: 4,
@@ -290,7 +282,6 @@ function setupStockButtonInteraction() {
   stockButton.addEventListener("pointerleave", () => {
     gsap.killTweensOf([stockButton, arrowIcon]);
 
-    // Ambos elementos regresan a su punto de origen de forma limpia
     gsap.to(stockButton, {
       y: 0,
       duration: 0.25,

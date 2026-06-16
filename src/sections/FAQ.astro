@@ -39,7 +39,7 @@ const { faqs = [] } = Astro.props;
         faqs.map(({ question, answer, videoUrl }) => (
           <li>
             <details
-              class="faq-item group bg-fvantracita-950/20 transition duration-300 open:bg-fvantracita-950/40 hover:bg-fvantracita-950/30"
+              class="faq-item group bg-fvantracita-950/20 border-x border-transparent transition-all duration-300 ease-out open:bg-fvantracita-950/40 hover:bg-fvantracita-900/30 hover:border-fvantracita-800/40"
               name="faq"
               itemprop="mainEntity"
               itemscope
@@ -48,13 +48,13 @@ const { faqs = [] } = Astro.props;
               <summary class="flex min-h-20 cursor-pointer list-none items-center justify-between gap-5 px-4 py-5 outline-none marker:hidden focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-black sm:min-h-24 sm:px-6 sm:py-6 [&::-webkit-details-marker]:hidden">
                 <h3
                   itemprop="name"
-                  class="font-primary text-sm sm:text-base leading-snug font-bold tracking-wider text-balance text-white/90 transition duration-300 group-open:text-white"
+                  class="font-primary text-sm sm:text-base leading-snug font-bold tracking-wider text-balance text-white/70 transition duration-300 group-hover:text-white group-open:text-white"
                 >
                   {question}
                 </h3>
 
                 <span
-                  class="relative flex size-9 shrink-0 items-center justify-center rounded-xl border border-fvantracita-800 bg-black/40 text-fvantracita-400 transition duration-300 group-open:rotate-45 group-open:border-white group-open:bg-white group-open:text-black sm:size-10"
+                  class="relative flex size-9 shrink-0 items-center justify-center rounded-xl border border-fvantracita-800 bg-black/40 text-fvantracita-400 transition-all duration-300 group-hover:border-fvantracita-700 group-hover:text-fvantracita-200 group-open:rotate-45 group-open:border-white group-open:bg-white group-open:text-black sm:size-10"
                   aria-hidden="true"
                 >
                   <span class="absolute h-px w-3.5 bg-current" />
@@ -123,11 +123,12 @@ const { faqs = [] } = Astro.props;
     );
     transform: scaleX(0);
     transform-origin: center;
-    transition: transform 300ms var(--faq-ease-out);
+    transition: transform 350ms var(--faq-ease-out);
     z-index: 10;
   }
 
-  .faq-item[open]::before {
+  .faq-item[open]::before,
+  .faq-item:hover::before {
     transform: scaleX(1);
   }
 
