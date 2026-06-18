@@ -1,0 +1,326 @@
+---
+const HITOS = [
+  {
+    year: "2001",
+    title: "Los inicios",
+    description:
+      "Arrancamos en la Avenida San Martín con muy poco, pero con una idea clara: seleccionar cada auto como si fuera para nosotros. Fue el primer paso de un camino basado en la palabra, el esfuerzo y la transparencia total.",
+    img: "/historiafv-2001.webp",
+  },
+  {
+    year: "2002",
+    title: "Construyendo Confianza",
+    description:
+      "Ya instalados, la rutina se volvió nuestra mejor escuela. Con los mismos valores del primer día, nos enfocamos en que cada cliente se llevara la tranquilidad de un trato directo y con honestidad absoluta.",
+    img: "/historiafv-2002.webp",
+  },
+  {
+    year: "2013",
+    title: "Años en Pres. Quintana",
+    description:
+      "Nos establecimos en Pres. Quintana, en Adrogué. Fue una etapa donde nos enfocamos de lleno en los vehículos de trabajo y vehículos particulares, siempre manteniendo ese rigor técnico que nos caracteriza para que cada camioneta o auto esté listo para salir a la calle.",
+    img: "/historiafv-2013.webp",
+  },
+  {
+    year: "2018",
+    title: "Crecimiento constante",
+    description:
+      "Seguíamos atendiendo desde Quintana por un largo tiempo, donde vimos crecer tanto el stock como la cantidad de clientes que nos elegían. Pese al volumen, nunca dejamos de seleccionar personalmente cada unidad, manteniendo la esencia de siempre.",
+    img: "/historiafv-2018.webp",
+  },
+  {
+    year: "2025",
+    title: "Avenida Frías",
+    description:
+      "Antes de establecer nuestra sede definitiva, pasamos por la Avenida Frías. Fue una etapa clave que nos permitió profesionalizar nuestra atención y afianzar el vínculo con nuestros clientes en un espacio propio.",
+    img: "/historiafv-2025.webp",
+  },
+  {
+    year: "Presente",
+    title: "Showroom Adrogué",
+    description:
+      "Hoy nos encontrás en nuestra casa actual sobre Ceferino Ramírez. Un lugar diseñado para que cada visita sea cómoda, transparente y con el sello de siempre: Fabio y Juampi al frente.",
+    img: "/historiafv-presente.webp",
+  },
+] as const;
+---
+
+<div class="relative z-10 my-16 w-full overflow-hidden py-6">
+  <div class="w-full">
+    <div
+      data-hitos-wrapper
+      class="relative w-full overflow-hidden select-none lg:cursor-none! cursor-grab active:cursor-grabbing pl-[max(1.5rem,calc((100vw-80rem)/2))]"
+    >
+      <div
+        data-hitos-slider
+        class="flex gap-6 sm:gap-8 w-max will-change-transform pr-[max(1.5rem,calc((100vw-80rem)/2))] lg:cursor-none!"
+      >
+        {
+          HITOS.map((hito, index) => (
+            <div
+              data-hito-card
+              data-index={index}
+              class="w-[80vw] sm:w-[50vw] lg:w-[42vw] shrink-0 flex flex-col space-y-6 group transition-all duration-500 data-[inactive=true]:opacity-30 hover:!opacity-100"
+            >
+              <div class="aspect-16/10 w-full overflow-hidden rounded-3xl border border-fvplata-300/30 bg-black transition duration-500 hover:border-fvplata-100/60 shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative">
+                <img
+                  src={hito.img}
+                  alt={`${hito.title} - FV Automotores`}
+                  class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+
+                <div class="absolute bottom-4 left-6 pointer-events-none">
+                  <span class="font-primary text-xl font-bold tracking-[0.22em] text-white">
+                    {hito.year}
+                  </span>
+                </div>
+              </div>
+
+              <div class="space-y-2 text-left px-4">
+                <h3 class="font-primary text-sm font-bold tracking-wider text-white sm:text-base group-hover:text-fvplata-300 transition-colors duration-500">
+                  {hito.title}
+                </h3>
+                <p class="max-w-xl font-overpass text-xs font-light leading-relaxed text-fvantracita-400 sm:text-sm">
+                  {hito.description}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <span
+        class="pointer-events-none absolute left-0 top-0 z-30 hidden size-20 items-center justify-center rounded-full border border-fvplata-300/40 bg-black/40 text-sm font-semibold tracking-[0.2em] text-white opacity-0 scale-90 backdrop-blur-md lg:flex transition-colors duration-300"
+        data-timeline-cursor
+      >
+        &lt;&gt;
+      </span>
+    </div>
+
+    <div
+      class="mt-6 flex items-center justify-start gap-3 z-20 relative pl-[max(1.5rem,calc((100vw-80rem)/2))]"
+    >
+      {
+        HITOS.map((_, index) => (
+          <button
+            type="button"
+            data-hito-dot={index}
+            class="size-1.5 rounded-full bg-fvantracita-700 transition-all duration-300 hover:bg-fvplata-300 data-[active=true]:bg-white data-[active=true]:scale-125 cursor-pointer lg:cursor-none!"
+            aria-label={`Ir al hito ${index + 1}`}
+          />
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import { Draggable } from "gsap/Draggable";
+
+  gsap.registerPlugin(Draggable);
+
+  function setupHitosSlider() {
+    const wrapper = document.querySelector("[data-hitos-wrapper]");
+    const slider = document.querySelector("[data-hitos-slider]");
+    const dots = document.querySelectorAll("[data-hito-dot]");
+    const cards = document.querySelectorAll("[data-hito-card]");
+    const customCursor = document.querySelector("[data-timeline-cursor]");
+
+    if (
+      !wrapper ||
+      !slider ||
+      dots.length === 0 ||
+      cards.length === 0 ||
+      !customCursor
+    )
+      return;
+
+    let currentActiveIndex = 0;
+    dots.forEach((d) => d.removeAttribute("data-active"));
+    dots[0].setAttribute("data-active", "true");
+
+    const getSliderMetrics = () => {
+      const wrapperWidth = (wrapper as HTMLElement).offsetWidth;
+      const sliderWidth = (slider as HTMLElement).offsetWidth;
+      const firstCard = cards[0] as HTMLElement;
+      const cardWidth = firstCard.offsetWidth;
+
+      const computedGap = parseFloat(window.getComputedStyle(slider).gap) || 24;
+      const stepWidth = cardWidth + computedGap;
+
+      const startPadding =
+        parseFloat(window.getComputedStyle(wrapper).paddingLeft) || 0;
+
+      const minX = Math.min(0, wrapperWidth - sliderWidth);
+
+      return { minX, stepWidth, startPadding };
+    };
+
+    const dragInstance = Draggable.create(slider, {
+      type: "x",
+      edgeResistance: 0.85,
+      bounds: { minX: getSliderMetrics().minX, maxX: 0 },
+      inertia: true,
+      throwProps: true,
+      onDrag: handleSliderUpdate,
+      onThrowUpdate: handleSliderUpdate,
+      snap: {
+        x: function (endValue) {
+          const { stepWidth } = getSliderMetrics();
+          return Math.round(endValue / stepWidth) * stepWidth;
+        },
+      },
+    })[0];
+
+    function handleSliderUpdate() {
+      const xPos = gsap.getProperty(slider, "x") as number;
+      const { stepWidth } = getSliderMetrics();
+
+      currentActiveIndex = Math.min(
+        cards.length - 1,
+        Math.max(0, Math.round(Math.abs(xPos) / stepWidth)),
+      );
+
+      dots.forEach((dot, index) => {
+        if (index === currentActiveIndex) {
+          dot.setAttribute("data-active", "true");
+        } else {
+          dot.removeAttribute("data-active");
+        }
+      });
+
+      cards.forEach((card, index) => {
+        if (index === currentActiveIndex) {
+          card.removeAttribute("data-inactive");
+        } else {
+          card.setAttribute("data-inactive", "true");
+        }
+      });
+    }
+
+    handleSliderUpdate();
+
+    let rect = wrapper.getBoundingClientRect();
+
+    const xTo = gsap.quickTo(customCursor, "x", {
+      duration: 0.2,
+      ease: "power3.out",
+    });
+    const yTo = gsap.quickTo(customCursor, "y", {
+      duration: 0.2,
+      ease: "power3.out",
+    });
+
+    gsap.set(customCursor, {
+      xPercent: -50,
+      yPercent: -50,
+      opacity: 0,
+      scale: 0.9,
+      transformOrigin: "center center",
+    });
+
+    wrapper.addEventListener("pointerenter", (e) => {
+      const pe = e as PointerEvent;
+      rect = wrapper.getBoundingClientRect();
+
+      gsap.set(customCursor, {
+        x: pe.clientX - rect.left,
+        y: pe.clientY - rect.top,
+      });
+
+      gsap.to(customCursor, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.25,
+        ease: "power2.out",
+      });
+    });
+
+    wrapper.addEventListener("pointermove", (e) => {
+      const pe = e as PointerEvent;
+      xTo(pe.clientX - rect.left);
+      yTo(pe.clientY - rect.top);
+
+      if (pe.target instanceof HTMLElement) {
+        const targetCard = pe.target.closest("[data-hito-card]");
+        if (targetCard) {
+          const cardIndex = parseInt(
+            targetCard.getAttribute("data-index") || "0",
+          );
+
+          if (cardIndex > currentActiveIndex) {
+            customCursor.textContent = ">";
+          } else if (cardIndex < currentActiveIndex) {
+            customCursor.textContent = "<";
+          } else {
+            customCursor.textContent = "<>";
+          }
+        }
+      }
+    });
+
+    wrapper.addEventListener("pointerleave", () => {
+      gsap.to(customCursor, {
+        opacity: 0,
+        scale: 0.9,
+        duration: 0.25,
+        ease: "power2.inOut",
+      });
+    });
+
+    cards.forEach((card, index) => {
+      card.addEventListener("click", () => {
+        if (dragInstance.isDragging || dragInstance.isThrowing) return;
+
+        const { minX, stepWidth } = getSliderMetrics();
+        const targetX = Math.max(minX, -(index * stepWidth));
+
+        gsap.to(slider, {
+          x: targetX,
+          duration: 0.6,
+          ease: "power2.out",
+          onComplete: () => {
+            handleSliderUpdate();
+            if (index === currentActiveIndex) {
+              customCursor.textContent = "<>";
+            }
+          },
+        });
+      });
+    });
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        const { minX, stepWidth } = getSliderMetrics();
+        const targetX = Math.max(minX, -(index * stepWidth));
+
+        gsap.to(slider, {
+          x: targetX,
+          duration: 0.6,
+          ease: "power2.out",
+          onComplete: handleSliderUpdate,
+        });
+      });
+    });
+
+    window.addEventListener(
+      "resize",
+      () => {
+        if (dragInstance) {
+          const { minX } = getSliderMetrics();
+          dragInstance.applyBounds({ minX: minX, maxX: 0 });
+        }
+        rect = wrapper.getBoundingClientRect();
+        handleSliderUpdate();
+      },
+      { passive: true },
+    );
+  }
+
+  document.addEventListener("astro:page-load", setupHitosSlider);
+</script>

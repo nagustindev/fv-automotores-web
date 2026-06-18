@@ -1,0 +1,68 @@
+---
+import { TESTIMONIOS } from "@/consts/testimonials";
+import OpenIcon from "@/assets/svg/open-icon.svg";
+import SectionHeader from "@/components/SectionHeader.astro";
+---
+
+<div class="relative z-10 mt-32">
+  <SectionHeader
+    titleId="testimonio-title"
+    title="LO QUE DICEN DE NOSOTROS"
+    subtitle="25 años de trayectoria demostrados en cada entrega. Esto es lo que opinan quienes ya confían en Fabio y Juan Pablo."
+  />
+</div>
+
+<div class="mx-auto max-w-7xl mt-16 px-4">
+  <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+    {
+      TESTIMONIOS.map((t) => (
+        <div class="group break-inside-avoid rounded-3xl border border-fvantracita-900 bg-fvantracita-950/40 p-1 transition-all duration-500 hover:border-fvplata-300/30 hover:scale-[1.02]">
+          <div class="flex flex-col rounded-[1.25rem] bg-fvantracita-950/60 overflow-hidden backdrop-blur-sm border border-white/5">
+            {t.image && (
+              <div class="relative h-64 w-full overflow-hidden">
+                <img
+                  src={t.image}
+                  alt={`Entrega de vehículo - ${t.name}`}
+                  class="h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
+                />
+                <div class="absolute inset-0 bg-linear-to-t from-fvantracita-950/90 to-transparent" />
+              </div>
+            )}
+
+            <div class="p-8 transition-colors duration-500 group-hover:bg-fvantracita-900/20">
+              <div class="flex gap-1 mb-5">
+                {[...Array(5)].map(() => (
+                  <span class="text-fvplata-300 text-sm">★</span>
+                ))}
+              </div>
+
+              <p class="font-overpass text-sm leading-relaxed text-fvantracita-300 mb-8 italic">
+                "{t.comment}"
+              </p>
+
+              <div class="w-full h-px bg-fvantracita-800 mb-6 transition-colors duration-500 group-hover:bg-fvplata-300/30" />
+
+              <div class="flex flex-col gap-2">
+                <h4 class="font-primary text-sm font-bold text-white uppercase tracking-widest transition-colors duration-500 group-hover:text-fvplata-300">
+                  {t.name}
+                </h4>
+
+                {t.url && (
+                  <a
+                    href={t.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-fvplata-300/50 transition-all duration-300 hover:text-white group-hover:opacity-100 opacity-60"
+                  >
+                    Ver reseña en Google
+                    <OpenIcon class="w-3 h-3" />
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>

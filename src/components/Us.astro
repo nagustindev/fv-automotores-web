@@ -1,0 +1,92 @@
+---
+
+---
+
+<div id="usTextSection" class="mx-auto max-w-7xl px-4 mt-24 mb-24 relative">
+  <div class="grid grid-cols-1 gap-12 items-start relative">
+    <div
+      data-reveal-container
+      class="text-left space-y-8 font-overpass text-white leading-[1.05] tracking-tight"
+    >
+      <p data-reveal-text class="text-2xl md:text-4xl lg:text-6xl font-light">
+        En FV Automotores no somos un concesionario más; somos una familia
+        apasionada por los autos. Fabio arrancó hace más de 20 años con una idea
+        clara: que comprar un vehículo sea, ante todo, un compromiso de
+        confianza. Hoy, junto a Juampi, seguimos trabajando con la misma
+        honestidad de siempre. Nos encargamos de toda la parte técnica y los
+        papeles para que vos solo tengas que disfrutar de tu próximo auto, con
+        un trato directo y sin vueltas.
+      </p>
+    </div>
+
+    <div class="w-full">
+      <div
+        class="group relative min-h-[300px] md:min-h-[450px] overflow-hidden rounded-3xl border border-fvplata-300/30 bg-black transition duration-500 hover:border-fvplata-100/60 shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+      >
+        <img
+          src="/prueba-gemini-about.webp"
+          alt="Fabio y Juan Pablo en el showroom de FV Automotores"
+          class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
+        >
+        </div>
+        <div class="absolute bottom-0 p-8 text-left w-full">
+          <p
+            class="font-primary text-xl font-bold tracking-[0.22em] text-white uppercase"
+          >
+            FV AUTOMOTORES
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  .reveal-word {
+    display: inline-block;
+    opacity: 0.15;
+    transition: opacity 0.4s ease;
+    will-change: opacity;
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initTextReveal() {
+    const section = document.querySelector("#usTextSection");
+    const paragraphs = document.querySelectorAll("[data-reveal-text]");
+
+    if (!section || paragraphs.length === 0) return;
+
+    paragraphs.forEach((p) => {
+      const text = p.textContent ? p.textContent.trim() : "";
+      const words = text.split(/\s+/);
+      p.innerHTML = words
+        .map((word) => `<span class="reveal-word">${word}</span>`)
+        .join(" ");
+    });
+
+    const allWords = section.querySelectorAll(".reveal-word");
+
+    gsap.to(allWords, {
+      scrollTrigger: {
+        trigger: "#usTextSection",
+        start: "top 60%",
+        end: "bottom 80%",
+        scrub: true,
+      },
+      opacity: 1,
+      stagger: 0.05,
+      ease: "none",
+    });
+  }
+
+  document.addEventListener("astro:page-load", initTextReveal);
+</script>

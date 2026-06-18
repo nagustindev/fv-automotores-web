@@ -1,9 +1,11 @@
 ---
-import { TESTIMONIOS } from "@/consts/testimonials";
 import AboutLayerLayering from "@/components/AboutLayerLayering.astro";
 import SectionHeader from "@/components/SectionHeader.astro";
-import OpenIcon from "@/assets/svg/open-icon.svg";
+
 import SectionGlowDivider from "@/components/SectionGlowDivider.astro";
+import Timeline from "@/components/Timeline.astro";
+import Us from "@/components/Us.astro";
+import Reviews from "@/components/Reviews.astro";
 ---
 
 <section
@@ -20,116 +22,8 @@ import SectionGlowDivider from "@/components/SectionGlowDivider.astro";
       title="FABIO VIOLA AUTOMOTORES"
       subtitle="DESDE 2001"
     />
-
-    <div class="mx-auto max-w-7xl px-4 mt-16">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start relative">
-        <div
-          class="lg:col-span-6 text-left space-y-8 text-fvantracita-300 font-sans text-base md:text-lg leading-relaxed"
-        >
-         <p>
-            Detrás de FV Automotores no hay una estructura fría ni un showroom impersonal; somos una familia apasionada por los autos. <strong class="text-white font-medium">Fabio</strong> arrancó con todo esto hace más de veinte años con una idea muy simple: que comprar un auto vuelva a ser una cuestión de palabra y confianza. Hoy, esa historia sigue con su hijo <strong class="text-white font-medium">Juampi</strong>, que le mete frescura al negocio manejando las redes y los canales oficiales, pero manteniendo siempre esa cercanía y honestidad de toda la vida.
-          </p>
-          <p>
-            Para nosotros, el camino no se mide en cuántos autos vendemos, sino en ver cómo las familias nos siguen eligiendo generación tras generación. Desde que abrimos en 2001, supimos que hay dos cosas que no se negocian bajo ningún concepto: una transparencia total en la <strong class="text-white font-medium">documentación</strong> para que firmes tranquilo, y un control a fondo para darte total <strong class="text-white font-medium">seguridad mecánica</strong>.
-          </p>
-          <p>
-            Sabemos perfectamente que tu tiempo vale oro. Por eso nos encargamos de toda la gestoría de punta a punta para que no tengas que renegar con ningún trámite. Ya sea que nos hables por las redes con Juampi o vengas a charlar acá al local con Fabio, vas a encontrar un trato de igual a igual, fluido y sin vueltas. Tu única preocupación va a ser recibir la llave y disfrutar de tu próximo vehículo.
-          </p>
-        </div>
-
-        <div class="lg:col-span-6 lg:sticky lg:top-28 w-full">
-          <div
-            class="group relative min-h-[450px] md:min-h-[550px] overflow-hidden rounded-3xl border border-fvplata-300/30 bg-black transition duration-500 hover:border-fvplata-100/60 shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
-          >
-            <img
-              src="/prueba-gemini-about.webp"
-              alt="Fabio y Juan Pablo en el showroom de FV Automotores"
-              class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
-            />
-
-            <div
-              class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"
-            >
-            </div>
-
-            <div class="absolute bottom-0 p-8 text-left w-full">
-              <p
-                class="font-primary text-xl font-bold tracking-[0.22em] text-white uppercase"
-              >
-                FV AUTOMOTORES
-              </p>
-              <div
-                class="mt-2 inline-flex items-center gap-2 text-[0.62rem] uppercase tracking-[0.45em] text-fvplata-300"
-              >
-                <span>Showroom Adrogué</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="relative z-10 mt-32">
-    <SectionHeader
-      titleId="testimonio-title"
-      title="LO QUE DICEN DE NOSOTROS"
-      subtitle="25 años de trayectoria demostrados en cada entrega. Esto es lo que opinan quienes ya confían en Fabio y Juan Pablo."
-    />
-  </div>
-
-  <div class="mx-auto max-w-7xl mt-16 px-4">
-    <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-      {
-        TESTIMONIOS.map((t) => (
-          <div class="group break-inside-avoid rounded-3xl border border-fvantracita-900 bg-fvantracita-950/40 p-1 transition-all duration-500 hover:border-fvplata-300/30 hover:scale-[1.02]">
-            <div class="flex flex-col rounded-[1.25rem] bg-fvantracita-950/60 overflow-hidden backdrop-blur-sm border border-white/5">
-              {t.image && (
-                <div class="relative h-64 w-full overflow-hidden">
-                  <img
-                    src={t.image}
-                    alt={`Entrega de vehículo - ${t.name}`}
-                    class="h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
-                  />
-                  <div class="absolute inset-0 bg-linear-to-t from-fvantracita-950/90 to-transparent" />
-                </div>
-              )}
-
-              <div class="p-8 transition-colors duration-500 group-hover:bg-fvantracita-900/20">
-                <div class="flex gap-1 mb-5">
-                  {[...Array(5)].map(() => (
-                    <span class="text-fvplata-300 text-sm">★</span>
-                  ))}
-                </div>
-
-                <p class="font-overpass text-sm leading-relaxed text-fvantracita-300 mb-8 italic">
-                  "{t.comment}"
-                </p>
-
-                <div class="w-full h-px bg-fvantracita-800 mb-6 transition-colors duration-500 group-hover:bg-fvplata-300/30" />
-
-                <div class="flex flex-col gap-2">
-                  <h4 class="font-primary text-sm font-bold text-white uppercase tracking-widest transition-colors duration-500 group-hover:text-fvplata-300">
-                    {t.name}
-                  </h4>
-
-                  {t.url && (
-                    <a
-                      href={t.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-fvplata-300/50 transition-all duration-300 hover:text-white group-hover:opacity-100 opacity-60"
-                    >
-                      Ver reseña en Google
-                      <OpenIcon class="w-3 h-3" />
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        ))
-      }
-    </div>
+    <Timeline />
+    <Us />
+    <Reviews />
   </div>
 </section>
