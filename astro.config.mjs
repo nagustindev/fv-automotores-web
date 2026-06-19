@@ -3,6 +3,8 @@ import { defineConfig } from 'astro/config';
 import tailwindv4 from '@tailwindcss/vite';
 import path from 'path';
 
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
@@ -13,4 +15,7 @@ export default defineConfig({
       },
     },
   },
+
+  site: 'https://fvautomotores.com.ar',
+  integrations: [sitemap()],
 });
